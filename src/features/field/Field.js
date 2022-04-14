@@ -9,8 +9,11 @@ export default class Field extends React.Component {
         this.rows_length = 5; // will be from state
         this.rows = " ".repeat(this.rows_length).split('') // replace to rows from state
     }
+
+    // button handler
     processInput() {
-        /* depends on row index */
+        // depends on row index
+        // calls WordleProcessor
     }
 
     render() {
@@ -18,6 +21,7 @@ export default class Field extends React.Component {
         return (
             <div>
                 {this.rows.map(row => <Row />)}
+                <button onClick={this.processInput}>enter</button>
             </div>
         )
     }
