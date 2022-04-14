@@ -4,22 +4,23 @@ import {connect} from "react-redux";
 import React from 'react';
 
 class Keyboard extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.keys = 'qwertyuiopasdfghjklzxcvbnm'.split('');
     }
 
     getKeyState(key) {
-        // switch (key) {
-        //     case this.props.green_keys.include(key):
-        //         return "keyboard_key__green";
-        //     case this.props.yellow_keys.include(key):
-        //         return  "keyboard_key__yellow";
-        //     case this.props.gray_keys.include(key):
-        //         return "keyboard_key__gray";
-        //
-        //     default: return "keyboard_key__white";
-        // }
+        switch (key) {
+            case this.props.green_keys.includes(key):
+                return "keyboard_key__green";
+            case this.props.yellow_keys.includes(key):
+                return "keyboard_key__yellow";
+            case this.props.gray_keys.includes(key):
+                return "keyboard_key__gray";
+
+            default:
+                return "keyboard_key__white";
+        }
     }
 
     KeyClickHandler(e) {
@@ -27,24 +28,23 @@ class Keyboard extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div onClick={this.KeyClickHandler}>
-                {this.keys.map(key => <Key letter={key} key_state={this.getKeyState(key)} />)}
+                {this.keys.map((key, idx) => <Key key={idx} letter={key} key_state={this.getKeyState(key)} />)}
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-    // green_keys: state.keyboard.green_keys,
-    // yellow_keys: state.keys.yellow_keys,
-    // gray_keys: state.keys.gray_keys
-});
+function MapStateToProps(state) {
+    return {
+        green_keys: state.keyboard.green_keys,
+        yellow_keys: state.keyboard.yellow_keys,
+        gray_keys: state.keyboard.gray_keys,
+    }
+}
+function MapDispatchToProps(dispatch) {
+    return {}
+}
 
-const mapDispatchToProps = (dispatch) => {
-    // import here actions from slice
-};
-
-// connect to usual react-redux or use function instead of class;
-export default connect(mapStateToProps, mapDispatchToProps)(Keyboard);
+export default connect(MapStateToProps, MapDispatchToProps)(Keyboard)
