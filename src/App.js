@@ -1,16 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
 import './App.css';
 
 import Keyboard from "./features/keyboard/Keyboard";
 import Field from "./features/field/Field";
 
+const Container = styled.div`
+  width: 1200px;
+  margin: 0 auto;
+`
+
 class App extends React.Component {
   render() {
     return (
-        <div className="App">
+        <Container>
             <Keyboard />
             <Field />
-        </div>
+        </Container>
     );
   }
 }
