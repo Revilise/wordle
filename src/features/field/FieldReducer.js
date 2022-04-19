@@ -1,5 +1,4 @@
 import {actionTypes} from "../../app/action-types";
-import Field from "./Field";
 
 class Field {
     _init = {

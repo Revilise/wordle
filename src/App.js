@@ -6,8 +6,6 @@ import Field from "./features/field/Field";
 import ControlButtons from "./features/controllButtons/ControllButtons";
 
 class App extends React.Component {
-
-
     render() {
         return (
             <div className="App">
