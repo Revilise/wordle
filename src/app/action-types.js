@@ -8,6 +8,8 @@ export const actionTypes = {
     CLEAR_INPUT_VALUE: "0x1001",
     INCREMENT_TRY_NUMBER: "0x1002",
     RESET_TRY_NUMBER: "0x1003",
+    CHANGE_FOCUSED_ROW: "0x1004",
+    CHANGE_FOCUSED_CELL: "0x1005",
 
     // window reducer
     CHANGE_APP_THEME: "0x9000",

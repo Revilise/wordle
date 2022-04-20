@@ -1,12 +1,19 @@
 import React from 'react';
 import {connect} from "react-redux";
+import styled from 'styled-components';
 
 import {Row} from "./row/Row";
 
-import {inputChangeActionCreator} from './FieldReducer'
+import {inputChangeActionCreator,
+    refocuseCellActionCreator} from './FieldReducer'
+
+const RowsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`
 
 class Field extends React.Component {
-    //current row=0 like initial
     constructor() {
         super();
 
@@ -23,7 +30,17 @@ class Field extends React.Component {
     render() {
         return (
             <div>
-                {this.rows.map((row, idx) => <Row handler={this.props.changeInput} key={idx} value={this.props.input} />)}
+                <RowsContainer>
+                    { this.rows.map((row, idx) => (
+                        <Row handler={this.props.changeInput}
+                             key={idx}
+                             idx={idx}
+                             focused_cell={this.props.focused_cell}
+                             cellRefocuseHandler={this.props.refocuseCell}
+                             disabled={this.props.focused_row !== idx}
+                             value={this.props.input["row_" + idx] || ""} />))
+                    }
+                </RowsContainer>
                 <button onClick={this.processInput}>enter</button>
             </div>
         )
@@ -33,12 +50,15 @@ class Field extends React.Component {
 function MapStateToProps(state) {
     return {
         input: state.field.input,
+        focused_row: state.field.focused_row,
+        focused_cell: state.field.focused_cell,
     }
 }
 
 function MapDispatchToProps(dispatch) {
     return {
-        changeInput: (e) => dispatch(inputChangeActionCreator(e.target.value)),
+        changeInput: (value, row) => dispatch(inputChangeActionCreator(value, row)),
+        refocuseCell: (value) => dispatch(refocuseCellActionCreator(value))
     }
 }
 
