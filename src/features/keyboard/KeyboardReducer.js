@@ -4,7 +4,7 @@ class Keyboard {
     _init = {
         green_keys: [],
         yellow_keys: [],
-        gray_keys: []
+        gray_keys: [],
     }
 
     constructor() {

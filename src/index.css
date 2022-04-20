@@ -5,9 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #e1e0dd;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+  /* light-theme */
+  --light-theme-green-key: #6ABE4DFF;
+  --light-theme-gray-key: #5D768CFF;
+  --light-theme-yellow-key: #E1BD2CFF;
+  --light-theme-white-key: #efeeec;
+
+  --light-theme-green-key__hovered: #56a13c;
+  --light-theme-gray-key__hovered: #4d6075;
+  --light-theme-yellow-key__hovered: #bb9912;
+  --light-theme-white-key__hovered: #dedbd7;
+  /* night-theme */
+
 }

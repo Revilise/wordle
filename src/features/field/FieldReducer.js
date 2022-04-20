@@ -2,7 +2,7 @@ import {actionTypes} from "../../app/action-types";
 
 class Field {
     _init = {
-        input: null,
+        input: "",
         row_index: 0,
         try_number: 0,
     }
@@ -14,10 +14,8 @@ class Field {
     reducer(state = this._init, action) {
         switch (action.type) {
             // TODO: complete reducer
-            case actionTypes.CHANGE_KEYS_STATE:
-                // TODO: complete action
-                return {...state};
-
+            case actionTypes.CHANGE_INPUT_VALUE:
+                return {...state, input: action.input};
             default: return state;
         }
     }
@@ -32,4 +30,7 @@ class Field {
     })
 }
 
-export default new Field();
+const FieldReducer = new Field();
+
+export const {inputChangeActionCreator, clearInputActionCreator} = FieldReducer;
+export default FieldReducer;
