@@ -1,14 +1,13 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Div = styled.div`
-  width: 49px;
-  height: 49px;
+  width: 50px;
+  height: 50px;
   text-align: center;
-  display: flex;
-  align-self: center;
-  background: #c9c2c2;
 `
 
 export function Key({letter, key_state}) {
-    return <Div> {letter} </Div>
+    return (
+        <Div className={`keyboard_key ${key_state}`}>{letter}</Div>
+    )
 }

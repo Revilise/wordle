@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-import keyboardReducer from '../features/keyboard/KeyboardSlice'
+import {combineReducers, createStore} from 'redux';
+import Keyboard from "../features/keyboard/KeyboardReducer";
+import App from "../AppReducer";
+import Field from "../features/field/FieldReducer";
 
-export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    keyboard: keyboardReducer
-  },
-});
+const rootReducer = combineReducers({
+  keyboard: Keyboard.reducer,
+  field: Field.reducer,
+  app: App.reducer,
+})
+
+export const store = createStore(rootReducer);
