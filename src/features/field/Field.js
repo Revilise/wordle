@@ -34,9 +34,7 @@ class Field extends React.Component {
                     { this.rows.map((row, idx) => (
                         <Row handler={this.props.changeInput}
                              key={idx}
-                             idx={idx}
-                             focused_cell={this.props.focused_cell}
-                             cellRefocuseHandler={this.props.refocuseCell}
+                             row_idx={idx}
                              disabled={this.props.focused_row !== idx}
                              value={this.props.input["row_" + idx] || ""} />))
                     }

@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9ee405e9-7703-4cde-87f0-ddef6def7ca1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/action-types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/action-types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/field/Field.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/field/Field.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/field/FieldReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/field/FieldReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/field/row/Row.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/field/row/Row.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +22,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -57,7 +68,7 @@
       <workItem from="1650198143752" duration="26000" />
       <workItem from="1650212770656" duration="1264000" />
       <workItem from="1650468325453" duration="3488000" />
-      <workItem from="1650477500179" duration="9909000" />
+      <workItem from="1650477500179" duration="15937000" />
     </task>
     <servers />
   </component>
