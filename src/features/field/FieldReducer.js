@@ -16,7 +16,6 @@ class Field {
             // TODO: complete reducer
             case actionTypes.CHANGE_INPUT_VALUE:
                 return {...state, input: action.input};
-
             default: return state;
         }
     }
@@ -30,6 +29,7 @@ class Field {
         type: actionTypes.CLEAR_INPUT_VALUE,
     })
 }
+
 const FieldReducer = new Field();
 
 export const {inputChangeActionCreator, clearInputActionCreator} = FieldReducer;

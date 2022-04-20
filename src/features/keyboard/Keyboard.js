@@ -73,6 +73,7 @@ class Keyboard extends React.Component {
         }
 
         return "keyboard_key__white";
+      
     }
 
     KeyClickHandler(e) {
