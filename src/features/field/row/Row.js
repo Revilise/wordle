@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useRef } from 'react';
 import React from 'react'
-import background from '../../../assets/input-grid.svg'
 
 const Container = styled.div`
   display: grid;
@@ -50,7 +49,7 @@ export function Row({value, handler, disabled, idx, cellRefocuseHandler}) {
         if (e.code === "Backspace") {
             if (focused_cell > 0) refocuseCell(focused_cell - 1);
         } else {
-            if (focused_cell < 5) refocuseCell(focused_cell + 1);
+            if (focused_cell < 4) refocuseCell(focused_cell + 1);
         }
     }
 
