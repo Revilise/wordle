@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useRef } from 'react';
 import React from 'react'
 
 const Container = styled.div`
@@ -25,43 +24,48 @@ const Input = styled.input`
   border-radius: 4px;
 `
 
-function CellEdit({word, focused, onChangeHandler, refocuseCell, focused_cell}) {
-    const InputRef = useRef(null)
+function CellEdit(props) {
+    const InputRef = React.useRef(null)
 
     React.useEffect(() => {
         setTimeout(() => {
-            if (InputRef.current) {
-                InputRef.current.focus();
-                InputRef.current.select();
-            }
-        })
-    })
+            if (InputRef.current) InputRef.current.focus();
+        }, 0)
+    }, [props.focused_cell, props.word])
 
-    function keyDownHandler(e) {
+    function keydownHandler(e) {
+        console.log(e)
         if (e.key === "Backspace") {
-            if (focused_cell => 0) {
-                refocuseCell(focused_cell - 1)
-            }
+            if (props.focused_cell > 0) props.refocuseCell(props.focused_cell - 1);
         }
     }
+
     return (
         <Cell>
-            {focused ? <Input ref={InputRef} onKeyDown={keyDownHandler} onChange={onChangeHandler} value={word} /> : <Input onChange={onChangeHandler} value={word} />}
+            {props.focused ?
+                <Input onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} /> :
+                <Input onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
         </Cell>
     )
 }
 
 export function Row({value, handler, disabled, row_idx}) {
     const [focused_cell, refocuseCell] = React.useState(0);
+    const [row_values, changeRowValues] = React.useState([]);
 
     const symbols_template = ",".repeat(4).split(',');
 
-    function CellValueChange(e, idx) {
-        let str = value.split('');
-        str[focused_cell] = e.target.value;
-        if (focused_cell < 5) refocuseCell(focused_cell + 1);
-        handler(str.join(''), row_idx)
+    function changeCell(e, idx) {
+        const updated = [...row_values]
+        const val = e.target.value
+        updated[idx] = val[val.length - 1];
+        changeRowValues(updated)
+        if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)
+        if (focused_cell === 4) {
+            refocuseCell(focused_cell)
+        }
     }
+
     return (
         <Container>
             {symbols_template.map((el, cell_idx) => {
@@ -72,12 +76,14 @@ export function Row({value, handler, disabled, row_idx}) {
                         </Cell>
                     )
                 }
+
                 return <CellEdit key={cell_idx}
-                                 refocuseCell={refocuseCell}
                                  focused_cell={focused_cell}
-                                 focused={focused_cell === cell_idx}
-                                 onChangeHandler={(e) => CellValueChange(e, cell_idx)}
-                                 word={value[cell_idx] || ""} />
+                                 refocuseCurrent={() => refocuseCell(cell_idx)}
+                                 refocuseCell={refocuseCell}
+                                 handler={(e) => changeCell(e, cell_idx)}
+                                 focused={cell_idx === focused_cell}
+                                 word={row_values[cell_idx] || ""}   />
             })}
         </Container>
     )

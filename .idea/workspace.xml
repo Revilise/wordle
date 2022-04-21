@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9ee405e9-7703-4cde-87f0-ddef6def7ca1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/action-types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/action-types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/field/Field.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/field/Field.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/field/FieldReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/field/FieldReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/field/row/Row.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/field/row/Row.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,5 +82,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
