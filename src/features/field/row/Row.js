@@ -34,9 +34,11 @@ function CellEdit(props) {
     }, [props.focused_cell, props.word])
 
     function keydownHandler(e) {
-        console.log(e)
-        if (e.key === "Backspace") {
-            if (props.focused_cell > 0) props.refocuseCell(props.focused_cell - 1);
+        switch (e.key) {
+            case "Backspace": if (props.focused_cell > 0) props.refocuseCell(props.focused_cell - 1); break;
+            case "ArrowRight": if (props.focused_cell < 5) props.refocuseCell(props.focused_cell + 1); break;
+            case "ArrowLeft": if (props.focused_cell > 0) props.refocuseCell(props.focused_cell - 1); break;
+            default: break;
         }
     }
 
@@ -61,9 +63,7 @@ export function Row({value, handler, disabled, row_idx}) {
         updated[idx] = val[val.length - 1];
         changeRowValues(updated)
         if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)
-        if (focused_cell === 4) {
-            refocuseCell(focused_cell)
-        }
+        if (focused_cell === 4) refocuseCell(focused_cell)
     }
 
     return (
