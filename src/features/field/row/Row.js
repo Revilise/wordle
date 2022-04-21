@@ -35,7 +35,9 @@ function CellEdit(props) {
 
     function keydownHandler(e) {
         switch (e.key) {
-            case "Backspace": if (props.focused_cell > 0) props.refocuseCell(props.focused_cell - 1); break;
+            case "Backspace": if (props.focused_cell > 0 && props.word) {
+                props.refocuseCell(props.focused_cell - 1);
+            } break;
             case "ArrowRight": if (props.focused_cell < 5) props.refocuseCell(props.focused_cell + 1); break;
             case "ArrowLeft": if (props.focused_cell > 0) props.refocuseCell(props.focused_cell - 1); break;
             default: break;
