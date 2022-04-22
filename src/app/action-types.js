@@ -5,7 +5,7 @@ export const actionTypes = {
 
     // field reducer
     CHANGE_INPUT_VALUE: "0x1000",
-    CLEAR_INPUT_VALUE: "0x1001",
+    RESET_CURRENT_ROW_VALUES: "0x1001",
     INCREMENT_TRY_NUMBER: "0x1002",
     RESET_TRY_NUMBER: "0x1003",
     CHANGE_FOCUSED_ROW: "0x1004",

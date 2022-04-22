@@ -11,6 +11,9 @@ const Container = styled.div`
 const Cell = styled.div`
   font-size: 24px;
   height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50px;
   outline: grey 1px solid;
   box-sizing: border-box;
@@ -53,16 +56,15 @@ function CellEdit(props) {
     )
 }
 
-export function Row({value, handler, disabled, row_idx, row_values, changeRowValues}) {
+export function Row({input, handler, disabled, row_idx, row_values, changeRowValues}) {
     const [focused_cell, refocuseCell] = React.useState(0);
 
     const symbols_template = ",".repeat(4).split(',');
 
-    console.log(row_values);
     function changeCell(e, idx) {
-        const updated = row_values;
+        const updated = row_values
         const val = e.target.value
-        updated[idx] = val[val.length - 1];
+        updated[idx] = val[val.length - 1]
         changeRowValues(updated)
         if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)
         if (focused_cell === 4) refocuseCell(focused_cell)
@@ -74,7 +76,7 @@ export function Row({value, handler, disabled, row_idx, row_values, changeRowVal
                 if (disabled) {
                     return (
                         <Cell key={cell_idx}>
-                            {value ? value[cell_idx] : '' }
+                            {input ? input[cell_idx] : ""}
                         </Cell>
                     )
                 }

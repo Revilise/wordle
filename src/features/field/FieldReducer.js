@@ -2,11 +2,11 @@ import {actionTypes} from "../../app/action-types";
 
 class Field {
     _init = {
-        input: {row_0: ""},
+        input: [],
         focused_row: 0,
         try_number: 0,
         focused_row: 0,
-        row_values: ["t", "e", "x", "t", "a"],
+        row_values: [],
     }
 
     constructor() {
@@ -17,28 +17,37 @@ class Field {
         switch (action.type) {
             // change established inputs values
             case actionTypes.CHANGE_INPUT_VALUE:
-                const key = "row_" + action.row;
-                const updated = {...state.input};
-                updated[key] =  action.value.trim().substring(0, 5);
-                return {...state, input: updated};
+                state.input[action.row] = action.value.trim().substring(0, 5);
+                return {...state, input: [...state.input]};
+
             // change current row values
             case actionTypes.CHANGE_ROW_VALUE:
-                //const updated1 = state.row_values;
                 state.row_values[action.index] = action.value;
                 return {...state, row_values: [...state.row_values]}
+
+            // reset current row value
+                // TODO: row_values is mutable. Fix it :v
+            case actionTypes.RESET_CURRENT_ROW_VALUES:
+               return {...state, row_values: []}
+
+            // refocuse row
+            case actionTypes.CHANGE_FOCUSED_ROW:
+                return {...state, focused_row: action.index}
+
             default: return state;
         }
     }
 
-    inputChangeActionCreator = (value, row) => ({
+    saveRowActionCreator = (value, row) => ({
         type: actionTypes.CHANGE_INPUT_VALUE,
         value, row
     })
-    clearInputActionCreator = () => ({
-        type: actionTypes.CLEAR_INPUT_VALUE,
+    clearCurrentRowActionCreator = () => ({
+        type: actionTypes.RESET_CURRENT_ROW_VALUES,
     })
-    refocuseRowActionCreator = (value) => ({
+    refocuseRowActionCreator = (index) => ({
         type: actionTypes.CHANGE_FOCUSED_ROW,
+        index
     })
     changeRowValuesActionCreator = (value, index) => ({
         type: actionTypes.CHANGE_ROW_VALUE,
@@ -49,8 +58,8 @@ class Field {
 const FieldReducer = new Field();
 
 export const {
-    inputChangeActionCreator,
-    clearInputActionCreator,
+    saveRowActionCreator,
+    clearCurrentRowActionCreator,
     changeRowValuesActionCreator,
     refocuseCellActionCreator,
     refocuseRowActionCreator} = FieldReducer;
