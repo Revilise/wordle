@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import {Row} from "./row/Row";
 
 import {inputChangeActionCreator,
+    changeRowValuesActionCreator,
     refocuseCellActionCreator} from './FieldReducer'
 
 const RowsContainer = styled.div`
@@ -35,6 +36,8 @@ class Field extends React.Component {
                         <Row handler={this.props.changeInput}
                              key={idx}
                              row_idx={idx}
+                             row_values={this.props.row_values}
+                             changeRowValues={this.props.changeRowValues}
                              disabled={this.props.focused_row !== idx}
                              value={this.props.input["row_" + idx] || ""} />))
                     }
@@ -50,13 +53,14 @@ function MapStateToProps(state) {
         input: state.field.input,
         focused_row: state.field.focused_row,
         focused_cell: state.field.focused_cell,
+        row_values: state.field.row_values,
     }
 }
 
 function MapDispatchToProps(dispatch) {
     return {
         changeInput: (value, row) => dispatch(inputChangeActionCreator(value, row)),
-        refocuseCell: (value) => dispatch(refocuseCellActionCreator(value))
+        changeRowValues: (value, row) => dispatch(changeRowValuesActionCreator(value, row))
     }
 }
 

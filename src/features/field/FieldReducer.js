@@ -5,7 +5,8 @@ class Field {
         input: {row_0: ""},
         focused_row: 0,
         try_number: 0,
-        focused_row: 0
+        focused_row: 0,
+        row_values: ["t", "e", "x", "t", "a"],
     }
 
     constructor() {
@@ -14,13 +15,17 @@ class Field {
 
     reducer(state = this._init, action) {
         switch (action.type) {
-            // TODO: complete reducer
+            // change established inputs values
             case actionTypes.CHANGE_INPUT_VALUE:
                 const key = "row_" + action.row;
                 const updated = {...state.input};
                 updated[key] =  action.value.trim().substring(0, 5);
-
                 return {...state, input: updated};
+            // change current row values
+            case actionTypes.CHANGE_ROW_VALUE:
+                //const updated1 = state.row_values;
+                state.row_values[action.index] = action.value;
+                return {...state, row_values: [...state.row_values]}
             default: return state;
         }
     }
@@ -35,6 +40,10 @@ class Field {
     refocuseRowActionCreator = (value) => ({
         type: actionTypes.CHANGE_FOCUSED_ROW,
     })
+    changeRowValuesActionCreator = (value, index) => ({
+        type: actionTypes.CHANGE_ROW_VALUE,
+        value, index
+    })
 }
 
 const FieldReducer = new Field();
@@ -42,6 +51,7 @@ const FieldReducer = new Field();
 export const {
     inputChangeActionCreator,
     clearInputActionCreator,
+    changeRowValuesActionCreator,
     refocuseCellActionCreator,
     refocuseRowActionCreator} = FieldReducer;
 

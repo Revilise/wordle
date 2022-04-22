@@ -53,14 +53,14 @@ function CellEdit(props) {
     )
 }
 
-export function Row({value, handler, disabled, row_idx}) {
+export function Row({value, handler, disabled, row_idx, row_values, changeRowValues}) {
     const [focused_cell, refocuseCell] = React.useState(0);
-    const [row_values, changeRowValues] = React.useState([]);
 
     const symbols_template = ",".repeat(4).split(',');
 
+    console.log(row_values);
     function changeCell(e, idx) {
-        const updated = [...row_values]
+        const updated = row_values;
         const val = e.target.value
         updated[idx] = val[val.length - 1];
         changeRowValues(updated)
