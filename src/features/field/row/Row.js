@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useRef } from 'react';
 import React from 'react'
 
 const Container = styled.div`
@@ -25,45 +24,68 @@ const Input = styled.input`
   border-radius: 4px;
 `
 
-function CellEdit({word, focused, handler, handlerChange}) {
-    const InputRef = useRef(null)
+function CellEdit(props) {
+    const InputRef = React.useRef(null)
 
     React.useEffect(() => {
-        if (InputRef.current) InputRef.current.focus()
-    })
+        setTimeout(() => {
+            if (InputRef.current) InputRef.current.focus();
+        }, 0)
+    }, [props.focused_cell, props.word])
 
-    return (
-        <Cell>
-            {focused ? <Input ref={InputRef} onKeyDown={handler} onChange={handlerChange} value={word} /> : <Input disabled={true} value={word} />}
-        </Cell>
-    )
-}
-
-export function Row({value, handler, disabled, idx, cellRefocuseHandler}) {
-    const [focused_cell, refocuseCell] = React.useState(0);
-    const [row_value, changeChar] = React.useState([]);
-
-    const symbols_template = ",".repeat(4).split(',');
-
-    function CellKeyDown(e) {
-        if (e.code === "Backspace") {
-            if (focused_cell > 0) refocuseCell(focused_cell - 1);
-        } else {
-            if (focused_cell < 4) refocuseCell(focused_cell + 1);
+    function keydownHandler(e) {
+        switch (e.key) {
+            case "Backspace": if (props.focused_cell > 0 && props.word) {
+                props.refocuseCell(props.focused_cell - 1);
+            } break;
+            case "ArrowRight": if (props.focused_cell < 5) props.refocuseCell(props.focused_cell + 1); break;
+            case "ArrowLeft": if (props.focused_cell > 0) props.refocuseCell(props.focused_cell - 1); break;
+            default: break;
         }
     }
 
     return (
+        <Cell>
+            {props.focused ?
+                <Input onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} /> :
+                <Input onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
+        </Cell>
+    )
+}
+
+export function Row({value, handler, disabled, row_idx}) {
+    const [focused_cell, refocuseCell] = React.useState(0);
+    const [row_values, changeRowValues] = React.useState([]);
+
+    const symbols_template = ",".repeat(4).split(',');
+
+    function changeCell(e, idx) {
+        const updated = [...row_values]
+        const val = e.target.value
+        updated[idx] = val[val.length - 1];
+        changeRowValues(updated)
+        if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)
+        if (focused_cell === 4) refocuseCell(focused_cell)
+    }
+
+    return (
         <Container>
-            {symbols_template.map((el, idx) => {
+            {symbols_template.map((el, cell_idx) => {
                 if (disabled) {
                     return (
-                        <Cell key={idx}>
-                            {value ? value[idx] : '' }
+                        <Cell key={cell_idx}>
+                            {value ? value[cell_idx] : '' }
                         </Cell>
                     )
                 }
-                return <CellEdit key={idx} focused={focused_cell === idx} handler={CellKeyDown} word={value[idx]} />
+
+                return <CellEdit key={cell_idx}
+                                 focused_cell={focused_cell}
+                                 refocuseCurrent={() => refocuseCell(cell_idx)}
+                                 refocuseCell={refocuseCell}
+                                 handler={(e) => changeCell(e, cell_idx)}
+                                 focused={cell_idx === focused_cell}
+                                 word={row_values[cell_idx] || ""}   />
             })}
         </Container>
     )
