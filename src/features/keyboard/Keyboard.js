@@ -78,12 +78,16 @@ class Keyboard extends React.Component {
 
     KeyClickHandler(e) {
         // e.target
+        const key = e.target.textContent;
+
+        changeRowValues()
+        // TODO: append the key const to the current_row_value
+        //TODO: call some dispatch func ?
     }
 
     render() {
         return (
             <Div onClick={this.KeyClickHandler}>
-
                 {this.keys.map((key, idx) => <Key key={idx} letter={key} key_state={this.getKeyState(key)} />)}
             </Div>
         )
@@ -95,10 +99,13 @@ function MapStateToProps(state) {
         green_keys: state.keyboard.green_keys,
         yellow_keys: state.keyboard.yellow_keys,
         gray_keys: state.keyboard.gray_keys,
+        row_values: state.field.row_values,
     }
 }
 function MapDispatchToProps(dispatch) {
-    return {}
+    return {
+        changeRowValues: (value, index) => dispatch(changeRowValuesActionCreator(value, index));
+    }
 }
 
 export default connect(MapStateToProps, MapDispatchToProps)(Keyboard)

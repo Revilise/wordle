@@ -5,7 +5,6 @@ class Field {
         input: [],
         focused_row: 0,
         try_number: 0,
-        focused_row: 0,
         row_values: [],
     }
 

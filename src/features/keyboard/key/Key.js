@@ -8,6 +8,6 @@ const Div = styled.div`
 
 export function Key({letter, key_state}) {
     return (
-        <Div className={`keyboard_key ${key_state}`}>{letter}</Div>
+        <Div value={letter} className={`keyboard_key ${key_state}`}>{letter}</Div>
     )
 }
