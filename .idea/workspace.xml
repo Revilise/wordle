@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ee405e9-7703-4cde-87f0-ddef6def7ca1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/wordleProcessor/WordleProcessor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wordleProcessor/vocabulary.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/controllButtons/ControllButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/controllButtons/ControllButtons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/keyboard/Keyboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/keyboard/KeyboardReducer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/keyboard/key/Key.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,18 +47,29 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/wordleProcessor" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="D:\WebStorm 2021.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\projects\wordle\src" />
       <recent name="E:\projects\wordle\src\wordleProcessor" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\projects\wordle\src\app" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="WordleProcessor.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/wordleProcessor/WordleProcessor.js" working-dir="$PROJECT_DIR$/src/wordleProcessor">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.WordleProcessor.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
