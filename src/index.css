@@ -28,6 +28,8 @@ code {
   --light-theme-gray-key__hovered: #4d6075;
   --light-theme-yellow-key__hovered: #bb9912;
   --light-theme-white-key__hovered: #dedbd7;
+
+  --light-theme-enter-btn: #97d78b
   /* night-theme */
 
 }

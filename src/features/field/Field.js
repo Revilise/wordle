@@ -18,6 +18,10 @@ const RowsContainer = styled.div`
 `
 const Button = styled.button`
   padding: 16px 24px;
+  border: none;
+  font-family: "Roboto Light";
+  font-size: 16px;
+  border-radius: 8px;
 `
 
 class Field extends React.Component {

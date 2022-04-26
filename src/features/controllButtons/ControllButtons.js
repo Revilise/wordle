@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {RestartButton} from "./restartButton/RestartButton";
-import {RulesButton} from "./rulesButton/RulesButton";
-import {SettingsButton} from "./settingsButton/SettingsButton";
+import styled from 'styled-components'
+
 import {resetFieldActionCreator} from '../field/FieldReducer';
 import {resetKeyboardActionCreator} from '../keyboard/KeyboardReducer';
 
@@ -11,9 +10,10 @@ class ControlButtons extends React.Component {
     constructor(props) {
         super(props);
 
-        this.Restart = RestartButton;
-        this.Rules = RulesButton;
-        this.Settings = SettingsButton;
+        this.Restart = styled.button``;
+
+        this.Rules = styled.button``;
+        this.Settings = styled.button``;
 
         this.restartGame = this.restartGame.bind(this);
         this.openRules = this.openRules.bind(this);

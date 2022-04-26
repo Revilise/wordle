@@ -38,4 +38,10 @@ class Keyboard {
     })
 }
 
-export default new Keyboard();
+const keydoardReducer = new Keyboard();
+
+export const { keysChangeStateActionCreator,
+    resetKeysStateActionCreator,
+    resetKeyboardActionCreator } = keydoardReducer;
+
+export default keydoardReducer;
