@@ -56,7 +56,7 @@ class Field {
         type: actionTypes.CHANGE_ROW_VALUE,
         value, index
     })
-    changeCurrentCellwIndex = (index) => ({
+    changeCurrentCellindexActionCreator = (index) => ({
         type: actionTypes.REFOCUSE_CURRENT_CELL,
         index
     })
@@ -69,7 +69,7 @@ export const {
     clearCurrentRowActionCreator,
     changeRowValuesActionCreator,
     refocuseCellActionCreator,
-    changeCurrentCellwIndex,
+    changeCurrentCellindexActionCreator,
     refocuseRowActionCreator} = FieldReducer;
 
 export default FieldReducer;

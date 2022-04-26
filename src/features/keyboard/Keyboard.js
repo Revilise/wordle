@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import styled from 'styled-components';
 
-import { changeRowValuesActionCreator } from '../field/FieldReducer'
+import { changeRowValuesActionCreator, changeCurrentCellindexActionCreator } from '../field/FieldReducer'
 
 import {Key} from "./key/Key";
 
@@ -79,17 +79,15 @@ class Keyboard extends React.Component {
     }
 
     KeyClickHandler(e) {
-        // e.target
         const key = e.target.textContent;
 
-        this.props.changeRowValues()
-        // TODO: append the key const to the current_row_value
-        //TODO: call some dispatch func ?
+        this.props.changeRowValues(key, this.props.focused_cell);
+        if (this.props.focused_cell < 4) this.props.refocuseCell(this.props.focused_cell + 1);
     }
 
     render() {
         return (
-            <Div onClick={this.KeyClickHandler}>
+            <Div onClick={this.KeyClickHandler.bind(this)}>
                 {this.keys.map((key, idx) => <Key key={idx} letter={key} key_state={this.getKeyState(key)} />)}
             </Div>
         )
@@ -107,6 +105,7 @@ function MapStateToProps(state) {
 function MapDispatchToProps(dispatch) {
     return {
         changeRowValues: (value, index) => dispatch(changeRowValuesActionCreator(value, index)),
+        refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index))
     }
 }
 

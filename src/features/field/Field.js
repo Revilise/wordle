@@ -8,7 +8,7 @@ import {saveRowActionCreator,
     changeRowValuesActionCreator,
     refocuseRowActionCreator,
     clearCurrentRowActionCreator,
-    changeCurrentCellwIndex,
+    changeCurrentCellindexActionCreator,
     refocuseCellActionCreator} from './FieldReducer'
 
 const RowsContainer = styled.div`
@@ -86,7 +86,7 @@ function MapDispatchToProps(dispatch) {
         saveRow: (value, row) => dispatch(saveRowActionCreator(value, row)),
         refocuseRow: (row) => dispatch(refocuseRowActionCreator(row)),
         clearCurrentRow: () => dispatch(clearCurrentRowActionCreator()),
-        refocuseCell: (index) => dispatch(changeCurrentCellwIndex(index)),
+        refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index)),
     }
 }
 
