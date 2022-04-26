@@ -37,6 +37,11 @@ class Field {
             // refocuse cell
             case actionTypes.REFOCUSE_CURRENT_CELL:
                 return {...state, focused_cell: action.index}
+
+            case actionTypes.RESET_REDUCER:
+                // TODO: reset all
+                // !!!! init is mutable !!!!
+                return {...this._init}
             default: return state;
         }
     }
@@ -60,6 +65,9 @@ class Field {
         type: actionTypes.REFOCUSE_CURRENT_CELL,
         index
     })
+    resetFieldActionCreator = () => ({
+        type:  actionTypes.RESET_REDUCER
+    })
 }
 
 const FieldReducer = new Field();
@@ -70,6 +78,7 @@ export const {
     changeRowValuesActionCreator,
     refocuseCellActionCreator,
     changeCurrentCellindexActionCreator,
-    refocuseRowActionCreator} = FieldReducer;
+    refocuseRowActionCreator,
+    resetFieldActionCreator } = FieldReducer;
 
 export default FieldReducer;

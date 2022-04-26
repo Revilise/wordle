@@ -1,5 +1,5 @@
-// styled components can return a component without function
+import styled from 'styled-components'
 
-export function RestartButton() {
-    return <></>
-}
+export const RestartButton = styled.button`
+    
+`
