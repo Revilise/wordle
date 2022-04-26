@@ -8,9 +8,15 @@ class WordleProcessor {
         const random_idx = Math.floor(Math.random() * words.length);
         this.secret_word = words[random_idx];
     }
-    CheckCorrectness() {
-        // return array of matched letters
-        //[{letter: "a", corstat: "yellow" }]
+    CheckCorrectness(word) {
+        word_chars = word.split('');
+        secretWord_chars = this.secret_word.split('');
+        // нужен алгоритм, который проверит и верность позиции, и существование в слове
+
+        // [{
+        //     letter: "a", position: "right" || "exist" || "none"
+        // }]
+
     }
     CheckWordExistance(word) {
         const words = JSON.parse(fs.readFileSync('vocabulary.json'));
