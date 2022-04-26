@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import styled from 'styled-components';
 
+import { changeRowValuesActionCreator } from '../field/FieldReducer'
+
 import {Key} from "./key/Key";
 
 const Div = styled.div`
@@ -80,7 +82,7 @@ class Keyboard extends React.Component {
         // e.target
         const key = e.target.textContent;
 
-        changeRowValues()
+        this.props.changeRowValues()
         // TODO: append the key const to the current_row_value
         //TODO: call some dispatch func ?
     }
@@ -99,12 +101,12 @@ function MapStateToProps(state) {
         green_keys: state.keyboard.green_keys,
         yellow_keys: state.keyboard.yellow_keys,
         gray_keys: state.keyboard.gray_keys,
-        row_values: state.field.row_values,
+        focused_cell: state.field.focused_cell,
     }
 }
 function MapDispatchToProps(dispatch) {
     return {
-        changeRowValues: (value, index) => dispatch(changeRowValuesActionCreator(value, index));
+        changeRowValues: (value, index) => dispatch(changeRowValuesActionCreator(value, index)),
     }
 }
 

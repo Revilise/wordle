@@ -56,8 +56,7 @@ function CellEdit(props) {
     )
 }
 
-export function Row({input, handler, disabled, row_idx, row_values, changeRowValues}) {
-    const [focused_cell, refocuseCell] = React.useState(0);
+export function Row({input, handler, disabled, row_idx, row_values, changeRowValues, focused_cell, refocuseCell }) {
 
     const symbols_template = ",".repeat(4).split(',');
 

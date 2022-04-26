@@ -8,6 +8,7 @@ import {saveRowActionCreator,
     changeRowValuesActionCreator,
     refocuseRowActionCreator,
     clearCurrentRowActionCreator,
+    changeCurrentCellwIndex,
     refocuseCellActionCreator} from './FieldReducer'
 
 const RowsContainer = styled.div`
@@ -53,6 +54,8 @@ class Field extends React.Component {
                     {this.rows.map((row, idx) => (
                         <Row handler={this.props.changeInput}
                              key={idx}
+                             focused_cell={this.props.focused_cell}
+                             refocuseCell={this.props.refocuseCell}
                              row_idx={idx}
                              row_values={this.props.row_values}
                              changeRowValues={this.props.changeRowValues}
@@ -82,7 +85,8 @@ function MapDispatchToProps(dispatch) {
         changeRowValues: (value, row) => dispatch(changeRowValuesActionCreator(value, row)),
         saveRow: (value, row) => dispatch(saveRowActionCreator(value, row)),
         refocuseRow: (row) => dispatch(refocuseRowActionCreator(row)),
-        clearCurrentRow: () => dispatch(clearCurrentRowActionCreator())
+        clearCurrentRow: () => dispatch(clearCurrentRowActionCreator()),
+        refocuseCell: (index) => dispatch(changeCurrentCellwIndex(index)),
     }
 }
 

@@ -10,6 +10,7 @@ export const actionTypes = {
     RESET_TRY_NUMBER: "0x1003",
     CHANGE_FOCUSED_ROW: "0x1004",
     CHANGE_ROW_VALUE: "0x1005",
+    REFOCUSE_CURRENT_CELL: "0x1006",
 
     // window reducer
     CHANGE_APP_THEME: "0x9000",

@@ -6,6 +6,7 @@ class Field {
         focused_row: 0,
         try_number: 0,
         row_values: [],
+        focused_cell: 0,
     }
 
     constructor() {
@@ -33,6 +34,9 @@ class Field {
             case actionTypes.CHANGE_FOCUSED_ROW:
                 return {...state, focused_row: action.index}
 
+            // refocuse cell
+            case actionTypes.REFOCUSE_CURRENT_CELL:
+                return {...state, focused_cell: action.index}
             default: return state;
         }
     }
@@ -52,6 +56,10 @@ class Field {
         type: actionTypes.CHANGE_ROW_VALUE,
         value, index
     })
+    changeCurrentCellwIndex = (index) => ({
+        type: actionTypes.REFOCUSE_CURRENT_CELL,
+        index
+    })
 }
 
 const FieldReducer = new Field();
@@ -61,6 +69,7 @@ export const {
     clearCurrentRowActionCreator,
     changeRowValuesActionCreator,
     refocuseCellActionCreator,
+    changeCurrentCellwIndex,
     refocuseRowActionCreator} = FieldReducer;
 
 export default FieldReducer;
