@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import styled from 'styled-components';
 
+import { changeRowValuesActionCreator, changeCurrentCellindexActionCreator } from '../field/FieldReducer'
+
 import {Key} from "./key/Key";
 
 const Div = styled.div`
@@ -77,14 +79,18 @@ class Keyboard extends React.Component {
     }
 
     KeyClickHandler(e) {
-        // e.target
+        const key = e.target.textContent;
+
+        this.props.changeRowValues(key, this.props.focused_cell);
+        if (this.props.focused_cell < 4) this.props.refocuseCell(this.props.focused_cell + 1);
+
+        e.stopPropagation();
     }
 
     render() {
         return (
-            <Div onClick={this.KeyClickHandler}>
-
-                {this.keys.map((key, idx) => <Key key={idx} letter={key} key_state={this.getKeyState(key)} />)}
+            <Div>
+                {this.keys.map((key, idx) => <Key handler={this.KeyClickHandler.bind(this)} key={idx} letter={key} key_state={this.getKeyState(key)} />)}
             </Div>
         )
     }
@@ -95,10 +101,14 @@ function MapStateToProps(state) {
         green_keys: state.keyboard.green_keys,
         yellow_keys: state.keyboard.yellow_keys,
         gray_keys: state.keyboard.gray_keys,
+        focused_cell: state.field.focused_cell,
     }
 }
 function MapDispatchToProps(dispatch) {
-    return {}
+    return {
+        changeRowValues: (value, index) => dispatch(changeRowValuesActionCreator(value, index)),
+        refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index))
+    }
 }
 
 export default connect(MapStateToProps, MapDispatchToProps)(Keyboard)

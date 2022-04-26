@@ -13,10 +13,15 @@ class Keyboard {
 
     reducer(state = this._init, action) {
         switch (action.type) {
+            // change key's color state
             case actionTypes.CHANGE_KEYS_STATE:
                 // TODO: complete action
-                return { ...state };
+                return {...state};
 
+            // reset reducer
+            case actionTypes.RESET_KEYBOARD_REDUCER:
+                // !!!! init is mutable !!!!
+                return {...this._init}
             default:
                 return state;
         }
@@ -27,6 +32,9 @@ class Keyboard {
     })
     resetKeysStateActionCreator = () => ({
         type: actionTypes.RESET_KEYS_STATE
+    })
+    resetKeyboardActionCreator = () => ({
+        type: actionTypes.RESET_KEYBOARD_REDUCER
     })
 }
 

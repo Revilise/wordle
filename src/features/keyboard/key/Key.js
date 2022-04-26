@@ -6,8 +6,8 @@ const Div = styled.div`
   text-align: center;
 `
 
-export function Key({letter, key_state}) {
+export function Key({letter, key_state, handler}) {
     return (
-        <Div className={`keyboard_key ${key_state}`}>{letter}</Div>
+        <Div onClick={handler} value={letter} className={`keyboard_key ${key_state}`}>{letter}</Div>
     )
 }

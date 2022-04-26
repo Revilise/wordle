@@ -2,13 +2,17 @@ export const actionTypes = {
     // keyboard reducer
     CHANGE_KEYS_STATE: "0x0000",
     RESET_KEYS_STATE: "0x0001",
+    RESET_KEYBOARD_REDUCER: "0x9999",
 
     // field reducer
     CHANGE_INPUT_VALUE: "0x1000",
-    CLEAR_INPUT_VALUE: "0x1001",
+    RESET_CURRENT_ROW_VALUES: "0x1001",
     INCREMENT_TRY_NUMBER: "0x1002",
     RESET_TRY_NUMBER: "0x1003",
     CHANGE_FOCUSED_ROW: "0x1004",
+    CHANGE_ROW_VALUE: "0x1005",
+    REFOCUSE_CURRENT_CELL: "0x1006",
+    RESET_REDUCER: "0x1999",
 
     // window reducer
     CHANGE_APP_THEME: "0x9000",
