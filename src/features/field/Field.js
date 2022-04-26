@@ -43,6 +43,7 @@ class Field extends React.Component {
                 this.props.refocuseRow(this.props.focused_row + 1);
                 // TODO: clear current row
                 this.props.clearCurrentRow();
+                this.props.refocuseCell(0);
             }
         }
     }

@@ -83,12 +83,14 @@ class Keyboard extends React.Component {
 
         this.props.changeRowValues(key, this.props.focused_cell);
         if (this.props.focused_cell < 4) this.props.refocuseCell(this.props.focused_cell + 1);
+
+        e.stopPropagation();
     }
 
     render() {
         return (
-            <Div onClick={this.KeyClickHandler.bind(this)}>
-                {this.keys.map((key, idx) => <Key key={idx} letter={key} key_state={this.getKeyState(key)} />)}
+            <Div>
+                {this.keys.map((key, idx) => <Key handler={this.KeyClickHandler.bind(this)} key={idx} letter={key} key_state={this.getKeyState(key)} />)}
             </Div>
         )
     }
