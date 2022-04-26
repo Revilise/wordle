@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import './App.css';
 
-import Keyboard from "./features/keyboard/Keyboard";
 import Field from "./features/field/Field";
 import ControlButtons from "./features/controllButtons/ControllButtons";
 
@@ -18,7 +17,6 @@ class App extends React.Component {
             <Div className="App">
                 <ControlButtons/>
                 <Field/>
-                <Keyboard/>
             </Div>
         );
     }

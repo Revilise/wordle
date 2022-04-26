@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import styled from 'styled-components'
 
 import {resetFieldActionCreator} from '../field/FieldReducer';
-import {resetKeyboardActionCreator} from '../keyboard/KeyboardReducer';
 
 class ControlButtons extends React.Component {
 
@@ -22,7 +21,6 @@ class ControlButtons extends React.Component {
 
     restartGame() {
         this.props.resetField();
-        this.props.resetKeyboard();
     }
     openRules() {
         // TODO: complete open rules function
@@ -47,7 +45,6 @@ function MapStateToProps(state) {
 function MapDispatchToProps(dispatch) {
     return {
         resetField: () => dispatch(resetFieldActionCreator()),
-        resetKeyboard: () => dispatch(resetKeyboardActionCreator()),
     }
 }
 
