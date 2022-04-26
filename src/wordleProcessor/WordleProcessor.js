@@ -12,16 +12,11 @@ class WordleProcessor {
         // return array of matched letters
         //[{letter: "a", corstat: "yellow" }]
     }
-    CheckWordExistance() {
-        // return boolean isExist in vocabulary
+    CheckWordExistance(word) {
+        const words = JSON.parse(fs.readFileSync('vocabulary.json'));
+        return words.includes(word);
     }
 }
 
 const processor = new WordleProcessor();
 processor.GenerateRandomWord();
-console.log(processor.secret_word);
-
-
-
-// const word = JSON.parse(words);
-// console.log(word)
