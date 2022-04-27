@@ -8,8 +8,7 @@ import {saveRowActionCreator,
     changeRowValuesActionCreator,
     refocuseRowActionCreator,
     clearCurrentRowActionCreator,
-    changeCurrentCellindexActionCreator,
-    refocuseCellActionCreator} from './FieldReducer'
+    changeCurrentCellindexActionCreator} from './FieldReducer'
 
 const RowsContainer = styled.div`
   display: flex;
@@ -22,6 +21,11 @@ const Button = styled.button`
   font-family: "Roboto Light";
   font-size: 16px;
   border-radius: 8px;
+  cursor: pointer;
+
+  :hover {
+    background: #e5e0e0;
+  }
 `
 
 class Field extends React.Component {
@@ -37,6 +41,7 @@ class Field extends React.Component {
         // TODO: check try count
 
         // TODO: proccess the row
+
         const value = this.props.row_values.join('').trim();
 
         // TODO: save the row
@@ -68,7 +73,7 @@ class Field extends React.Component {
                              input={this.props.input[idx] || ""}/>))
                     }
                 </RowsContainer>
-                <Button onClick={this.processInput.bind(this)}>enter</Button>
+                <Button className="enter_btn" onClick={this.processInput.bind(this)}>enter</Button>
             </div>
         )
     }

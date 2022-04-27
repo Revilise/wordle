@@ -9,14 +9,20 @@ class WordleProcessor {
         this.secret_word = words[random_idx];
     }
     CheckCorrectness(word) {
-        word_chars = word.split('');
-        secretWord_chars = this.secret_word.split('');
-        // нужен алгоритм, который проверит и верность позиции, и существование в слове
+        if (word) {
+            const word_chars = word.split('');
+            const secretWord_chars = this.secret_word.split('');
 
-        // [{
-        //     letter: "a", position: "right" || "exist" || "none"
-        // }]
+            return word_chars.map((letter, idx) => {
+                const result = { letter };
+                if (secretWord_chars[idx] === letter) result.position = "right";
+                else if (secretWord_chars.includes(letter)) result.position = "exists";
+                else result.position = "none";
 
+                return result;
+            })
+        }
+        return [];
     }
     CheckWordExistance(word) {
         const words = JSON.parse(fs.readFileSync('vocabulary.json'));
@@ -24,5 +30,4 @@ class WordleProcessor {
     }
 }
 
-const processor = new WordleProcessor();
-processor.GenerateRandomWord();
+export default const processor = new WordleProcessor();
