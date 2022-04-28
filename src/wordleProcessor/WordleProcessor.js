@@ -20,9 +20,9 @@ function WordleProcessor() {
 
             return word_chars.map((letter, idx) => {
                 const result = {letter};
-                if (secretWord_chars[idx] === letter) result.position = "right";
+                if (secretWord_chars[idx] === letter) result.position = "allMatch";
                 else if (secretWord_chars.includes(letter)) result.position = "exists";
-                else result.position = "none";
+                else result.position = "noMatch";
 
                 return result;
             })
@@ -35,4 +35,12 @@ function WordleProcessor() {
     return { getSecret, GenerateRandomWord, CheckCorrectness, CheckWordExistence }
 }
 
-export default new WordleProcessor();
+// <-- for test -->
+const proc = new WordleProcessor();
+proc.GenerateRandomWord();
+console.log("secret: ", proc.getSecret());
+
+export default proc;
+// <------------->
+
+// export default WordleProcessor(); <-- ready variant
