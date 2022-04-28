@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import styled from 'styled-components';
+import wordleProcessor from '../../wordleProcessor/WordleProcessor';
 
 import {Row} from "./row/Row";
 
@@ -41,19 +42,22 @@ class Field extends React.Component {
         // TODO: check try count
 
         // TODO: proccess the row
-
         const value = this.props.row_values.join('').trim();
 
-        // TODO: save the row
-        if (value.length === 5) {
-            this.props.saveRow(value, this.props.focused_row);
-            // TODO: refocuse next row
-            if (this.props.focused_row < this.props.game_difficulty) {
-                this.props.refocuseRow(this.props.focused_row + 1);
-                // TODO: clear current row
-                this.props.clearCurrentRow();
-                this.props.refocuseCell(0);
+        if (wordleProcessor.CheckWordExistance(value)) {
+            // TODO: save the row
+            if (value.length === 5) {
+                this.props.saveRow(value, this.props.focused_row);
+                // TODO: refocuse next row
+                if (this.props.focused_row < this.props.game_difficulty) {
+                    this.props.refocuseRow(this.props.focused_row + 1);
+                    // TODO: clear current row
+                    this.props.clearCurrentRow();
+                    this.props.refocuseCell(0);
+                }
             }
+        } else {
+            // signal about unsaved word
         }
     }
 
