@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import React from 'react'
 
 const Container = styled.div`
@@ -7,6 +8,16 @@ const Container = styled.div`
   grid-column-gap: 10px;
   padding: 5px;
   margin: auto;
+  
+  & > .item-cell__all-matched {
+    background: green;
+  }
+  & > .item-cell__exists {
+    background: #bb9912;
+  }
+  & > .item-cell__no-match {
+    background: #4d6075;
+  }
 `
 const Cell = styled.div`
   font-size: 24px;
@@ -34,7 +45,7 @@ function CellEdit(props) {
         setTimeout(() => {
             if (InputRef.current) InputRef.current.focus();
         }, 0)
-    }, [props.focused_cell, props.word])
+    }, [props.focused_cell])
 
     function keydownHandler(e) {
         switch (e.key) {
@@ -56,7 +67,7 @@ function CellEdit(props) {
     )
 }
 
-export function Row({input, handler, disabled, row_idx, row_values, changeRowValues, focused_cell, refocuseCell }) {
+export function Row({input, disabled, row_values, changeRowValues, focused_cell, refocuseCell, correctness }) {
 
     const symbols_template = ",".repeat(4).split(',');
 
@@ -69,12 +80,28 @@ export function Row({input, handler, disabled, row_idx, row_values, changeRowVal
         if (focused_cell === 4) refocuseCell(focused_cell)
     }
 
+    function recolor(letter) {
+        if (letter) {
+            const {allMatch = [], exists = [], noMatch = []} = correctness;
+            switch (true) {
+                case allMatch.includes(letter):
+                    return "item-cell__all-matched";
+                case exists.includes(letter):
+                    return "item-cell__exists";
+                case noMatch.includes(letter):
+                    return "item-cell__no-match";
+                default: return "item-cell";
+            }
+        }
+        return ""
+    }
+
     return (
         <Container>
             {symbols_template.map((el, cell_idx) => {
                 if (disabled) {
                     return (
-                        <Cell key={cell_idx}>
+                        <Cell className={recolor(input[cell_idx])} key={cell_idx}>
                             {input ? input[cell_idx] : ""}
                         </Cell>
                     )

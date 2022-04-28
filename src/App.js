@@ -9,6 +9,7 @@ import ControlButtons from "./features/controllButtons/ControllButtons";
 const Div = styled.div`
   width: 960px;
   margin: 0 auto;
+  
 `
 
 class App extends React.Component {

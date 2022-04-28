@@ -7,6 +7,8 @@ class Field {
         try_number: 0,
         row_values: [],
         focused_cell: 0,
+        isWindowShowed: false,
+        correctness_rows: []
     }
 
     constructor() {
@@ -26,9 +28,9 @@ class Field {
                 return {...state, row_values: [...state.row_values]}
 
             // reset current row value
-                // TODO: row_values is mutable. Fix it :v
+            // TODO: row_values is mutable. Fix it :v
             case actionTypes.RESET_CURRENT_ROW_VALUES:
-               return {...state, row_values: []}
+                return {...state, row_values: []}
 
             // refocuse row
             case actionTypes.CHANGE_FOCUSED_ROW:
@@ -42,7 +44,25 @@ class Field {
                 // TODO: reset all
                 // !!!! init is mutable !!!!
                 return {...this._init}
-            default: return state;
+
+            // show/hide window with error
+            case actionTypes.SHOW_ERROR_WINDOW:
+                return {...state, isWindowShowed: action.value}
+
+            // fill correctness schema
+            case actionTypes.FILL_CORRECTNESS:
+                const cor = JSON.parse(JSON.stringify(state.correctness_rows));
+
+                const { index, array } = action;
+                cor.push(Object.create(null));
+                array.forEach(el => {
+                    if (!cor[index][el.position]) cor[index][el.position] = [];
+                    cor[index][el.position].push(el.letter)
+                })
+                return {...state, correctness_rows: cor};
+
+            default:
+                return state;
         }
     }
 
@@ -68,6 +88,14 @@ class Field {
     resetFieldActionCreator = () => ({
         type:  actionTypes.RESET_REDUCER
     })
+    showWindowActionCreator = (value) => ({
+        type: actionTypes.SHOW_ERROR_WINDOW,
+        value
+    })
+    noteCorrectnessActionCreator = (array, index) => ({
+        type: actionTypes.FILL_CORRECTNESS,
+        array, index
+    })
 }
 
 const FieldReducer = new Field();
@@ -76,9 +104,10 @@ export const {
     saveRowActionCreator,
     clearCurrentRowActionCreator,
     changeRowValuesActionCreator,
-    refocuseCellActionCreator,
     changeCurrentCellindexActionCreator,
     refocuseRowActionCreator,
+    showWindowActionCreator,
+    noteCorrectnessActionCreator,
     resetFieldActionCreator } = FieldReducer;
 
 export default FieldReducer;

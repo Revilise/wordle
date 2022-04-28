@@ -1,15 +1,20 @@
 import React from 'react';
 import {connect} from "react-redux";
 import styled from 'styled-components';
-import wordleProcessor from '../../wordleProcessor/WordleProcessor';
 
 import {Row} from "./row/Row";
 
-import {saveRowActionCreator,
+import {
+    saveRowActionCreator,
     changeRowValuesActionCreator,
     refocuseRowActionCreator,
     clearCurrentRowActionCreator,
-    changeCurrentCellindexActionCreator} from './FieldReducer'
+    noteCorrectnessActionCreator,
+    changeCurrentCellindexActionCreator,
+    showWindowActionCreator
+} from './FieldReducer'
+import WordleProcessor from "../../wordleProcessor/WordleProcessor";
+import DialogWindow from "../dialogWindow/DialogWindow";
 
 const RowsContainer = styled.div`
   display: flex;
@@ -41,36 +46,38 @@ class Field extends React.Component {
     processInput() {
         // TODO: check try count
 
-        // TODO: proccess the row
         const value = this.props.row_values.join('').trim();
+        const isValueExists = WordleProcessor.CheckWordExistence(value);
 
-        if (wordleProcessor.CheckWordExistance(value)) {
-            // TODO: save the row
-            if (value.length === 5) {
-                this.props.saveRow(value, this.props.focused_row);
-                // TODO: refocuse next row
-                if (this.props.focused_row < this.props.game_difficulty) {
-                    this.props.refocuseRow(this.props.focused_row + 1);
-                    // TODO: clear current row
-                    this.props.clearCurrentRow();
-                    this.props.refocuseCell(0);
-                }
+        if (isValueExists && value.length === 5) {
+            this.props.saveRow(value, this.props.focused_row);
+
+            const correctness = WordleProcessor.CheckCorrectness(value);
+            this.props.noteCorrectness(correctness, this.props.focused_row);
+
+            if (this.props.focused_row < this.props.game_difficulty) {
+                this.props.refocuseRow(this.props.focused_row + 1);
+                this.props.clearCurrentRow();
+                this.props.refocuseCell(0);
             }
-        } else {
-            // signal about unsaved word
-        }
-    }
+        } else this.props.showWindow(true);
+    };
 
     render() {
         return (
             <div>
+                {  this.props.isWindowShowed ? (
+                    <DialogWindow closeHandler={() => this.props.showWindow(false)}>
+                        <DialogWindow.Title>Ops</DialogWindow.Title>
+                        <p>bad word...</p>
+                    </DialogWindow>
+                ) : "" }
                 <RowsContainer>
                     {this.rows.map((row, idx) => (
-                        <Row handler={this.props.changeInput}
-                             key={idx}
+                        <Row key={idx}
+                             correctness={this.props.correctness[idx] || {} }
                              focused_cell={this.props.focused_cell}
                              refocuseCell={this.props.refocuseCell}
-                             row_idx={idx}
                              row_values={this.props.row_values}
                              changeRowValues={this.props.changeRowValues}
                              disabled={this.props.focused_row !== idx}
@@ -85,11 +92,13 @@ class Field extends React.Component {
 
 function MapStateToProps(state) {
     return {
+        game_difficulty: state.app.difficulty,
         input: state.field.input,
         focused_row: state.field.focused_row,
         focused_cell: state.field.focused_cell,
         row_values: state.field.row_values,
-        game_difficulty: state.app.difficulty,
+        isWindowShowed: state.field.isWindowShowed,
+        correctness: state.field.correctness_rows,
     }
 }
 
@@ -101,6 +110,8 @@ function MapDispatchToProps(dispatch) {
         refocuseRow: (row) => dispatch(refocuseRowActionCreator(row)),
         clearCurrentRow: () => dispatch(clearCurrentRowActionCreator()),
         refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index)),
+        showWindow: (value) => dispatch(showWindowActionCreator(value)),
+        noteCorrectness: (array, index) => dispatch(noteCorrectnessActionCreator(array, index))
     }
 }
 

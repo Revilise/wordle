@@ -29,7 +29,8 @@ code {
   --light-theme-yellow-key__hovered: #bb9912;
   --light-theme-white-key__hovered: #dedbd7;
 
-  --light-theme-enter-btn: #97d78b
+  --light-theme-enter-btn: #97d78b;
+  --light-theme-text-color: #1f1e1e;
   /* night-theme */
 
 }
