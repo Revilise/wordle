@@ -7,6 +7,7 @@ class Field {
         try_number: 0,
         row_values: [],
         focused_cell: 0,
+        isWindowShowed: false,
     }
 
     constructor() {
@@ -42,6 +43,9 @@ class Field {
                 // TODO: reset all
                 // !!!! init is mutable !!!!
                 return {...this._init}
+
+            case actionTypes.SHOW_ERROR_WINDOW:
+                return {...state, isWindowShowed: action.value}
             default: return state;
         }
     }
@@ -68,6 +72,10 @@ class Field {
     resetFieldActionCreator = () => ({
         type:  actionTypes.RESET_REDUCER
     })
+    showWindowActionCreator = (value) => ({
+        type: actionTypes.SHOW_ERROR_WINDOW,
+        value
+    })
 }
 
 const FieldReducer = new Field();
@@ -76,9 +84,9 @@ export const {
     saveRowActionCreator,
     clearCurrentRowActionCreator,
     changeRowValuesActionCreator,
-    refocuseCellActionCreator,
     changeCurrentCellindexActionCreator,
     refocuseRowActionCreator,
+    showWindowActionCreator,
     resetFieldActionCreator } = FieldReducer;
 
 export default FieldReducer;

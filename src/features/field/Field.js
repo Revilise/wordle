@@ -4,11 +4,15 @@ import styled from 'styled-components';
 
 import {Row} from "./row/Row";
 
-import {saveRowActionCreator,
+import {
+    saveRowActionCreator,
     changeRowValuesActionCreator,
     refocuseRowActionCreator,
     clearCurrentRowActionCreator,
-    changeCurrentCellindexActionCreator} from './FieldReducer'
+    changeCurrentCellindexActionCreator, showWindowActionCreator
+} from './FieldReducer'
+import WordleProcessor from "../../wordleProcessor/WordleProcessor";
+import DialogWindow from "../dialogWindow/DialogWindow";
 
 const RowsContainer = styled.div`
   display: flex;
@@ -41,25 +45,29 @@ class Field extends React.Component {
         // TODO: check try count
 
         // TODO: proccess the row
-
         const value = this.props.row_values.join('').trim();
+        const isValueExists = WordleProcessor.CheckWordExistence(value);
 
-        // TODO: save the row
-        if (value.length === 5) {
+        if (isValueExists && value.length === 5) {
             this.props.saveRow(value, this.props.focused_row);
-            // TODO: refocuse next row
             if (this.props.focused_row < this.props.game_difficulty) {
                 this.props.refocuseRow(this.props.focused_row + 1);
-                // TODO: clear current row
                 this.props.clearCurrentRow();
                 this.props.refocuseCell(0);
             }
-        }
-    }
+        } else this.props.showWindow(true);
+    };
+
 
     render() {
         return (
             <div>
+                {  this.props.isWindowShowed ? (
+                    <DialogWindow closeHandler={() => this.props.showWindow(false)}>
+                        <DialogWindow.Title>Ops</DialogWindow.Title>
+                        <p>bad word...</p>
+                    </DialogWindow>
+                ) : "" }
                 <RowsContainer>
                     {this.rows.map((row, idx) => (
                         <Row handler={this.props.changeInput}
@@ -86,6 +94,7 @@ function MapStateToProps(state) {
         focused_cell: state.field.focused_cell,
         row_values: state.field.row_values,
         game_difficulty: state.app.difficulty,
+        isWindowShowed: state.field.isWindowShowed,
     }
 }
 
@@ -97,6 +106,7 @@ function MapDispatchToProps(dispatch) {
         refocuseRow: (row) => dispatch(refocuseRowActionCreator(row)),
         clearCurrentRow: () => dispatch(clearCurrentRowActionCreator()),
         refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index)),
+        showWindow: (value) => dispatch(showWindowActionCreator(value)),
     }
 }
 

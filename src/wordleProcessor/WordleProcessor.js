@@ -1,18 +1,17 @@
+import vocab from './vocabulary.json'
+
 /*
 *   This module encapsulates secret_word variable.
 *   You can access to secret_word only by calling getSecret().
  */
-import * as fs from 'fs-web'
 
 function WordleProcessor() {
     const getSecret = () => {
         return this.secret_word;
     }
     const GenerateRandomWord = () => {
-        const words = fs.readFileSync('vocabulary.json');
-        const words2 = JSON.parse(words);
-        const random_idx = Math.floor(Math.random() * words2.length);
-        this.secret_word = words2[random_idx];
+        const random_idx = Math.floor(Math.random() * vocab.length);
+        this.secret_word = vocab[random_idx];
     }
     const CheckCorrectness = (word) => {
         if (word) {
@@ -31,8 +30,7 @@ function WordleProcessor() {
         return [];
     }
     const CheckWordExistence = (word) => {
-        const words = JSON.parse(fs.readFileSync('vocabulary.json'));
-        return words.includes(word);
+        return vocab.includes(word);
     }
     return { getSecret, GenerateRandomWord, CheckCorrectness, CheckWordExistence }
 }

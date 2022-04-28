@@ -13,6 +13,7 @@ export const actionTypes = {
     CHANGE_ROW_VALUE: "0x1005",
     REFOCUSE_CURRENT_CELL: "0x1006",
     RESET_REDUCER: "0x1999",
+    SHOW_ERROR_WINDOW: "0x1099",
 
     // window reducer
     CHANGE_APP_THEME: "0x9000",
