@@ -1,18 +1,18 @@
-const fs = require('fs');
-
 /*
 *   This module encapsulates secret_word variable.
 *   You can access to secret_word only by calling getSecret().
  */
+import * as fs from 'fs-web'
 
 function WordleProcessor() {
     const getSecret = () => {
         return this.secret_word;
     }
     const GenerateRandomWord = () => {
-        const words = JSON.parse(fs.readFileSync('vocabulary.json'));
-        const random_idx = Math.floor(Math.random() * words.length);
-        this.secret_word = words[random_idx];
+        const words = fs.readFileSync('vocabulary.json');
+        const words2 = JSON.parse(words);
+        const random_idx = Math.floor(Math.random() * words2.length);
+        this.secret_word = words2[random_idx];
     }
     const CheckCorrectness = (word) => {
         if (word) {
