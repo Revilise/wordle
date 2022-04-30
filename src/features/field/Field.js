@@ -45,31 +45,35 @@ class Field extends React.Component {
     // button handler
     processInput() {
 
-            const value = this.props.row_values.join('').trim();
-            const isValueExists = WordleProcessor.CheckWordExistence(value);
+        const value = this.props.row_values.join('').trim();
+        const isValueExists = WordleProcessor.CheckWordExistence(value);
 
-            if (isValueExists && value.length === 5) {
-                this.props.saveRow(value, this.props.focused_row);
+        if (isValueExists && value.length === 5) {
+            this.props.saveRow(value, this.props.focused_row);
 
-                const correctness = WordleProcessor.CheckCorrectness(value);
-                this.props.noteCorrectness(correctness, this.props.focused_row);
-                //
+            const correctness = WordleProcessor.CheckCorrectness(value);
+            this.props.noteCorrectness(correctness, this.props.focused_row);
 
-                if (this.props.focused_row < this.props.game_difficulty) {
-                    this.props.refocuseRow(this.props.focused_row + 1);
-                    this.props.clearCurrentRow();
-                    this.props.refocuseCell(0);
-
-                    this.props.incrementTryNumber();
-
-                    if (this.props.try_number == this.props.game_difficulty-1) {
-                        this.props.showWindow(true, "defeat", ":(")
-                    }
-            } else {
-                this.props.showWindow(true, "bad word", "Try another word.");
+            if (this.props.focused_row < this.props.game_difficulty) {
+                this.props.refocuseRow(this.props.focused_row + 1);
+                this.props.clearCurrentRow();
+                this.props.refocuseCell(0);
+                this.props.incrementTryNumber();
             }
+
+            const cor_flag = correctness.every(el => el.position === "allMatch");
+
+            if (this.props.try_number + 1 == this.props.game_difficulty && !cor_flag) {
+                this.props.showWindow(true, "defeat", ":(")
+            }
+
+            if (cor_flag) {
+                this.props.showWindow(true, "win", ":)")
+            }
+        } else {
+            this.props.showWindow(true, "bad word", "Try another word.");
         }
-    };
+    }
 
     render() {
         return (

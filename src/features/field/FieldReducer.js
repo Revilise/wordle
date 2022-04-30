@@ -50,7 +50,7 @@ class Field {
 
             // show/hide window with error
             case actionTypes.SHOW_WINDOW:
-                console.log(action)
+
                 return {...state, window: {
                             open: action.bool,
                             title: action.title || state.window.title,
