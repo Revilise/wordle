@@ -11,7 +11,8 @@ import {
     clearCurrentRowActionCreator,
     noteCorrectnessActionCreator,
     changeCurrentCellindexActionCreator,
-    showWindowActionCreator
+    incrementTryNumberActionCreator,
+    showWindowActionCreator,
 } from './FieldReducer'
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import DialogWindow from "../dialogWindow/DialogWindow";
@@ -38,38 +39,45 @@ class Field extends React.Component {
     constructor(props) {
         super(props);
 
-        this.rows_length = 5; // will be from state
-        this.rows = " ".repeat(this.rows_length).split('') // replace to rows from state
+        this.rows = " ".repeat(this.props.game_difficulty).split('') // replace to rows from state
     }
 
     // button handler
     processInput() {
-        // TODO: check try count
 
-        const value = this.props.row_values.join('').trim();
-        const isValueExists = WordleProcessor.CheckWordExistence(value);
+            const value = this.props.row_values.join('').trim();
+            const isValueExists = WordleProcessor.CheckWordExistence(value);
 
-        if (isValueExists && value.length === 5) {
-            this.props.saveRow(value, this.props.focused_row);
+            if (isValueExists && value.length === 5) {
+                this.props.saveRow(value, this.props.focused_row);
 
-            const correctness = WordleProcessor.CheckCorrectness(value);
-            this.props.noteCorrectness(correctness, this.props.focused_row);
+                const correctness = WordleProcessor.CheckCorrectness(value);
+                this.props.noteCorrectness(correctness, this.props.focused_row);
+                //
 
-            if (this.props.focused_row < this.props.game_difficulty) {
-                this.props.refocuseRow(this.props.focused_row + 1);
-                this.props.clearCurrentRow();
-                this.props.refocuseCell(0);
+                if (this.props.focused_row < this.props.game_difficulty) {
+                    this.props.refocuseRow(this.props.focused_row + 1);
+                    this.props.clearCurrentRow();
+                    this.props.refocuseCell(0);
+
+                    this.props.incrementTryNumber();
+
+                    if (this.props.try_number == this.props.game_difficulty-1) {
+                        this.props.showWindow(true, "defeat", ":(")
+                    }
+            } else {
+                this.props.showWindow(true, "bad word", "Try another word.");
             }
-        } else this.props.showWindow(true);
+        }
     };
 
     render() {
         return (
             <div>
-                {  this.props.isWindowShowed ? (
+                {  this.props.window.open ? (
                     <DialogWindow closeHandler={() => this.props.showWindow(false)}>
-                        <DialogWindow.Title>Ops</DialogWindow.Title>
-                        <p>bad word...</p>
+                        <DialogWindow.Title>{this.props.window.title}</DialogWindow.Title>
+                        <p>{this.props.window.content}</p>
                     </DialogWindow>
                 ) : "" }
                 <RowsContainer>
@@ -97,8 +105,9 @@ function MapStateToProps(state) {
         focused_row: state.field.focused_row,
         focused_cell: state.field.focused_cell,
         row_values: state.field.row_values,
-        isWindowShowed: state.field.isWindowShowed,
+        window: state.field.window,
         correctness: state.field.correctness_rows,
+        try_number: state.field.try_number,
     }
 }
 
@@ -110,8 +119,9 @@ function MapDispatchToProps(dispatch) {
         refocuseRow: (row) => dispatch(refocuseRowActionCreator(row)),
         clearCurrentRow: () => dispatch(clearCurrentRowActionCreator()),
         refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index)),
-        showWindow: (value) => dispatch(showWindowActionCreator(value)),
-        noteCorrectness: (array, index) => dispatch(noteCorrectnessActionCreator(array, index))
+        showWindow: (bool, title, content) => dispatch(showWindowActionCreator(bool, title, content)),
+        noteCorrectness: (array, index) => dispatch(noteCorrectnessActionCreator(array, index)),
+        incrementTryNumber: () => dispatch(incrementTryNumberActionCreator())
     }
 }
 

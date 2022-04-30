@@ -41,6 +41,6 @@ proc.GenerateRandomWord();
 console.log("secret: ", proc.getSecret());
 
 export default proc;
-// <------------->
+// <-------------->
 
-// export default WordleProcessor(); <-- ready variant
+// export default WordleProcessor(); <-- deploy variant

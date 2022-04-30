@@ -8,14 +8,19 @@ class Field {
         row_values: [],
         focused_cell: 0,
         isWindowShowed: false,
-        correctness_rows: []
+        correctness_rows: [],
+        window: {
+            open: false,
+            title: "",
+            content: "",
+        }
     }
 
     constructor() {
         this.reducer = this.reducer.bind(this);
     }
 
-    reducer(state = this._init, action) {
+    reducer(state = JSON.parse(JSON.stringify(this._init)), action) {
         switch (action.type) {
             // change established inputs values
             case actionTypes.CHANGE_INPUT_VALUE:
@@ -28,9 +33,8 @@ class Field {
                 return {...state, row_values: [...state.row_values]}
 
             // reset current row value
-            // TODO: row_values is mutable. Fix it :v
             case actionTypes.RESET_CURRENT_ROW_VALUES:
-                return {...state, row_values: []}
+                return {...state, row_values: this._init.row_values}
 
             // refocuse row
             case actionTypes.CHANGE_FOCUSED_ROW:
@@ -40,14 +44,18 @@ class Field {
             case actionTypes.REFOCUSE_CURRENT_CELL:
                 return {...state, focused_cell: action.index}
 
+            // reset reducer scheme
             case actionTypes.RESET_REDUCER:
-                // TODO: reset all
-                // !!!! init is mutable !!!!
                 return {...this._init}
 
             // show/hide window with error
-            case actionTypes.SHOW_ERROR_WINDOW:
-                return {...state, isWindowShowed: action.value}
+            case actionTypes.SHOW_WINDOW:
+                console.log(action)
+                return {...state, window: {
+                            open: action.bool,
+                            title: action.title || state.window.title,
+                            content: action.content || state.window.content
+                        }}
 
             // fill correctness schema
             case actionTypes.FILL_CORRECTNESS:
@@ -60,6 +68,10 @@ class Field {
                     cor[index][el.position].push(el.letter)
                 })
                 return {...state, correctness_rows: cor};
+
+            // change try number
+            case actionTypes.INCREMENT_TRY_NUMBER:
+                return {...state, try_number: state.try_number+1};
 
             default:
                 return state;
@@ -88,13 +100,16 @@ class Field {
     resetFieldActionCreator = () => ({
         type:  actionTypes.RESET_REDUCER
     })
-    showWindowActionCreator = (value) => ({
-        type: actionTypes.SHOW_ERROR_WINDOW,
-        value
+    showWindowActionCreator = (bool, title, content) => ({
+        type: actionTypes.SHOW_WINDOW,
+        bool, title, content
     })
     noteCorrectnessActionCreator = (array, index) => ({
         type: actionTypes.FILL_CORRECTNESS,
         array, index
+    })
+    incrementTryNumberActionCreator = () => ({
+        type: actionTypes.INCREMENT_TRY_NUMBER
     })
 }
 
@@ -108,6 +123,7 @@ export const {
     refocuseRowActionCreator,
     showWindowActionCreator,
     noteCorrectnessActionCreator,
+    incrementTryNumberActionCreator,
     resetFieldActionCreator } = FieldReducer;
 
 export default FieldReducer;
