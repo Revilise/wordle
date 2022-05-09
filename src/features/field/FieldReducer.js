@@ -47,7 +47,7 @@ class Field {
 
             // reset reducer scheme
             case actionTypes.RESET_REDUCER:
-                return {...this._init}
+                return {...this.copy(this._init)}
 
             // show/hide window with error
             case actionTypes.SHOW_WINDOW:
@@ -60,7 +60,7 @@ class Field {
 
             // fill correctness schema
             case actionTypes.FILL_CORRECTNESS:
-                const cor = JSON.parse(JSON.stringify(state.correctness_rows));
+                const cor = this.copy(state.correctness_rows);
 
                 const { index, array } = action;
                 cor.push(Object.create(null));
