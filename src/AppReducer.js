@@ -5,7 +5,7 @@ class App {
         this._init = {
             theme: "default",
             sound: false,
-            difficulty: 5
+            difficulty: 1
         }
 
         this.reducer = this.reducer.bind(this);
@@ -31,4 +31,4 @@ class App {
     })
 }
 
-export default new App;
+export default new App();

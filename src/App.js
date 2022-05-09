@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import './App.css';
 
 import Field from "./features/field/Field";
-import ControlButtons from "./features/controllButtons/ControllButtons";
+import ControlButtons from "./features/controllButtons/ControlButtons";
 
 const Div = styled.div`
   width: 960px;

@@ -12,10 +12,11 @@ import {
     noteCorrectnessActionCreator,
     changeCurrentCellindexActionCreator,
     incrementTryNumberActionCreator,
-    showWindowActionCreator,
+    showWindowActionCreator, resetFieldActionCreator,
 } from './FieldReducer'
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import DialogWindow from "../dialogWindow/DialogWindow";
+import ControlButtons from "../controllButtons/ControlButtons";
 
 const RowsContainer = styled.div`
   display: flex;
@@ -42,9 +43,7 @@ class Field extends React.Component {
         this.rows = " ".repeat(this.props.game_difficulty).split('') // replace to rows from state
     }
 
-    // button handler
     processInput() {
-
         const value = this.props.row_values.join('').trim();
         const isValueExists = WordleProcessor.CheckWordExistence(value);
 
@@ -61,9 +60,9 @@ class Field extends React.Component {
                 this.props.incrementTryNumber();
             }
 
-            const cor_flag = correctness.every(el => el.position === "allMatch");
+           const cor_flag = correctness.every(el => el.position === "allMatch");
 
-            if (this.props.try_number + 1 === this.props.game_difficulty && !cor_flag) {
+            if (this.props.try_number + 1 >= this.props.game_difficulty && !cor_flag) {
                 this.props.showWindow(true, "defeat", `:( secret word: ${WordleProcessor.getSecret()}`);
             }
 
@@ -82,8 +81,7 @@ class Field extends React.Component {
                     <DialogWindow closeHandler={() => this.props.showWindow(false)}>
                         <DialogWindow.Title>{this.props.window.title}</DialogWindow.Title>
                         <p>{this.props.window.content}</p>
-                        {this.props.window.title === "defeat" ?
-                        <ControllButtons.Restart onClick={Conr}/>}
+                        { this.props.window.title==="defeat" ? <ControlButtons.Restart /> : "" }
                     </DialogWindow>
                 ) : "" }
                 <RowsContainer>
@@ -119,7 +117,6 @@ function MapStateToProps(state) {
 
 function MapDispatchToProps(dispatch) {
     return {
-        changeInput: (value, row) => dispatch(saveRowActionCreator(value, row)),
         changeRowValues: (value, row) => dispatch(changeRowValuesActionCreator(value, row)),
         saveRow: (value, row) => dispatch(saveRowActionCreator(value, row)),
         refocuseRow: (row) => dispatch(refocuseRowActionCreator(row)),
@@ -127,7 +124,8 @@ function MapDispatchToProps(dispatch) {
         refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index)),
         showWindow: (bool, title, content) => dispatch(showWindowActionCreator(bool, title, content)),
         noteCorrectness: (array, index) => dispatch(noteCorrectnessActionCreator(array, index)),
-        incrementTryNumber: () => dispatch(incrementTryNumberActionCreator())
+        incrementTryNumber: () => dispatch(incrementTryNumberActionCreator()),
+        resetField: () => dispatch(resetFieldActionCreator())
     }
 }
 
