@@ -61,8 +61,8 @@ function CellEdit(props) {
     return (
         <Cell>
             {props.focused ?
-                <Input onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} /> :
-                <Input onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
+                <Input autocomplete={false} onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} /> :
+                <Input autocomplete={false} onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
         </Cell>
     )
 }

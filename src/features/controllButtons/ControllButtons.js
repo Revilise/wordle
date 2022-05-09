@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import styled from 'styled-components';
+import WordleProcessor from '../../wordleProcessor/WordleProcessor'
 
 import {resetFieldActionCreator} from '../field/FieldReducer';
 
@@ -10,7 +11,6 @@ class ControlButtons extends React.Component {
         super(props);
 
         this.Restart = styled.button``;
-
         this.Rules = styled.button``;
         this.Settings = styled.button``;
 
@@ -21,6 +21,7 @@ class ControlButtons extends React.Component {
 
     restartGame() {
         this.props.resetField();
+        WordleProcessor.GenerateRandomWord();
     }
     openRules() {
         // TODO: complete open rules function
@@ -38,7 +39,15 @@ class ControlButtons extends React.Component {
             </div>
         )
     }
+
+    Buttons = () => ({
+        Restart = this.Restart;
+        Rules = this.Rules;
+        Settings = this.Settings;
+    })
+
 }
+
 function MapStateToProps(state) {
     return {}
 }

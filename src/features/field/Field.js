@@ -63,8 +63,8 @@ class Field extends React.Component {
 
             const cor_flag = correctness.every(el => el.position === "allMatch");
 
-            if (this.props.try_number + 1 == this.props.game_difficulty && !cor_flag) {
-                this.props.showWindow(true, "defeat", ":(")
+            if (this.props.try_number + 1 === this.props.game_difficulty && !cor_flag) {
+                this.props.showWindow(true, "defeat", `:( secret word: ${WordleProcessor.getSecret()}`);
             }
 
             if (cor_flag) {
@@ -82,6 +82,8 @@ class Field extends React.Component {
                     <DialogWindow closeHandler={() => this.props.showWindow(false)}>
                         <DialogWindow.Title>{this.props.window.title}</DialogWindow.Title>
                         <p>{this.props.window.content}</p>
+                        {this.props.window.title === "defeat" ?
+                        <ControllButtons.Restart onClick={Conr}/>}
                     </DialogWindow>
                 ) : "" }
                 <RowsContainer>

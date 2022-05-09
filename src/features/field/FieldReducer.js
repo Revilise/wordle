@@ -19,8 +19,9 @@ class Field {
     constructor() {
         this.reducer = this.reducer.bind(this);
     }
+    copy = (obj) => JSON.parse(JSON.stringify(obj));
 
-    reducer(state = JSON.parse(JSON.stringify(this._init)), action) {
+    reducer(state = this.copy(this._init), action) {
         switch (action.type) {
             // change established inputs values
             case actionTypes.CHANGE_INPUT_VALUE:
@@ -34,7 +35,7 @@ class Field {
 
             // reset current row value
             case actionTypes.RESET_CURRENT_ROW_VALUES:
-                return {...state, row_values: this._init.row_values}
+                return {...state, row_values: this.copy(this._init.row_values)}
 
             // refocuse row
             case actionTypes.CHANGE_FOCUSED_ROW:
