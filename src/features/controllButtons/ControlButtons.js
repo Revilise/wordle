@@ -7,6 +7,7 @@ import WordleProcessor from '../../wordleProcessor/WordleProcessor'
 import {resetFieldActionCreator} from '../field/FieldReducer';
 import Restart from "./Restart/Restart";
 import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
+import wordleProcessor from "../../wordleProcessor/WordleProcessor";
 
 let showWindow = () => {};
 let resetField = () => {};
@@ -43,6 +44,7 @@ const MDTP = (dispatch) => ({
 const ConnectedControlButtons  = connect(MSTP, MDTP)(ControlButtons)
 ConnectedControlButtons.Restart = () => Restart({handler: () => {
     resetField();
+    wordleProcessor.GenerateRandomWord();
     showWindow({open: false});
     }});
 export default ConnectedControlButtons;
