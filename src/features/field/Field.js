@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import styled from 'styled-components';
+import './Field.css'
 
 import {Row} from "./row/Row";
 
@@ -18,11 +19,6 @@ import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import DialogWindow from "../dialogWindow/DialogWindow";
 import ControlButtons from "../controllButtons/ControlButtons";
 
-const RowsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-`
 const Button = styled.button`
   padding: 16px 24px;
   border: none;
@@ -41,8 +37,13 @@ class Field extends React.Component {
         super(props);
 
         this.rows = " ".repeat(this.props.game_difficulty).split('') // replace to rows from state
+        this.keyDownHandler = this.keyDownHandler.bind(this);
+        this.processInput = this.processInput.bind(this);
     }
 
+    keyDownHandler(e) {
+        if (e.key === 'Enter') this.processInput();
+    }
     processInput() {
         const value = this.props.row_values.join('').trim();
         const isValueExists = WordleProcessor.CheckWordExistence(value);
@@ -76,15 +77,15 @@ class Field extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
                 {  this.props.window.open ? (
                     <DialogWindow closeHandler={() => this.props.showWindow(false)}>
                         <DialogWindow.Title>{this.props.window.title}</DialogWindow.Title>
                         <p>{this.props.window.content}</p>
-                        { this.props.window.title==="defeat" ? <ControlButtons.Restart /> : "" }
+                        { this.props.window.title === "defeat" ? <ControlButtons.Restart /> : "" }
                     </DialogWindow>
                 ) : "" }
-                <RowsContainer>
+                <div className="rows-container" onKeyDown={this.keyDownHandler}>
                     {this.rows.map((row, idx) => (
                         <Row key={idx}
                              correctness={this.props.correctness[idx] || {} }
@@ -95,9 +96,10 @@ class Field extends React.Component {
                              disabled={this.props.focused_row !== idx}
                              input={this.props.input[idx] || ""}/>))
                     }
-                </RowsContainer>
+                </div>
                 <Button className="enter_btn" onClick={this.processInput.bind(this)}>enter</Button>
-            </div>
+            </>
+
         )
     }
 }

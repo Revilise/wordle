@@ -6,6 +6,7 @@ class DialogWindowReducer {
     constructor() {
         this._init = {
             open: false,
+
         }
         this.reducer = this.reducer.bind(this);
     }

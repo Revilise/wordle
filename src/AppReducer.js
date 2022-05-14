@@ -5,7 +5,7 @@ class App {
         this._init = {
             theme: "default",
             sound: false,
-            difficulty: 3
+            difficulty: 5
         }
 
         this.reducer = this.reducer.bind(this);

@@ -1,23 +1,7 @@
 import styled from "styled-components";
-import close from '../../assets/close.svg'
+import close from '../../assets/close.9e523dd28931ef34f052429a96d99445.svg';
+import './DialogWindow.css';
 
-const Container = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(52, 52, 52, 0.19);
-  left: 0;
-  top: 0;
-`
-const Window = styled.div`
-  width: 840px;
-  margin: 20vh auto 0 auto;
-  background: white;
-  border-radius: 24px;
-  padding: 24px;
-  box-sizing: border-box;
-  color: var(--light-theme-text-color);
-`
 const Close = styled.div`
   width: 100%;
   display: flex;
@@ -25,16 +9,16 @@ const Close = styled.div`
 `
 function DialogWindow({children, closeHandler}) {
     return (
-        <Container>
-            <Window>
+        <div className="window-container">
+            <div className="window">
                 <Close>
                     <input onClick={closeHandler} type="image" src={close}  alt=""/>
                 </Close>
                 <div>
                     {children}
                 </div>
-            </Window>
-        </Container>
+            </div>
+        </div>
     )
 }
 

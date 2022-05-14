@@ -17,15 +17,15 @@ function restartGame() {
 }
 
 class ControlButtons extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         showWindow = () => this.props.showWindow();
         resetField = () => this.props.resetField();
     }
 
     render() {
         return (
-            <div>
+            <div className="control-container">
                 <Restart handler={restartGame} />
             </div>
         )

@@ -1,24 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import './App.css';
 
 import Field from "./features/field/Field";
 import ControlButtons from "./features/controllButtons/ControlButtons";
 
-const Div = styled.div`
-  width: 960px;
-  margin: 0 auto;
-  
-`
-
 class App extends React.Component {
     render() {
         return (
-            <Div className="App">
+            <div className="App">
                 <ControlButtons/>
                 <Field/>
-            </Div>
+            </div>
         );
     }
 }

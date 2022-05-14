@@ -72,10 +72,8 @@ export function Row({input, disabled, row_values, changeRowValues, focused_cell,
     const symbols_template = ",".repeat(4).split(',');
 
     function changeCell(e, idx) {
-        const updated = row_values
         const val = e.target.value
-        updated[idx] = val[val.length - 1]
-        changeRowValues(updated)
+        changeRowValues(val[val.length - 1], idx)
         if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)
         if (focused_cell === 4) refocuseCell(focused_cell)
     }

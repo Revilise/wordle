@@ -26,7 +26,7 @@ class Field {
             // change established inputs values
             case actionTypes.CHANGE_INPUT_VALUE:
                 state.input[action.row] = action.value.trim().substring(0, 5);
-                return {...state, input: [...state.input]};
+                return {...state, input: state.input};
 
             // change current row values
             case actionTypes.CHANGE_ROW_VALUE:

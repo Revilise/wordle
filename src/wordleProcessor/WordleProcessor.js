@@ -34,13 +34,8 @@ function WordleProcessor() {
     }
     return { getSecret, GenerateRandomWord, CheckCorrectness, CheckWordExistence }
 }
+const processor = new WordleProcessor();
+processor.GenerateRandomWord();
+console.log(processor.getSecret()); // debug
 
-// <-- for test -->
-const proc = new WordleProcessor();
-proc.GenerateRandomWord();
-console.log("secret: ", proc.getSecret());
-
-export default proc;
-// <-------------->
-
-// export default WordleProcessor(); <-- deploy variant
+export default processor;
