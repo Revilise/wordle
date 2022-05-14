@@ -30,5 +30,6 @@ class App {
         difficulty
     })
 }
+const app = new App();
 
-export default new App();
+export default app.reducer;

@@ -12,12 +12,10 @@ import {
     clearCurrentRowActionCreator,
     noteCorrectnessActionCreator,
     changeCurrentCellindexActionCreator,
-    incrementTryNumberActionCreator,
-    showWindowActionCreator, resetFieldActionCreator,
+    incrementTryNumberActionCreator, resetFieldActionCreator,
 } from './FieldReducer'
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
-import DialogWindow from "../dialogWindow/DialogWindow";
-import ControlButtons from "../controllButtons/ControlButtons";
+import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
 
 const Button = styled.button`
   padding: 16px 24px;
@@ -42,7 +40,7 @@ class Field extends React.Component {
     }
 
     keyDownHandler(e) {
-        if (e.key === 'Enter') this.processInput();
+        if (e.key === 'Enter') return this.processInput();
     }
     processInput() {
         const value = this.props.row_values.join('').trim();
@@ -64,27 +62,33 @@ class Field extends React.Component {
            const cor_flag = correctness.every(el => el.position === "allMatch");
 
             if (this.props.try_number + 1 >= this.props.game_difficulty && !cor_flag) {
-                this.props.showWindow(true, "defeat", `:( secret word: ${WordleProcessor.getSecret()}`);
+                this.props.showWindow({
+                    open: true,
+                    title: "defeat :(",
+                    content: `secret word: ${WordleProcessor.getSecret()}`,
+                    role: "end"
+                });
             }
 
             if (cor_flag) {
-                this.props.showWindow(true, "win", ":)")
+                this.props.showWindow({
+                    open: true,
+                    title: "win :)",
+                    content: "Try again?",
+                    role: "end"
+                })
             }
         } else {
-            this.props.showWindow(true, "bad word", "Try another word.");
-        }
+            this.props.showWindow({
+                open: true,
+                title: "bad word",
+                content: "Try another word."
+            })}
     }
 
     render() {
         return (
             <>
-                {  this.props.window.open ? (
-                    <DialogWindow closeHandler={() => this.props.showWindow(false)}>
-                        <DialogWindow.Title>{this.props.window.title}</DialogWindow.Title>
-                        <p>{this.props.window.content}</p>
-                        { this.props.window.title === "defeat" ? <ControlButtons.Restart /> : "" }
-                    </DialogWindow>
-                ) : "" }
                 <div className="rows-container" onKeyDown={this.keyDownHandler}>
                     {this.rows.map((row, idx) => (
                         <Row key={idx}
@@ -99,21 +103,17 @@ class Field extends React.Component {
                 </div>
                 <Button className="enter_btn" onClick={this.processInput.bind(this)}>enter</Button>
             </>
-
         )
     }
 }
 
 function MapStateToProps(state) {
+
+    const { input, focused_row, focused_cell, row_values, correctness, try_number } = state.field;
+
     return {
         game_difficulty: state.app.difficulty,
-        input: state.field.input,
-        focused_row: state.field.focused_row,
-        focused_cell: state.field.focused_cell,
-        row_values: state.field.row_values,
-        window: state.field.window,
-        correctness: state.field.correctness_rows,
-        try_number: state.field.try_number,
+        input, focused_row, focused_cell, row_values, correctness, try_number
     }
 }
 
@@ -124,7 +124,7 @@ function MapDispatchToProps(dispatch) {
         refocuseRow: (row) => dispatch(refocuseRowActionCreator(row)),
         clearCurrentRow: () => dispatch(clearCurrentRowActionCreator()),
         refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index)),
-        showWindow: (bool, title, content) => dispatch(showWindowActionCreator(bool, title, content)),
+        showWindow: (obj) => dispatch(showWindowActionCreator(obj)),
         noteCorrectness: (array, index) => dispatch(noteCorrectnessActionCreator(array, index)),
         incrementTryNumber: () => dispatch(incrementTryNumberActionCreator()),
         resetField: () => dispatch(resetFieldActionCreator())

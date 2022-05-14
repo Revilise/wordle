@@ -8,7 +8,7 @@ class Field {
         row_values: [],
         focused_cell: 0,
         isWindowShowed: false,
-        correctness_rows: [],
+        correctness: [],
         window: {
             open: false,
             title: "",
@@ -49,18 +49,9 @@ class Field {
             case actionTypes.RESET_REDUCER:
                 return {...this.copy(this._init)}
 
-            // show/hide window with error
-            case actionTypes.SHOW_WINDOW:
-
-                return {...state, window: {
-                            open: action.bool,
-                            title: action.title || state.window.title,
-                            content: action.content || state.window.content
-                        }}
-
             // fill correctness schema
             case actionTypes.FILL_CORRECTNESS:
-                const cor = this.copy(state.correctness_rows);
+                const cor = this.copy(state.correctness);
 
                 const { index, array } = action;
                 cor.push(Object.create(null));
@@ -68,7 +59,7 @@ class Field {
                     if (!cor[index][el.position]) cor[index][el.position] = [];
                     cor[index][el.position].push(el.letter)
                 })
-                return {...state, correctness_rows: cor};
+                return {...state, correctness: cor};
 
             // change try number
             case actionTypes.INCREMENT_TRY_NUMBER:
@@ -101,10 +92,6 @@ class Field {
     resetFieldActionCreator = () => ({
         type:  actionTypes.RESET_REDUCER
     })
-    showWindowActionCreator = (bool, title, content) => ({
-        type: actionTypes.SHOW_WINDOW,
-        bool, title, content
-    })
     noteCorrectnessActionCreator = (array, index) => ({
         type: actionTypes.FILL_CORRECTNESS,
         array, index
@@ -122,9 +109,8 @@ export const {
     changeRowValuesActionCreator,
     changeCurrentCellindexActionCreator,
     refocuseRowActionCreator,
-    showWindowActionCreator,
     noteCorrectnessActionCreator,
     incrementTryNumberActionCreator,
     resetFieldActionCreator } = FieldReducer;
 
-export default FieldReducer;
+export default FieldReducer.reducer;

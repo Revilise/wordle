@@ -1,10 +1,12 @@
 import {combineReducers, createStore} from 'redux';
-import App from "../AppReducer";
-import Field from "../features/field/FieldReducer";
+import FieldReducer from "../features/field/FieldReducer";
+import AppReducer from "../AppReducer";
+import dialogWindowReducer from "../features/dialogWindow/DialogWindowReducer";
 
 const rootReducer = combineReducers({
-  field: Field.reducer,
-  app: App.reducer,
+  field: FieldReducer,
+  app: AppReducer,
+  window: dialogWindowReducer,
 })
 
 export const store = createStore(rootReducer);

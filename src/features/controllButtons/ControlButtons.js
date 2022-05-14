@@ -4,14 +4,15 @@ import './ControlButtons.css'
 import { connect } from "react-redux";
 import WordleProcessor from '../../wordleProcessor/WordleProcessor'
 
-import {resetFieldActionCreator, showWindowActionCreator} from '../field/FieldReducer';
+import {resetFieldActionCreator} from '../field/FieldReducer';
 import Restart from "./Restart/Restart";
+import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
 
 let showWindow = () => {};
 let resetField = () => {};
 
 function restartGame() {
-    showWindow(false);
+    showWindow({open: false});
     resetField();
     WordleProcessor.GenerateRandomWord();
 }
@@ -19,7 +20,7 @@ function restartGame() {
 class ControlButtons extends React.Component {
     constructor(props) {
         super(props);
-        showWindow = () => this.props.showWindow();
+        showWindow = (obj) => this.props.showWindow(obj);
         resetField = () => this.props.resetField();
     }
 
@@ -36,9 +37,12 @@ class ControlButtons extends React.Component {
 const MSTP = (state) => ({});
 const MDTP = (dispatch) => ({
     resetField: () => dispatch(resetFieldActionCreator()),
-    showWindow: (bool, title, content) => dispatch(showWindowActionCreator(bool, title, content)),
+    showWindow: (obj) => dispatch(showWindowActionCreator(obj)),
 })
 
 const ConnectedControlButtons  = connect(MSTP, MDTP)(ControlButtons)
-ConnectedControlButtons.Restart = () => Restart({handler: resetField});
+ConnectedControlButtons.Restart = () => Restart({handler: () => {
+    resetField();
+    showWindow({open: false});
+    }});
 export default ConnectedControlButtons;
