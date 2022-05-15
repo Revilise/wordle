@@ -7,18 +7,26 @@ class Field {
         try_number: 0,
         row_values: [],
         focused_cell: 0,
+        isWindowShowed: false,
+        correctness: [],
+        window: {
+            open: false,
+            title: "",
+            content: "",
+        }
     }
 
     constructor() {
         this.reducer = this.reducer.bind(this);
     }
+    copy = (obj) => JSON.parse(JSON.stringify(obj));
 
-    reducer(state = this._init, action) {
+    reducer(state = this.copy(this._init), action) {
         switch (action.type) {
             // change established inputs values
             case actionTypes.CHANGE_INPUT_VALUE:
                 state.input[action.row] = action.value.trim().substring(0, 5);
-                return {...state, input: [...state.input]};
+                return {...state, input: state.input};
 
             // change current row values
             case actionTypes.CHANGE_ROW_VALUE:
@@ -26,9 +34,8 @@ class Field {
                 return {...state, row_values: [...state.row_values]}
 
             // reset current row value
-                // TODO: row_values is mutable. Fix it :v
             case actionTypes.RESET_CURRENT_ROW_VALUES:
-               return {...state, row_values: []}
+                return {...state, row_values: this.copy(this._init.row_values)}
 
             // refocuse row
             case actionTypes.CHANGE_FOCUSED_ROW:
@@ -38,11 +45,28 @@ class Field {
             case actionTypes.REFOCUSE_CURRENT_CELL:
                 return {...state, focused_cell: action.index}
 
+            // reset reducer scheme
             case actionTypes.RESET_REDUCER:
-                // TODO: reset all
-                // !!!! init is mutable !!!!
-                return {...this._init}
-            default: return state;
+                return {...this.copy(this._init)}
+
+            // fill correctness schema
+            case actionTypes.FILL_CORRECTNESS:
+                const cor = this.copy(state.correctness);
+
+                const { index, array } = action;
+                cor.push(Object.create(null));
+                array.forEach(el => {
+                    if (!cor[index][el.position]) cor[index][el.position] = [];
+                    cor[index][el.position].push(el.letter)
+                })
+                return {...state, correctness: cor};
+
+            // change try number
+            case actionTypes.INCREMENT_TRY_NUMBER:
+                return {...state, try_number: state.try_number+1};
+
+            default:
+                return state;
         }
     }
 
@@ -68,6 +92,13 @@ class Field {
     resetFieldActionCreator = () => ({
         type:  actionTypes.RESET_REDUCER
     })
+    noteCorrectnessActionCreator = (array, index) => ({
+        type: actionTypes.FILL_CORRECTNESS,
+        array, index
+    })
+    incrementTryNumberActionCreator = () => ({
+        type: actionTypes.INCREMENT_TRY_NUMBER
+    })
 }
 
 const FieldReducer = new Field();
@@ -76,9 +107,10 @@ export const {
     saveRowActionCreator,
     clearCurrentRowActionCreator,
     changeRowValuesActionCreator,
-    refocuseCellActionCreator,
     changeCurrentCellindexActionCreator,
     refocuseRowActionCreator,
+    noteCorrectnessActionCreator,
+    incrementTryNumberActionCreator,
     resetFieldActionCreator } = FieldReducer;
 
-export default FieldReducer;
+export default FieldReducer.reducer;
