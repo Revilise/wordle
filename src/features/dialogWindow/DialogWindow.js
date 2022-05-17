@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 
-import close from '../../assets/close.9e523dd28931ef34f052429a96d99445.svg';
+import close from '../../assets/close.svg';
 import './DialogWindow.css';
 import {connect} from "react-redux";
 import {showWindowActionCreator} from "./DialogWindowReducer";
@@ -12,6 +12,7 @@ const Close = styled.div`
   display: flex;
   justify-content: right;
 `
+
 class DialogWindow extends React.Component {
     render() {
         if (!this.props.open) {
