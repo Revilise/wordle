@@ -11,24 +11,41 @@ class Keyboard {
         this.reducer = this.reducer.bind(this);
     }
 
-    reducer(state = this._init, action) {
+    deleteDoubles = (array) => {
+        return array.filter((el, idx, self) => self.indexOf(el) === idx);
+    }
+    copy = (array) => JSON.parse(JSON.stringify(array));
+    reducer(state = this.copy(this._init), action) {
         switch (action.type) {
-            // change key's color state
             case actionTypes.CHANGE_KEYS_STATE:
-                // TODO: complete action
+                action.correctness.forEach(el => {
+                    switch (el.position) {
+                        case "noMatch":
+                            state.gray_keys.push(el.letter)
+                            state.gray_keys = this.deleteDoubles(state.gray_keys);
+                            break;
+                        case "allMatch":
+                            state.green_keys.push(el.letter);
+                            state.green_keys = this.deleteDoubles(state.green_keys);
+                            break;
+                        case "exists":
+                            state.yellow_keys.push(el.letter);
+                            state.yellow_keys = this.deleteDoubles(state.yellow_keys);
+                            break;
+                        default: break;
+                    }
+                });
                 return {...state};
 
-            // reset reducer
             case actionTypes.RESET_KEYBOARD_REDUCER:
-                // !!!! init is mutable !!!!
-                return {...this._init}
+                return {...this.copy(this._init)}
             default:
                 return state;
         }
     }
 
-    keysChangeStateActionCreator = (letter, destination) => ({
-        type: actionTypes.CHANGE_KEYS_STATE, letter, destination
+    keysChangeStateActionCreator = (correctness) => ({
+        type: actionTypes.CHANGE_KEYS_STATE, correctness
     })
     resetKeysStateActionCreator = () => ({
         type: actionTypes.RESET_KEYS_STATE
@@ -45,4 +62,4 @@ export const {
     resetKeyboardActionCreator
 } = keyboardReducer;
 
-export default keyboardReducer.reducer();
+export default keyboardReducer.reducer;

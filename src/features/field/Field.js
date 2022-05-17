@@ -16,6 +16,7 @@ import {
 } from './FieldReducer'
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
+import {keysChangeStateActionCreator} from "../keyboard/KeyboardReducer";
 
 const Button = styled.button`
   padding: 16px 24px;
@@ -51,6 +52,7 @@ class Field extends React.Component {
 
             const correctness = WordleProcessor.CheckCorrectness(value);
             this.props.noteCorrectness(correctness, this.props.focused_row);
+            this.props.keysChangeState(correctness);
 
             if (this.props.focused_row < this.props.game_difficulty) {
                 this.props.refocuseRow(this.props.focused_row + 1);
@@ -108,9 +110,7 @@ class Field extends React.Component {
 }
 
 function MapStateToProps(state) {
-
     const { input, focused_row, focused_cell, row_values, correctness, try_number } = state.field;
-
     return {
         game_difficulty: state.app.difficulty,
         input, focused_row, focused_cell, row_values, correctness, try_number
@@ -127,7 +127,8 @@ function MapDispatchToProps(dispatch) {
         showWindow: (obj) => dispatch(showWindowActionCreator(obj)),
         noteCorrectness: (array, index) => dispatch(noteCorrectnessActionCreator(array, index)),
         incrementTryNumber: () => dispatch(incrementTryNumberActionCreator()),
-        resetField: () => dispatch(resetFieldActionCreator())
+        resetField: () => dispatch(resetFieldActionCreator()),
+        keysChangeState: (correctness) => dispatch(keysChangeStateActionCreator(correctness))
     }
 }
 
