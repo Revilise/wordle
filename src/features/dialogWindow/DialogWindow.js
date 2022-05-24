@@ -27,7 +27,7 @@ class DialogWindow extends React.Component {
                     </Close>
                     <div>
                         <h2>{this.props.title}</h2>
-                        <p>{this.props.content}</p>
+                        {typeof this.props.content === 'function' ? this.props.content() : <p>{this.props.content}</p> }
                     </div>
                     { this.props.role === "end" ? <ControlButtons.Restart /> : "" }
                 </div>

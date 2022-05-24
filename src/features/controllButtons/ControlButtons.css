@@ -4,3 +4,9 @@
     border-radius: 8px;
     cursor: pointer;
 }
+.control-container {
+    display: flex;
+    justify-content: space-between;
+    width: 678px;
+    margin: 0 auto;
+}

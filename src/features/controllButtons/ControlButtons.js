@@ -1,14 +1,15 @@
 import React from 'react';
 import './ControlButtons.css'
-
 import { connect } from "react-redux";
 import WordleProcessor from '../../wordleProcessor/WordleProcessor'
 
-import {resetFieldActionCreator} from '../field/FieldReducer';
+import Rules from "./Rules/Rules";
 import Restart from "./Restart/Restart";
+
+import {resetFieldActionCreator} from '../field/FieldReducer';
 import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
-import wordleProcessor from "../../wordleProcessor/WordleProcessor";
 import {resetKeyboardActionCreator} from "../keyboard/KeyboardReducer";
+import RulesBox from "../RulesBox/RulesBox";
 
 let showWindow = () => {};
 let resetField = () => {};
@@ -19,6 +20,9 @@ function restartGame() {
     resetField();
     resetKeys();
     WordleProcessor.GenerateRandomWord();
+}
+function showRules() {
+    showWindow({ open: true, title: "Game rules", content: RulesBox });
 }
 
 class ControlButtons extends React.Component {
@@ -32,6 +36,7 @@ class ControlButtons extends React.Component {
     render() {
         return (
             <div className="control-container">
+                <Rules handler={showRules}/>
                 <Restart handler={restartGame} />
             </div>
         )
@@ -51,7 +56,7 @@ ConnectedControlButtons.Restart = () => Restart({handler: () => {
     showWindow({open: false});
     resetField();
     resetKeys();
-    wordleProcessor.GenerateRandomWord();
+    WordleProcessor.GenerateRandomWord();
     console.log("updated")
     }});
 export default ConnectedControlButtons;

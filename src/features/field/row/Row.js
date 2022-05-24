@@ -2,13 +2,15 @@ import styled from 'styled-components';
 
 import React from 'react'
 
-const Container = styled.div`
+export const Container = styled.div`
   display: grid;
   grid-template-columns: 50px 50px 50px 50px 50px;
   grid-column-gap: 10px;
   padding: 5px;
   margin: auto;
-  
+  & > div {
+    color: #efeeec;
+  }
   & > .item-cell__all-matched {
     background: green;
   }
@@ -19,7 +21,7 @@ const Container = styled.div`
     background: #4d6075;
   }
 `
-const Cell = styled.div`
+export const Cell = styled.div`
   font-size: 24px;
   height: 50px;
   display: flex;
