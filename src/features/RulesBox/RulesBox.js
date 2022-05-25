@@ -10,30 +10,38 @@ export default function RulesBox() {
                 After each guess, the color of the tiles will change to show how close your guess was to the word.
             </p>
 
-            <Container className="rules-box_example">
-                { "SMILE".split('').map((letter, idx) => (
-                    <Cell key={idx} className={letter === "S" ? "item-cell__all-matched" : "item-cell__no-match"}>
-                        {letter}
-                    </Cell>
-                ))}
-                <p>letter S is on right position in secret word</p>
-            </Container>
+            <div className="rules-box_example">
+                <Container>
+                    { "SMILE".split('').map((letter, idx) => (
+                        <Cell key={idx} className={letter === "S" ? "item-cell__all-matched" : "item-cell__no-match"}>
+                            {letter}
+                        </Cell>
+                    ))}
+                </Container>
+                <p>letter S is on right position in secret word.</p>
+            </div>
 
-            <Container className="rules-box_example">
-                { "ENJOY".split('').map((letter, idx) => (
-                    <Cell key={idx} className={letter === "J" ? "item-cell__exists" : "item-cell__no-match"}>
-                        {letter}
-                    </Cell>
-                ))}
-            </Container>
+            <div className="rules-box_example">
+                <Container>
+                    { "ENJOY".split('').map((letter, idx) => (
+                        <Cell key={idx} className={letter === "J" ? "item-cell__exists" : "item-cell__no-match"}>
+                            {letter}
+                        </Cell>
+                    ))}
+                </Container>
+                <p>Letter J is exists in secret word, but position is wrong.</p>
+            </div>
 
-            <Container className="rules-box_example">
-                { "HAPPY".split('').map((letter, idx) => (
-                    <Cell key={idx} className="item-cell__no-match">
-                        {letter}
-                    </Cell>
-                ))}
-            </Container>
+            <div className="rules-box_example">
+                <Container>
+                    { "HAPPY".split('').map((letter, idx) => (
+                        <Cell key={idx} className="item-cell__no-match">
+                            {letter}
+                        </Cell>
+                    ))}
+                </Container>
+                <p>Gray cells display that such letters don't exist in secret word.</p>
+            </div>
         </div>
     )
 }

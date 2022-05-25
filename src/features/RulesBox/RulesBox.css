@@ -4,10 +4,11 @@
 .rules-box_example {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .rules-box_example div {
     margin: 6px;
 }
 .rules-box_example p {
-    width: 100%;
+    margin-left: 16px;
 }
