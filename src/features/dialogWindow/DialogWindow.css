@@ -15,3 +15,6 @@
     box-sizing: border-box;
     color: var(--light-theme-text-color);
 }
+.window_title {
+    margin-bottom: 24px;
+}

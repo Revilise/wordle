@@ -10,6 +10,7 @@ import {resetFieldActionCreator} from '../field/FieldReducer';
 import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
 import {resetKeyboardActionCreator} from "../keyboard/KeyboardReducer";
 import RulesBox from "../RulesBox/RulesBox";
+import Settings from "./Settings/Settings";
 
 let showWindow = () => {};
 let resetField = () => {};
@@ -23,6 +24,9 @@ function restartGame() {
 }
 function showRules() {
     showWindow({ open: true, title: "Game rules", content: RulesBox });
+}
+function showSettings() {
+    showWindow({open: true, title: "Settings"});
 }
 
 class ControlButtons extends React.Component {
@@ -38,6 +42,7 @@ class ControlButtons extends React.Component {
             <div className="control-container">
                 <Rules handler={showRules}/>
                 <Restart handler={restartGame} />
+                <Settings handler={showSettings}/>
             </div>
         )
     }

@@ -26,7 +26,7 @@ class DialogWindow extends React.Component {
                         <input onClick={() => this.props.showWindow(false)} type="image" src={close}  alt=""/>
                     </Close>
                     <div>
-                        <h2>{this.props.title}</h2>
+                        <h2 className="window_title">{this.props.title}</h2>
                         {typeof this.props.content === 'function' ? this.props.content() : <p>{this.props.content}</p> }
                     </div>
                     { this.props.role === "end" ? <ControlButtons.Restart /> : "" }
