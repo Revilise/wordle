@@ -2,43 +2,12 @@ import styled from 'styled-components';
 
 import React from 'react'
 
-export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 50px 50px 50px 50px 50px;
-  grid-column-gap: 10px;
-  padding: 5px;
-  margin: auto;
-  & > div {
-    color: #efeeec;
-  }
-  & > .item-cell__all-matched {
-    background: green;
-  }
-  & > .item-cell__exists {
-    background: #bb9912;
-  }
-  & > .item-cell__no-match {
-    background: #4d6075;
-  }
-`
-export const Cell = styled.div`
-  font-size: 24px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  outline: grey 1px solid;
-  box-sizing: border-box;
-  border-radius: 4px;
-`
-const Input = styled.input`
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  box-sizing: border-box;
-  border-radius: 4px;
-`
+export function Cell({recolorClass, children}) {
+    return <div className={`cell ${recolorClass}`}>{children}</div>
+}
+export function Container({children}) {
+    return <div className="field">{children}</div>
+}
 
 function CellEdit(props) {
     const InputRef = React.useRef(null)
@@ -62,9 +31,9 @@ function CellEdit(props) {
 
     return (
         <Cell>
-            {props.focused ?
-                <Input autocomplete={false} onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} /> :
-                <Input autocomplete={false} onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
+            {props.focused
+                ? <input className="cell-edit" autoComplete={false} onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} />
+                : <input className="cell-edit" autoComplete={false} onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
         </Cell>
     )
 }
@@ -101,7 +70,7 @@ export function Row({input, disabled, row_values, changeRowValues, focused_cell,
             {symbols_template.map((el, cell_idx) => {
                 if (disabled) {
                     return (
-                        <Cell className={recolor(input[cell_idx])} key={cell_idx}>
+                        <Cell recolorClass={recolor(input[cell_idx])} key={cell_idx}>
                             {input ? input[cell_idx] : ""}
                         </Cell>
                     )

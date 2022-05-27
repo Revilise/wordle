@@ -11,6 +11,7 @@ import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
 import {resetKeyboardActionCreator} from "../keyboard/KeyboardReducer";
 import RulesBox from "../RulesBox/RulesBox";
 import Settings from "./Settings/Settings";
+import SettingsBox from "../SettingsBox/SettingsBox";
 
 let showWindow = () => {};
 let resetField = () => {};
@@ -26,7 +27,7 @@ function showRules() {
     showWindow({ open: true, title: "Game rules", content: RulesBox });
 }
 function showSettings() {
-    showWindow({open: true, title: "Settings"});
+    showWindow({ open: true, title: "Settings", content: () => <SettingsBox /> });
 }
 
 class ControlButtons extends React.Component {
@@ -39,7 +40,7 @@ class ControlButtons extends React.Component {
 
     render() {
         return (
-            <div className="control-container">
+            <div className={`control-container ${this.props.theme}-theme`}>
                 <Rules handler={showRules}/>
                 <Restart handler={restartGame} />
                 <Settings handler={showSettings}/>
@@ -49,7 +50,9 @@ class ControlButtons extends React.Component {
 }
 
 // MapStateToProps & MapDispatchToProps
-const MSTP = (state) => ({});
+const MSTP = (state) => ({
+    theme: state.app.theme
+});
 const MDTP = (dispatch) => ({
     resetField: () => dispatch(resetFieldActionCreator()),
     showWindow: (obj) => dispatch(showWindowActionCreator(obj)),

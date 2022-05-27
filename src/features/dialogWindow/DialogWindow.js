@@ -20,15 +20,13 @@ class DialogWindow extends React.Component {
         }
 
         return (
-            <div className="window-container">
+            <div className={`window-container ${this.props.theme}-theme`}>
                 <div className="window">
                     <Close>
                         <input onClick={() => this.props.showWindow(false)} type="image" src={close}  alt=""/>
                     </Close>
-                    <div>
-                        <h2 className="window_title">{this.props.title}</h2>
-                        {typeof this.props.content === 'function' ? this.props.content() : <p>{this.props.content}</p> }
-                    </div>
+                    <h2 className="window_title">{this.props.title}</h2>
+                    {typeof this.props.content === 'function' ? this.props.content() : <p>{this.props.content}</p> }
                     { this.props.role === "end" ? <ControlButtons.Restart /> : "" }
                 </div>
             </div>
@@ -39,7 +37,8 @@ class DialogWindow extends React.Component {
 function MapStateToProps(state) {
     const { open, title, content, role } = state.window;
     return {
-        open, title, content, role
+        open, title, content, role,
+        theme: state.app.theme
     }
 }
 function MapDispatchToProps(dispatch) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-import styled from 'styled-components';
 import './Field.css'
 
 import {Row} from "./row/Row";
@@ -17,19 +16,6 @@ import {
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
 import {keysChangeStateActionCreator} from "../keyboard/KeyboardReducer";
-
-const Button = styled.button`
-  padding: 16px 24px;
-  border: none;
-  font-family: "Roboto Light";
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-
-  :hover {
-    background: #e5e0e0;
-  }
-`
 
 class Field extends React.Component {
     constructor(props) {
@@ -91,7 +77,7 @@ class Field extends React.Component {
     render() {
         return (
             <>
-                <div className="rows-container" onKeyDown={this.keyDownHandler}>
+                <div className={`rows-container ${this.props.theme}-theme`} onKeyDown={this.keyDownHandler}>
                     {this.rows.map((row, idx) => (
                         <Row key={idx}
                              correctness={this.props.correctness[idx] || {} }
@@ -103,7 +89,9 @@ class Field extends React.Component {
                              input={this.props.input[idx] || ""}/>))
                     }
                 </div>
-                <Button className="enter_btn" onClick={this.processInput.bind(this)}>enter</Button>
+                <div className={`control-btn`}>
+                    <button className="enter_btn" onClick={this.processInput.bind(this)}>enter</button>
+                </div>
             </>
         )
     }
@@ -113,6 +101,7 @@ function MapStateToProps(state) {
     const { input, focused_row, focused_cell, row_values, correctness, try_number } = state.field;
     return {
         game_difficulty: state.app.difficulty,
+        theme: state.app.theme,
         input, focused_row, focused_cell, row_values, correctness, try_number
     }
 }

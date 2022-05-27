@@ -3,7 +3,7 @@ import {actionTypes} from "./app/action-types";
 class App {
     constructor() {
         this._init = {
-            theme: "default",
+            theme: "light",
             sound: false,
             difficulty: 5
         }
@@ -13,7 +13,8 @@ class App {
     reducer(state = this._init, action) {
         switch (action.type) {
 
-
+            case actionTypes.CHANGE_APP_THEME:
+                return {...state, theme: action.theme }
             default: return state;
         }
     }
@@ -31,5 +32,9 @@ class App {
     })
 }
 const app = new App();
+
+export const {
+    changeThemeActionCreator
+} = app;
 
 export default app.reducer;

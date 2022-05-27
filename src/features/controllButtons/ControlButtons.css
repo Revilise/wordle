@@ -10,3 +10,11 @@
     width: 678px;
     margin: 0 auto;
 }
+.dark-theme .control-btn > button {
+    background: var(--dark-theme-btn-background);
+    color: var(--dark-theme-text-color);
+}
+.dark-theme .control-btn > button:hover {
+    background: var(--dark-theme-btn-background-hovered);
+    color: var(--dark-theme-text-color);
+}
