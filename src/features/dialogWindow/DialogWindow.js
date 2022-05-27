@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from "styled-components";
 
-import close from '../../assets/close.svg';
+import closeLight from '../../assets/close-light.svg';
+import closeDark from '../../assets/close-dark.svg';
+
 import './DialogWindow.css';
 import {connect} from "react-redux";
 import {showWindowActionCreator} from "./DialogWindowReducer";
@@ -23,7 +25,7 @@ class DialogWindow extends React.Component {
             <div className={`window-container ${this.props.theme}-theme`}>
                 <div className="window">
                     <Close>
-                        <input onClick={() => this.props.showWindow(false)} type="image" src={close}  alt=""/>
+                        <input onClick={() => this.props.showWindow(false)} type="image" src={this.props.theme === "light" ? closeLight : closeDark} alt=""/>
                     </Close>
                     <h2 className="window_title">{this.props.title}</h2>
                     {typeof this.props.content === 'function' ? this.props.content() : <p>{this.props.content}</p> }
