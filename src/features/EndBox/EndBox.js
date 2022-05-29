@@ -1,5 +1,6 @@
 import ControlButtons from "../controllButtons/ControlButtons";
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
+import './EndBox.css';
 
 const defeat =  "defeat-component";
 const win = "win-component";
@@ -17,10 +18,13 @@ function EndBox(state, winInfo) {
                 :
                 <>
                     <p>let's try again!</p>
-                    <button onClick={() => copy(winInfo)}>copy result</button>
+                    <div className="control-btn">
+                        <button onClick={() => copy(winInfo)}>copy result</button>
+                    </div>
                 </>
             }
             <ControlButtons.Restart />
+
         </div>
     )
 }
