@@ -14,7 +14,7 @@ function EndBox(state, winInfo) {
         <div className="end-box">
             {
                 state === defeat && state
-                ? <p>secret word is {WordleProcessor.getSecret()}</p>
+                ? <p>secret word is <b>{WordleProcessor.getSecret()}</b></p>
                 :
                 <>
                     <p>let's try again!</p>
