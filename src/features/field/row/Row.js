@@ -32,8 +32,8 @@ function CellEdit(props) {
     return (
         <Cell>
             {props.focused
-                ? <input className="cell-edit" autoComplete={false} onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} />
-                : <input className="cell-edit" autoComplete={false} onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
+                ? <input className="cell-edit" autoComplete="false" onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} />
+                : <input className="cell-edit" autoComplete="false" onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
         </Cell>
     )
 }

@@ -7,7 +7,6 @@ import closeDark from '../../assets/close-dark.svg';
 import './DialogWindow.css';
 import {connect} from "react-redux";
 import {showWindowActionCreator} from "./DialogWindowReducer";
-import ControlButtons from "../controllButtons/ControlButtons";
 
 const Close = styled.div`
   width: 100%;
@@ -29,7 +28,6 @@ class DialogWindow extends React.Component {
                     </Close>
                     <h2 className="window_title">{this.props.title}</h2>
                     {typeof this.props.content === 'function' ? this.props.content() : <p>{this.props.content}</p> }
-                    { this.props.role === "end" ? <ControlButtons.Restart /> : "" }
                 </div>
             </div>
         )

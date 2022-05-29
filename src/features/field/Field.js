@@ -16,6 +16,7 @@ import {
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
 import {keysChangeStateActionCreator} from "../keyboard/KeyboardReducer";
+import EndBox from "../EndBox/EndBox";
 
 class Field extends React.Component {
     constructor(props) {
@@ -53,8 +54,7 @@ class Field extends React.Component {
                 this.props.showWindow({
                     open: true,
                     title: "defeat :(",
-                    content: `secret word: ${WordleProcessor.getSecret()}`,
-                    role: "end"
+                    content: EndBox.Defeat,
                 });
             }
 
@@ -62,8 +62,7 @@ class Field extends React.Component {
                 this.props.showWindow({
                     open: true,
                     title: "win :)",
-                    content: "Try again?",
-                    role: "end"
+                    content: EndBox.Win,
                 })
             }
         } else {
