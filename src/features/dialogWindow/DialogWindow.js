@@ -19,7 +19,6 @@ class DialogWindow extends React.Component {
         if (!this.props.open) {
             return  <></>
         }
-
         return (
             <div className={`window-container ${this.props.theme}-theme`}>
                 <div className="window">

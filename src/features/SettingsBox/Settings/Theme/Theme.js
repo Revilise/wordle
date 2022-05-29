@@ -7,8 +7,8 @@ export function Theme({theme, changeTheme}) {
     }
     return (
         <div onClick={handler} className="toggle-btn">
-            <input checked={theme === "light"} className="toggle-btn_checkbox" type="checkbox" />
-            <inpt className="toggle-btn_slider" />
+            <input onChange={() => {}} checked={theme === "light"} className="toggle-btn_checkbox" type="checkbox" />
+            <div className="toggle-btn_slider" />
         </div>
     )
 }

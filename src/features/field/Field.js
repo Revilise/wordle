@@ -59,10 +59,11 @@ class Field extends React.Component {
             }
 
             if (cor_flag) {
+                this.props.incrementTryNumber();
                 this.props.showWindow({
                     open: true,
                     title: "win :)",
-                    content: EndBox.Win,
+                    content: () => EndBox.Win([this.props.try_number+1, this.props.game_difficulty]),
                 })
             }
         } else {

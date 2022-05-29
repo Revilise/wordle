@@ -65,6 +65,5 @@ ConnectedControlButtons.Restart = () => Restart({handler: () => {
     resetField();
     resetKeys();
     WordleProcessor.GenerateRandomWord();
-    console.log("updated")
     }});
 export default ConnectedControlButtons;
