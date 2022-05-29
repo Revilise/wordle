@@ -22,7 +22,6 @@ class Field extends React.Component {
     constructor(props) {
         super(props);
 
-        this.rows = " ".repeat(this.props.game_difficulty).split('') // replace to rows from state
         this.keyDownHandler = this.keyDownHandler.bind(this);
         this.processInput = this.processInput.bind(this);
     }
@@ -75,10 +74,11 @@ class Field extends React.Component {
     }
 
     render() {
+        const rows = " ".repeat(this.props.game_difficulty);
         return (
             <>
                 <div className={`rows-container ${this.props.theme}-theme`} onKeyDown={this.keyDownHandler}>
-                    {this.rows.map((row, idx) => (
+                    {rows.split('').map((row, idx) => (
                         <Row key={idx}
                              correctness={this.props.correctness[idx] || {} }
                              focused_cell={this.props.focused_cell}
@@ -87,6 +87,7 @@ class Field extends React.Component {
                              changeRowValues={this.props.changeRowValues}
                              disabled={this.props.focused_row !== idx}
                              sound={this.props.sound}
+                             difficulty={this.props.game_difficulty}
                              input={this.props.input[idx] || ""}/>))
                     }
                 </div>

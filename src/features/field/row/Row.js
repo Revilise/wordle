@@ -37,17 +37,16 @@ function CellEdit(props) {
     )
 }
 
-export function Row({input, disabled, row_values, changeRowValues, focused_cell, refocuseCell, correctness, sound }) {
+export function Row({input, difficulty, disabled, row_values, changeRowValues, focused_cell, refocuseCell, correctness, sound }) {
 
     const symbols_template = ",".repeat(4).split(',');
 
     function changeCell(e, idx) {
-
-        console.log(sound)
         if (sound) PlaySound();
+
         const val = e.target.value
         changeRowValues(val[val.length - 1], idx)
-        if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)
+        if (focused_cell < difficulty && val) refocuseCell(focused_cell + 1)
         if (focused_cell === 4) refocuseCell(focused_cell)
     }
 

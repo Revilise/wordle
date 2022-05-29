@@ -54,6 +54,7 @@ function MapStateToProps(state) {
         yellow_keys: state.keyboard.yellow_keys,
         gray_keys: state.keyboard.gray_keys,
         focused_cell: state.field.focused_cell,
+        difficulty: state.app.difficulty,
     }
 }
 function MapDispatchToProps(dispatch) {
