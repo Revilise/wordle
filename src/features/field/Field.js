@@ -86,6 +86,7 @@ class Field extends React.Component {
                              row_values={this.props.row_values}
                              changeRowValues={this.props.changeRowValues}
                              disabled={this.props.focused_row !== idx}
+                             sound={this.props.sound}
                              input={this.props.input[idx] || ""}/>))
                     }
                 </div>
@@ -101,6 +102,7 @@ function MapStateToProps(state) {
     const { input, focused_row, focused_cell, row_values, correctness, try_number } = state.field;
     return {
         game_difficulty: state.app.difficulty,
+        sound: state.app.sound,
         theme: state.app.theme,
         input, focused_row, focused_cell, row_values, correctness, try_number
     }

@@ -3,6 +3,7 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    transition: .2s;
 }
 .control-container {
     display: flex;
@@ -10,6 +11,7 @@
     width: 678px;
     margin: 0 auto;
 }
+/* dark theme */
 .dark-theme .control-btn > button {
     background: var(--dark-theme-btn-background);
     color: var(--dark-theme-text-color);
@@ -17,4 +19,13 @@
 .dark-theme .control-btn > button:hover {
     background: var(--dark-theme-btn-background-hovered);
     color: var(--dark-theme-text-color);
+}
+/* light theme */
+.light-theme .control-btn > button {
+    background: var(--light-theme-btn-background);
+    color: var(--light-theme-text-color);
+}
+.light-theme .control-btn > button:hover {
+    background: var(--light-theme-btn-background-hovered);
+    color: var(--light-theme-text-color);
 }

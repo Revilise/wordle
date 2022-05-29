@@ -1,6 +1,5 @@
-import styled from 'styled-components';
-
 import React from 'react'
+import {PlaySound} from "../../../app/audioControl";
 
 export function Cell({recolorClass, children}) {
     return <div className={`cell ${recolorClass}`}>{children}</div>
@@ -38,11 +37,14 @@ function CellEdit(props) {
     )
 }
 
-export function Row({input, disabled, row_values, changeRowValues, focused_cell, refocuseCell, correctness }) {
+export function Row({input, disabled, row_values, changeRowValues, focused_cell, refocuseCell, correctness, sound }) {
 
     const symbols_template = ",".repeat(4).split(',');
 
     function changeCell(e, idx) {
+
+        console.log(sound)
+        if (sound) PlaySound();
         const val = e.target.value
         changeRowValues(val[val.length - 1], idx)
         if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)

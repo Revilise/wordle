@@ -7,7 +7,6 @@ class App {
             sound: false,
             difficulty: 5
         }
-
         this.reducer = this.reducer.bind(this);
     }
     reducer(state = this._init, action) {
@@ -15,10 +14,11 @@ class App {
 
             case actionTypes.CHANGE_APP_THEME:
                 return {...state, theme: action.theme }
+            case actionTypes.TOGGLE_APP_SOUND:
+                return {...state, sound: !state.sound }
             default: return state;
         }
     }
-
     changeThemeActionCreator = (theme) => ({
         type: actionTypes.CHANGE_APP_THEME,
         theme
@@ -34,7 +34,8 @@ class App {
 const app = new App();
 
 export const {
-    changeThemeActionCreator
+    changeThemeActionCreator,
+    toggleSoundActionCreator
 } = app;
 
 export default app.reducer;

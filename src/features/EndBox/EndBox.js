@@ -24,7 +24,6 @@ function EndBox(state, winInfo) {
                 </>
             }
             <ControlButtons.Restart />
-
         </div>
     )
 }

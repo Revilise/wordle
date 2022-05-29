@@ -1,4 +1,4 @@
-.toggle-btn {
+.toggle-theme-btn {
     position: relative;
     display: inline-block;
     width: 60px;
@@ -6,14 +6,14 @@
 }
 
 /* Hide default HTML checkbox */
-.toggle-btn .toggle-btn_checkbox {
+.toggle-theme-btn .toggle-theme-btn_checkbox {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The toggle-btn_slider */
-.toggle-btn_slider {
+/* The toggle-theme-btn_slider */
+.toggle-theme-btn_slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -26,7 +26,7 @@
     border-radius: 34px;
 }
 
-.toggle-btn_slider:before {
+.toggle-theme-btn_slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -39,16 +39,16 @@
     border-radius: 50%;
 }
 
-.toggle-btn_checkbox:checked + .toggle-btn_slider {
+.toggle-theme-btn_checkbox:checked + .toggle-theme-btn_slider {
 
     background-color: var(--dark-theme-slide-background);
 }
 
-.toggle-btn_checkbox:focus + .toggle-btn_slider {
+.toggle-theme-btn_checkbox:focus + .toggle-theme-btn_slider {
     box-shadow: 0 0 1px #2196F3;
 }
 
-.toggle-btn_checkbox:checked + .toggle-btn_slider:before {
+.toggle-theme-btn_checkbox:checked + .toggle-theme-btn_slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);

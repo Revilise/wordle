@@ -1,0 +1,27 @@
+.toggle-sound_btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+    border-radius: 100%;
+    transition: .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* dark theme */
+.dark-theme .toggle-sound_btn {
+    background: var(--dark-theme-btn-background);
+}
+.dark-theme .toggle-sound_btn:hover {
+    background: var(--dark-theme-btn-background-hovered);
+}
+/* light theme */
+
+.light-theme .toggle-sound_btn {
+    background: var(--light-theme-btn-background);
+}
+.light-theme .toggle-sound_btn:hover {
+    background: var(--light-theme-btn-background-hovered);
+}
