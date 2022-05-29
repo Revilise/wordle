@@ -46,7 +46,7 @@ export function Row({input, difficulty, disabled, row_values, changeRowValues, f
 
         const val = e.target.value
         changeRowValues(val[val.length - 1], idx)
-        if (focused_cell < difficulty && val) refocuseCell(focused_cell + 1)
+        if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)
         if (focused_cell === 4) refocuseCell(focused_cell)
     }
 
