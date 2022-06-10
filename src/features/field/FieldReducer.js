@@ -9,11 +9,6 @@ class Field {
         focused_cell: 0,
         isWindowShowed: false,
         correctness: [],
-        window: {
-            open: false,
-            title: "",
-            content: "",
-        }
     }
 
     constructor() {

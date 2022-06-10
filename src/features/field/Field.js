@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-import styled from 'styled-components';
 import './Field.css'
 
 import {Row} from "./row/Row";
@@ -16,25 +15,13 @@ import {
 } from './FieldReducer'
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
-
-const Button = styled.button`
-  padding: 16px 24px;
-  border: none;
-  font-family: "Roboto Light";
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-
-  :hover {
-    background: #e5e0e0;
-  }
-`
+import {keysChangeStateActionCreator} from "../keyboard/KeyboardReducer";
+import EndBox from "../EndBox/EndBox";
 
 class Field extends React.Component {
     constructor(props) {
         super(props);
 
-        this.rows = " ".repeat(this.props.game_difficulty).split('') // replace to rows from state
         this.keyDownHandler = this.keyDownHandler.bind(this);
         this.processInput = this.processInput.bind(this);
     }
@@ -51,6 +38,7 @@ class Field extends React.Component {
 
             const correctness = WordleProcessor.CheckCorrectness(value);
             this.props.noteCorrectness(correctness, this.props.focused_row);
+            this.props.keysChangeState(correctness);
 
             if (this.props.focused_row < this.props.game_difficulty) {
                 this.props.refocuseRow(this.props.focused_row + 1);
@@ -65,17 +53,16 @@ class Field extends React.Component {
                 this.props.showWindow({
                     open: true,
                     title: "defeat :(",
-                    content: `secret word: ${WordleProcessor.getSecret()}`,
-                    role: "end"
+                    content: EndBox.Defeat,
                 });
             }
 
             if (cor_flag) {
+                this.props.incrementTryNumber();
                 this.props.showWindow({
                     open: true,
                     title: "win :)",
-                    content: "Try again?",
-                    role: "end"
+                    content: () => EndBox.Win([this.props.try_number+1, this.props.game_difficulty]),
                 })
             }
         } else {
@@ -87,10 +74,11 @@ class Field extends React.Component {
     }
 
     render() {
+        const rows = " ".repeat(this.props.game_difficulty);
         return (
             <>
-                <div className="rows-container" onKeyDown={this.keyDownHandler}>
-                    {this.rows.map((row, idx) => (
+                <div className={`rows-container ${this.props.theme}-theme`} onKeyDown={this.keyDownHandler}>
+                    {rows.split('').map((row, idx) => (
                         <Row key={idx}
                              correctness={this.props.correctness[idx] || {} }
                              focused_cell={this.props.focused_cell}
@@ -98,21 +86,25 @@ class Field extends React.Component {
                              row_values={this.props.row_values}
                              changeRowValues={this.props.changeRowValues}
                              disabled={this.props.focused_row !== idx}
+                             sound={this.props.sound}
+                             difficulty={this.props.game_difficulty}
                              input={this.props.input[idx] || ""}/>))
                     }
                 </div>
-                <Button className="enter_btn" onClick={this.processInput.bind(this)}>enter</Button>
+                <div className={`control-btn`}>
+                    <button className="enter_btn" onClick={this.processInput.bind(this)}>enter</button>
+                </div>
             </>
         )
     }
 }
 
 function MapStateToProps(state) {
-
     const { input, focused_row, focused_cell, row_values, correctness, try_number } = state.field;
-
     return {
         game_difficulty: state.app.difficulty,
+        sound: state.app.sound,
+        theme: state.app.theme,
         input, focused_row, focused_cell, row_values, correctness, try_number
     }
 }
@@ -127,7 +119,8 @@ function MapDispatchToProps(dispatch) {
         showWindow: (obj) => dispatch(showWindowActionCreator(obj)),
         noteCorrectness: (array, index) => dispatch(noteCorrectnessActionCreator(array, index)),
         incrementTryNumber: () => dispatch(incrementTryNumberActionCreator()),
-        resetField: () => dispatch(resetFieldActionCreator())
+        resetField: () => dispatch(resetFieldActionCreator()),
+        keysChangeState: (correctness) => dispatch(keysChangeStateActionCreator(correctness))
     }
 }
 

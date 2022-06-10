@@ -10,6 +10,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #e1e0dd;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 code {
@@ -31,6 +34,34 @@ code {
 
   --light-theme-enter-btn: #97d78b;
   --light-theme-text-color: #1f1e1e;
-  /* night-theme */
 
+  --light-theme-slide-background: #e1dede;
+  --light-theme-switch-background: #fff;
+
+  --light-theme-background: #ffffff;
+  --light-theme-pre-background: rgba(52, 52, 52, 0.19);
+
+  --light-theme-cell-border: #eae8e8;
+  --light-theme-default-cell: #f3f3f3;
+
+  --light-theme-btn-background: #f3f3f3;
+  --light-theme-btn-background-hovered: #dadada;
+
+  /* night-theme */
+  --dark-theme-gray-key: #b0b0b0;
+  --dark-theme-yellow-key: #ffc755;
+  --dark-theme-green-key: #68d554;
+
+  --dark-theme-background: rgb(14, 14, 38);
+  --dark-theme-pre-background: rgba(0, 0, 0, 0.4);
+
+  --dark-theme-slide-background: #131f34;
+
+  --dark-theme-text-color: #ffffff;
+  --dark-theme-btn-background: #1b2c49;
+  --dark-theme-btn-background-hovered: #1e3457;
+
+  --dark-theme-key-default-background: #1b2c49;
+
+  --dark-theme-cell-border: #525f77;
 }

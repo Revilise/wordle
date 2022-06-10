@@ -1,34 +1,32 @@
 import React from 'react'
 import styled from "styled-components";
 
-import close from '../../assets/close.9e523dd28931ef34f052429a96d99445.svg';
+import closeLight from '../../assets/close-light.svg';
+import closeDark from '../../assets/close-dark.svg';
+
 import './DialogWindow.css';
 import {connect} from "react-redux";
 import {showWindowActionCreator} from "./DialogWindowReducer";
-import ControlButtons from "../controllButtons/ControlButtons";
 
 const Close = styled.div`
   width: 100%;
   display: flex;
   justify-content: right;
 `
+
 class DialogWindow extends React.Component {
     render() {
         if (!this.props.open) {
             return  <></>
         }
-
         return (
-            <div className="window-container">
+            <div className={`window-container ${this.props.theme}-theme`}>
                 <div className="window">
                     <Close>
-                        <input onClick={() => this.props.showWindow(false)} type="image" src={close}  alt=""/>
+                        <input onClick={() => this.props.showWindow(false)} type="image" src={this.props.theme === "light" ? closeLight : closeDark} alt=""/>
                     </Close>
-                    <div>
-                        <h2>{this.props.title}</h2>
-                        <p>{this.props.content}</p>
-                    </div>
-                    { this.props.role === "end" ? <ControlButtons.Restart /> : "" }
+                    <h2 className="window_title">{this.props.title}</h2>
+                    {typeof this.props.content === 'function' ? this.props.content() : <p>{this.props.content}</p> }
                 </div>
             </div>
         )
@@ -38,7 +36,8 @@ class DialogWindow extends React.Component {
 function MapStateToProps(state) {
     const { open, title, content, role } = state.window;
     return {
-        open, title, content, role
+        open, title, content, role,
+        theme: state.app.theme
     }
 }
 function MapDispatchToProps(dispatch) {
