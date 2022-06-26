@@ -1,43 +1,26 @@
-import {actionTypes} from "./app/action-types";
+import {createSlice} from "@reduxjs/toolkit";
 
-class App {
-    constructor() {
-        this._init = {
-            theme: "light",
-            sound: false,
-            difficulty: 5
-        }
-        this.reducer = this.reducer.bind(this);
-    }
-    reducer(state = this._init, action) {
-        switch (action.type) {
-            case actionTypes.CHANGE_APP_THEME:
-                return {...state, theme: action.theme }
-            case actionTypes.TOGGLE_APP_SOUND:
-                return {...state, sound: !state.sound }
-            case actionTypes.CHANGE_APP_DIFFICULTY:
-                return {...state, difficulty: action.difficulty}
-            default: return state;
-        }
-    }
-    changeThemeActionCreator = (theme) => ({
-        type: actionTypes.CHANGE_APP_THEME,
-        theme
-    })
-    toggleSoundActionCreator = () => ({
-        type: actionTypes.TOGGLE_APP_SOUND
-    })
-    changeDifficultyActionCreator = (difficulty) => ({
-        type:  actionTypes.CHANGE_APP_DIFFICULTY,
-        difficulty
-    })
+const initialState = {
+    theme: "light",
+    sound: false,
+    difficulty: 5
 }
-const app = new App();
 
-export const {
-    changeThemeActionCreator,
-    toggleSoundActionCreator,
-    changeDifficultyActionCreator
-} = app;
+const app = createSlice({
+    name: "app",
+    initialState,
+    reducers: {
+        changeTheme(state, action) {
+            state.theme = action.payload
+        },
+        toggleSound(state) {
+            state.sound = !state.sound
+        },
+        changeDifficulty(state, action) {
+            state.difficulty = action.payload;
+        }
+    }
+})
 
+export const { changeTheme, toggleSound, changeDifficulty } = app.actions;
 export default app.reducer;

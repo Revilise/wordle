@@ -1,5 +1,7 @@
 import React from 'react'
 import {PlaySound} from "../../../app/audioControl";
+import {useDispatch, useSelector} from "react-redux";
+import {changeCurrentRowValue, refocusCell} from "../FieldReducer";
 
 export function Cell({recolorClass, children}) {
     return <div className={`cell ${recolorClass}`}>{children}</div>
@@ -10,7 +12,6 @@ export function Container({children}) {
 
 function CellEdit(props) {
     const InputRef = React.useRef(null)
-
     React.useEffect(() => {
         setTimeout(() => {
             if (InputRef.current) InputRef.current.focus();
@@ -20,10 +21,10 @@ function CellEdit(props) {
     function keydownHandler(e) {
         switch (e.key) {
             case "Backspace": if (props.focused_cell > 0 && props.word) {
-                props.refocuseCell(props.focused_cell - 1);
+                props.refocusCell(props.focused_cell - 1);
             } break;
-            case "ArrowRight": if (props.focused_cell < 5) props.refocuseCell(props.focused_cell + 1); break;
-            case "ArrowLeft": if (props.focused_cell > 0) props.refocuseCell(props.focused_cell - 1); break;
+            case "ArrowRight": if (props.focused_cell < 5) props.refocusCell(props.focused_cell + 1); break;
+            case "ArrowLeft": if (props.focused_cell > 0) props.refocusCell(props.focused_cell - 1); break;
             default: break;
         }
     }
@@ -32,22 +33,28 @@ function CellEdit(props) {
         <Cell>
             {props.focused
                 ? <input className="cell-edit" autoComplete="false" onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} />
-                : <input className="cell-edit" autoComplete="false" onClick={props.refocuseCurrent} onChange={props.handler} value={props.word} />}
+                : <input className="cell-edit" autoComplete="false" onClick={props.refocusCurrent} onChange={props.handler} value={props.word} />}
         </Cell>
     )
 }
 
-export function Row({input, difficulty, disabled, row_values, changeRowValues, focused_cell, refocuseCell, correctness, sound }) {
+const symbols_template = ",".repeat(4).split(',');
 
-    const symbols_template = ",".repeat(4).split(',');
+export function Row({correctness, disabled, input}) {
 
-    function changeCell(e, idx) {
-        if (sound) PlaySound();
+    const app = useSelector(state => state.app);
+    const field = useSelector(state => state.field);
 
+    const dispatch = useDispatch();
+
+    function changeCell(e) {
         const val = e.target.value
-        changeRowValues(val[val.length - 1], idx)
-        if (focused_cell < 5 && val) refocuseCell(focused_cell + 1)
-        if (focused_cell === 4) refocuseCell(focused_cell)
+
+        dispatch(changeCurrentRowValue(val[val.length - 1])); //
+        if (field.focused_cell < 5 && val) dispatch(refocusCell(field.focused_cell + 1));
+        if (field.focused_cell === 4) dispatch(refocusCell(field.focused_cell)); //todo: fix
+
+        if (app.sound) PlaySound(); // todo: выпилить
     }
 
     function recolor(letter) {
@@ -78,12 +85,12 @@ export function Row({input, difficulty, disabled, row_values, changeRowValues, f
                 }
 
                 return <CellEdit key={cell_idx}
-                                 focused_cell={focused_cell}
-                                 refocuseCurrent={() => refocuseCell(cell_idx)}
-                                 refocuseCell={refocuseCell}
-                                 handler={(e) => changeCell(e, cell_idx)}
-                                 focused={cell_idx === focused_cell}
-                                 word={row_values[cell_idx] || ""}   />
+                                 focused_cell={field.focused_cell}
+                                 refocusCurrent={() => dispatch(refocusCell(cell_idx))}
+                                 refocusCell={(val) => dispatch(refocusCell(val))}
+                                 handler={changeCell}
+                                 focused={cell_idx === field.focused_cell}
+                                 word={field.row_values[cell_idx] || ""}   />
             })}
         </Container>
     )

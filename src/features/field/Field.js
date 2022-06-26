@@ -1,127 +1,91 @@
-import React from 'react';
-import {connect} from "react-redux";
-import './Field.css'
-
-import {Row} from "./row/Row";
-
-import {
-    saveRowActionCreator,
-    changeRowValuesActionCreator,
-    refocuseRowActionCreator,
-    clearCurrentRowActionCreator,
-    noteCorrectnessActionCreator,
-    changeCurrentCellindexActionCreator,
-    incrementTryNumberActionCreator, resetFieldActionCreator,
-} from './FieldReducer'
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
-import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
-import {keysChangeStateActionCreator} from "../keyboard/KeyboardReducer";
-import EndBox from "../EndBox/EndBox";
+import React from 'react';
 
-class Field extends React.Component {
-    constructor(props) {
-        super(props);
+import EndBox from "../../factory/PopupFactory/contentBoxes/End/EndBox";
+import {Row} from "./row/Row";
+import './Field.css'
+import {useDispatch, useSelector} from "react-redux";
+import {showWindow} from "../dialogWindow/DialogWindowReducer";
+import {
+    changeInputValue,
+    changeTryNumber,
+    fillCorrectness,
+    refocusCell,
+    refocusRow,
+    resetCurrentRow
+} from "./FieldReducer";
+import {changeKeyState} from "../keyboard/KeyboardReducer";
 
-        this.keyDownHandler = this.keyDownHandler.bind(this);
-        this.processInput = this.processInput.bind(this);
+export default function Field() {
+
+    const app = useSelector(state => state.app);
+    const field = useSelector(state => state.field);
+    const dispatch = useDispatch();
+
+    function keyDownHandler(e) {
+        if (e.key === 'Enter') return processInput();
     }
 
-    keyDownHandler(e) {
-        if (e.key === 'Enter') return this.processInput();
-    }
-    processInput() {
-        const value = this.props.row_values.join('').trim();
+    function processInput() {
+        const value = field.row_values.join('').trim();
         const isValueExists = WordleProcessor.CheckWordExistence(value);
 
         if (isValueExists && value.length === 5) {
-            this.props.saveRow(value, this.props.focused_row);
+            dispatch(changeInputValue(value));
 
             const correctness = WordleProcessor.CheckCorrectness(value);
-            this.props.noteCorrectness(correctness, this.props.focused_row);
-            this.props.keysChangeState(correctness);
+            dispatch(fillCorrectness(correctness));
+            dispatch(changeKeyState(correctness));
 
-            if (this.props.focused_row < this.props.game_difficulty) {
-                this.props.refocuseRow(this.props.focused_row + 1);
-                this.props.clearCurrentRow();
-                this.props.refocuseCell(0);
-                this.props.incrementTryNumber();
+            if (field.focused_row < app.difficulty) {
+                dispatch(refocusRow(field.focused_row + 1));
+                dispatch(resetCurrentRow());
+                dispatch(refocusCell(0));
+                dispatch(changeTryNumber());
             }
 
-           const cor_flag = correctness.every(el => el.position === "allMatch");
+            const cor_flag = correctness.every(el => el.position === "allMatch");
 
-            if (this.props.try_number + 1 >= this.props.game_difficulty && !cor_flag) {
-                this.props.showWindow({
+            if (field.try_number + 1 >= app.difficulty && !cor_flag) {
+                dispatch(showWindow({
                     open: true,
                     title: "defeat :(",
-                    content: EndBox.Defeat,
-                });
+                    type: "end"
+                }))
             }
 
             if (cor_flag) {
-                this.props.incrementTryNumber();
-                this.props.showWindow({
+                dispatch(changeTryNumber());
+                dispatch(showWindow({
                     open: true,
                     title: "win :)",
-                    content: () => EndBox.Win([this.props.try_number+1, this.props.game_difficulty]),
-                })
+                    // content: () => End.Win([field.try_number + 1, app.difficulty]),
+                    type: "win"
+                }))
             }
         } else {
-            this.props.showWindow({
+            dispatch(showWindow({
                 open: true,
                 title: "bad word",
                 content: "Try another word."
-            })}
+            }))
+        }
     }
 
-    render() {
-        const rows = " ".repeat(this.props.game_difficulty);
-        return (
-            <>
-                <div className={`rows-container ${this.props.theme}-theme`} onKeyDown={this.keyDownHandler}>
-                    {rows.split('').map((row, idx) => (
-                        <Row key={idx}
-                             correctness={this.props.correctness[idx] || {} }
-                             focused_cell={this.props.focused_cell}
-                             refocuseCell={this.props.refocuseCell}
-                             row_values={this.props.row_values}
-                             changeRowValues={this.props.changeRowValues}
-                             disabled={this.props.focused_row !== idx}
-                             sound={this.props.sound}
-                             difficulty={this.props.game_difficulty}
-                             input={this.props.input[idx] || ""}/>))
-                    }
-                </div>
-                <div className={`control-btn`}>
-                    <button className="enter_btn" onClick={this.processInput.bind(this)}>enter</button>
-                </div>
-            </>
-        )
-    }
+    const rows = " ".repeat(app.difficulty);
+    return (
+        <>
+            <div className={`rows-container ${app.theme}-theme`} onKeyDown={keyDownHandler}>
+                {rows.split('').map((row, idx) => (
+                    <Row key={idx}
+                         correctness={field.correctness[idx] || {}}
+                         disabled={field.focused_row !== idx}
+                         input={field.input[idx] || ""}/>))
+                }
+            </div>
+            <div className={`control-btn`}>
+                <button className="enter_btn" onClick={processInput.bind(this)}>enter</button>
+            </div>
+        </>
+    )
 }
-
-function MapStateToProps(state) {
-    const { input, focused_row, focused_cell, row_values, correctness, try_number } = state.field;
-    return {
-        game_difficulty: state.app.difficulty,
-        sound: state.app.sound,
-        theme: state.app.theme,
-        input, focused_row, focused_cell, row_values, correctness, try_number
-    }
-}
-
-function MapDispatchToProps(dispatch) {
-    return {
-        changeRowValues: (value, row) => dispatch(changeRowValuesActionCreator(value, row)),
-        saveRow: (value, row) => dispatch(saveRowActionCreator(value, row)),
-        refocuseRow: (row) => dispatch(refocuseRowActionCreator(row)),
-        clearCurrentRow: () => dispatch(clearCurrentRowActionCreator()),
-        refocuseCell: (index) => dispatch(changeCurrentCellindexActionCreator(index)),
-        showWindow: (obj) => dispatch(showWindowActionCreator(obj)),
-        noteCorrectness: (array, index) => dispatch(noteCorrectnessActionCreator(array, index)),
-        incrementTryNumber: () => dispatch(incrementTryNumberActionCreator()),
-        resetField: () => dispatch(resetFieldActionCreator()),
-        keysChangeState: (correctness) => dispatch(keysChangeStateActionCreator(correctness))
-    }
-}
-
-export default connect(MapStateToProps, MapDispatchToProps)(Field)

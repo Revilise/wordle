@@ -12,7 +12,10 @@ function WordleProcessor() {
     const GenerateRandomWord = () => {
         const random_idx = Math.floor(Math.random() * vocab.length);
         this.secret_word = vocab[random_idx];
-        console.log(this.secret_word); // <-- debug
+        if (window.location.href === "http://localhost:3000/") { // dev host
+            console.log(this.secret_word); // <-- debug
+        }
+
     }
     const CheckCorrectness = (word) => {
         if (word) {

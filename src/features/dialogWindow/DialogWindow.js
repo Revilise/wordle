@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from "styled-components";
 
-import closeLight from '../../assets/close-light.svg';
-import closeDark from '../../assets/close-dark.svg';
+import closeLight from '../../assets/icons/close-light.svg';
+import closeDark from '../../assets/icons/close-dark.svg';
 
 import './DialogWindow.css';
-import {connect} from "react-redux";
-import {showWindowActionCreator} from "./DialogWindowReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {showWindow} from "./DialogWindowReducer";
+import {Popup, PopupFactory, SettingsPopup, TextPopup} from "../../factory/PopupFactory/PopupFactory";
+import {changeDifficulty, changeTheme, toggleSound} from "../../AppReducer";
 
 const Close = styled.div`
   width: 100%;
@@ -14,35 +16,37 @@ const Close = styled.div`
   justify-content: right;
 `
 
-class DialogWindow extends React.Component {
-    render() {
-        if (!this.props.open) {
-            return  <></>
-        }
-        return (
-            <div className={`window-container ${this.props.theme}-theme`}>
-                <div className="window">
-                    <Close>
-                        <input onClick={() => this.props.showWindow(false)} type="image" src={this.props.theme === "light" ? closeLight : closeDark} alt=""/>
-                    </Close>
-                    <h2 className="window_title">{this.props.title}</h2>
-                    {typeof this.props.content === 'function' ? this.props.content() : <p>{this.props.content}</p> }
-                </div>
-            </div>
-        )
+export default function DialogWindow() {
+    const window = useSelector(state => state.window);
+    const { theme, difficulty, sound } = useSelector(state => state.app);
+    const dispatch = useDispatch();
+    if (!window.open) {
+        return <></>
     }
-}
 
-function MapStateToProps(state) {
-    const { open, title, content, role } = state.window;
-    return {
-        open, title, content, role,
-        theme: state.app.theme
+    const content = PopupFactory.createElem(window.type);
+
+    if (TextPopup.prototype.isPrototypeOf(content)) {
+        content.setText(window.content);
     }
-}
-function MapDispatchToProps(dispatch) {
-    return {
-        showWindow: (bool, title, content) => dispatch(showWindowActionCreator(bool, title, content)),
+    else if (SettingsPopup.prototype.isPrototypeOf(content)) {
+        content.setProps({
+            app: { theme, difficulty, sound },
+            changeDifficulty: (value) => dispatch(changeDifficulty(value)),
+            toggleSound: () => dispatch(toggleSound()),
+            changeTheme: (value) => dispatch(changeTheme(value))
+        })
     }
+    return (
+        <div className={`window-container ${theme}-theme`}>
+            <div className="window">
+                <Close>
+                    <input onClick={() => dispatch(showWindow(false))} type="image"
+                           src={theme === "light" ? closeLight : closeDark} alt=""/>
+                </Close>
+                <h2 className="window_title">{window.title}</h2>
+                {content.get()}
+            </div>
+        </div>
+    )
 }
-export default connect(MapStateToProps, MapDispatchToProps)(DialogWindow)

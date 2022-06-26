@@ -1,8 +1,8 @@
-import soundOn from '../../../../assets/sound_on.svg';
-import soundOff from '../../../../assets/sound_off.svg';
+import soundOn from '../../../../../../assets/icons/sound_on.svg';
+import soundOff from '../../../../../../assets/icons/sound_off.svg';
 
-import soundOn_dark from '../../../../assets/sound_on_dark.svg';
-import soundOff_dark from '../../../../assets/sound_off_dark.svg';
+import soundOn_dark from '../../../../../../assets/icons/sound_on_dark.svg';
+import soundOff_dark from '../../../../../../assets/icons/sound_off_dark.svg';
 
 import './Sound.css'
 

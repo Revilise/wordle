@@ -1,15 +1,14 @@
-import ControlButtons from "../controllButtons/ControlButtons";
-import WordleProcessor from "../../wordleProcessor/WordleProcessor";
+import ControlButtons from "../../../../features/controllButtons/ControlButtons";
+import WordleProcessor from "../../../../wordleProcessor/WordleProcessor";
 import './EndBox.css';
 
 const defeat =  "defeat-component";
 const win = "win-component";
 
-function copy(string) {
-    navigator.clipboard.writeText(`WORDLE WIN\n${string[0]}x${string[1]}`).then(r => alert("result copied"));
-}
-
-function EndBox(state, winInfo) {
+function EndBox({state, winInfo}) {
+    function copy(string) {
+        navigator.clipboard.writeText(`WORDLE WIN\n${string[0]}x${string[1]}`).then(r => alert("result copied"));
+    }
     return (
         <div className="end-box">
             {
@@ -23,12 +22,12 @@ function EndBox(state, winInfo) {
                     </div>
                 </>
             }
-            <ControlButtons.Restart />
+            { ControlButtons.Restart ? <ControlButtons.Restart /> : <></> }
         </div>
     )
 }
 
-EndBox.Defeat = () => EndBox(defeat);
-EndBox.Win = (winInfo) => EndBox(win, winInfo);
+EndBox.Defeat = () => <EndBox state={defeat} />;
+EndBox.Win = (winInfo) => <EndBox state={win} winInfo ={winInfo} />;
 
 export default EndBox;

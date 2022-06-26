@@ -1,7 +1,7 @@
-import './RulesBox.css'
-import {Cell, Container} from "../field/row/Row";
+import './Rules.css'
+import {Cell, Container} from "../../../../features/field/row/Row";
 
-export default function RulesBox() {
+export default function Rules() {
     return (
         <div className="rules-box">
             <p>

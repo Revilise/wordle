@@ -1,69 +1,60 @@
 import React from 'react';
 import './ControlButtons.css'
-import { connect } from "react-redux";
 import WordleProcessor from '../../wordleProcessor/WordleProcessor'
 
-import Rules from "./Rules/Rules";
-import Restart from "./Restart/Restart";
+import Button from "./Button/Button";
+import {useDispatch, useSelector} from "react-redux";
+import {showWindow} from "../dialogWindow/DialogWindowReducer";
+import {resetReducer} from "../field/FieldReducer";
+import {resetKeyState} from "../keyboard/KeyboardReducer";
 
-import {resetFieldActionCreator} from '../field/FieldReducer';
-import {showWindowActionCreator} from "../dialogWindow/DialogWindowReducer";
-import {resetKeyboardActionCreator} from "../keyboard/KeyboardReducer";
-import RulesBox from "../RulesBox/RulesBox";
-import Settings from "./Settings/Settings";
-import SettingsBox from "../SettingsBox/SettingsBox";
+let restartGame;
+let showSettings;
+let showRules;
 
-let showWindow = () => {};
-let resetField = () => {};
-let resetKeys = () => {};
+function ControlButtonsAPI() {
+    const theme = useSelector(state => state.app.theme);
+    const dispatch = useDispatch();
 
-function restartGame() {
-    showWindow({open: false});
-    resetField();
-    resetKeys();
-    WordleProcessor.GenerateRandomWord();
-}
-function showRules() {
-    showWindow({ open: true, title: "Game rules", content: RulesBox });
-}
-function showSettings() {
-    showWindow({ open: true, title: "Settings", content: () => <SettingsBox /> });
-}
-
-class ControlButtons extends React.Component {
-    constructor(props) {
-        super(props);
-        showWindow = (obj) => this.props.showWindow(obj);
-        resetField = () => this.props.resetField();
-        resetKeys = () => this.props.resetKeys();
+    restartGame = () => {
+        dispatch(showWindow({open: false}));
+        dispatch(resetReducer());
+        dispatch(resetKeyState());
+        WordleProcessor.GenerateRandomWord();
     }
-
-    render() {
+    showRules = () => {
+        dispatch(
+            showWindow({open: true, title: "Game rules", type: "rules"})
+        );
+    }
+    showSettings = () => {
+        dispatch(
+            showWindow({open: true, title: "Settings", type: "settings"})
+        );
+    }
+    function ControlButtons() {
         return (
-            <div className={`control-container ${this.props.theme}-theme`}>
-                <Rules handler={showRules}/>
-                <Restart handler={restartGame} />
-                <Settings handler={showSettings}/>
+            <div className={`control-container ${theme}-theme`}>
+                <Settings/>
+                <Restart/>
+                <Rules/>
             </div>
         )
     }
+
+    return <ControlButtons />
 }
 
-// MapStateToProps & MapDispatchToProps
-const MSTP = (state) => ({
-    theme: state.app.theme
-});
-const MDTP = (dispatch) => ({
-    resetField: () => dispatch(resetFieldActionCreator()),
-    showWindow: (obj) => dispatch(showWindowActionCreator(obj)),
-    resetKeys: () => dispatch(resetKeyboardActionCreator()),
+export const Restart = () => Button({
+    children: "Restart",
+    handler: restartGame
 })
-
-const ConnectedControlButtons  = connect(MSTP, MDTP)(ControlButtons)
-ConnectedControlButtons.Restart = () => Restart({handler: () => {
-    showWindow({open: false});
-    resetField();
-    resetKeys();
-    WordleProcessor.GenerateRandomWord();
-    }});
-export default ConnectedControlButtons;
+export const Settings = () => Button({
+    children: "Settings",
+    handler: showSettings
+})
+export const Rules = () => Button({
+    children: "Rules",
+    handler: showRules
+})
+export default ControlButtonsAPI;

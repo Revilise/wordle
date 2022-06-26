@@ -14,8 +14,8 @@ class App extends React.Component {
             <div className={`App ${this.props.theme}-theme`}>
                 <div className="app-container">
                     <DialogWindow />
-                    <ControlButtons/>
-                    <Field/>
+                    <ControlButtons />
+                    <Field />
                     <Keyboard />
                 </div>
             </div>

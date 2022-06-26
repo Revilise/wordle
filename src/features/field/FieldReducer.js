@@ -1,111 +1,66 @@
-import {actionTypes} from "../../app/action-types";
+import {createSlice} from "@reduxjs/toolkit";
+import {copy} from "../../app/alias";
 
-class Field {
-    _init = {
-        input: [],
-        focused_row: 0,
-        try_number: 0,
-        row_values: [],
-        focused_cell: 0,
-        isWindowShowed: false,
-        correctness: [],
-    }
+const initialState = {
+    input: [],
+    focused_row: 0,
+    try_number: 0,
+    row_values: [],
+    focused_cell: 0,
+    isWindowShowed: false,
+    correctness: []
+}
+const field = createSlice({
+    name: "field",
+    initialState,
+    reducers: {
+        changeInputValue(state, action) {
+            state.input[state.focused_row] = action.payload.trim().substring(0, 5);
+        },
+        changeCurrentRowValue(state, action) {
+            state.row_values[state.focused_cell] = action.payload;
+        },
+        resetCurrentRow(state) {
+            state.row_values = copy(initialState.row_values)
+        },
+        resetReducer(state) {
+            let init = copy(initialState);
+            for (let key in init) {
+                state[key] = init[key];
+            }
+        },
+        refocusCell(state, action) {
+            state.focused_cell = action.payload;
+        },
+        refocusRow(state, action) {
+            state.focused_row = action.payload;
+        },
+        changeTryNumber(state) {
+            state.try_number = state.try_number + 1;
+        },
+        fillCorrectness(state, action) {
+            const cor = copy(state.correctness);
 
-    constructor() {
-        this.reducer = this.reducer.bind(this);
-    }
-    copy = (obj) => JSON.parse(JSON.stringify(obj));
+            const correctness = action.payload;
+            const index = state.focused_row;
 
-    reducer(state = this.copy(this._init), action) {
-        switch (action.type) {
-            // change established inputs values
-            case actionTypes.CHANGE_INPUT_VALUE:
-                state.input[action.row] = action.value.trim().substring(0, 5);
-                return {...state, input: state.input};
-
-            // change current row values
-            case actionTypes.CHANGE_ROW_VALUE:
-                state.row_values[action.index] = action.value;
-                return {...state, row_values: [...state.row_values]}
-
-            // reset current row value
-            case actionTypes.RESET_CURRENT_ROW_VALUES:
-                return {...state, row_values: this.copy(this._init.row_values)}
-
-            // refocuse row
-            case actionTypes.CHANGE_FOCUSED_ROW:
-                return {...state, focused_row: action.index}
-
-            // refocuse cell
-            case actionTypes.REFOCUSE_CURRENT_CELL:
-                return {...state, focused_cell: action.index}
-
-            // reset reducer scheme
-            case actionTypes.RESET_REDUCER:
-                return {...this.copy(this._init)}
-
-            // fill correctness schema
-            case actionTypes.FILL_CORRECTNESS:
-                const cor = this.copy(state.correctness);
-
-                const { index, array } = action;
-                cor.push(Object.create(null));
-                array.forEach(el => {
-                    if (!cor[index][el.position]) cor[index][el.position] = [];
-                    cor[index][el.position].push(el.letter)
-                })
-                return {...state, correctness: cor};
-
-            // change try number
-            case actionTypes.INCREMENT_TRY_NUMBER:
-                return {...state, try_number: state.try_number+1};
-
-            default:
-                return state;
+            cor.push(Object.create(null));
+            correctness.forEach(el => {
+                if (!cor[index][el.position]) cor[index][el.position] = [];
+                cor[index][el.position].push(el.letter)
+            })
+            state.correctness = action.payload;
         }
     }
-
-    saveRowActionCreator = (value, row) => ({
-        type: actionTypes.CHANGE_INPUT_VALUE,
-        value, row
-    })
-    clearCurrentRowActionCreator = () => ({
-        type: actionTypes.RESET_CURRENT_ROW_VALUES,
-    })
-    refocuseRowActionCreator = (index) => ({
-        type: actionTypes.CHANGE_FOCUSED_ROW,
-        index
-    })
-    changeRowValuesActionCreator = (value, index) => ({
-        type: actionTypes.CHANGE_ROW_VALUE,
-        value, index
-    })
-    changeCurrentCellindexActionCreator = (index) => ({
-        type: actionTypes.REFOCUSE_CURRENT_CELL,
-        index
-    })
-    resetFieldActionCreator = () => ({
-        type:  actionTypes.RESET_REDUCER
-    })
-    noteCorrectnessActionCreator = (array, index) => ({
-        type: actionTypes.FILL_CORRECTNESS,
-        array, index
-    })
-    incrementTryNumberActionCreator = () => ({
-        type: actionTypes.INCREMENT_TRY_NUMBER
-    })
-}
-
-const FieldReducer = new Field();
-
+});
 export const {
-    saveRowActionCreator,
-    clearCurrentRowActionCreator,
-    changeRowValuesActionCreator,
-    changeCurrentCellindexActionCreator,
-    refocuseRowActionCreator,
-    noteCorrectnessActionCreator,
-    incrementTryNumberActionCreator,
-    resetFieldActionCreator } = FieldReducer;
-
-export default FieldReducer.reducer;
+    changeInputValue,
+    changeCurrentRowValue,
+    resetCurrentRow,
+    resetReducer,
+    refocusCell,
+    refocusRow,
+    changeTryNumber,
+    fillCorrectness,
+} = field.actions;
+export default field.reducer;
