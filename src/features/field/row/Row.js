@@ -21,21 +21,23 @@ function CellEdit(props) {
     function keydownHandler(e) {
         switch (e.key) {
             case "Backspace":
-                // if (props.focused_cell > 0 && props.word) {
-                // props.refocusCell(props.focused_cell - 1);
-                // }
+                props.onChange("");
+                if (props.focused_cell > 0 && props.word) {
+                    props.refocusCell(props.focused_cell - 1);
+                }
                 break;
             case "ArrowRight": if (props.focused_cell < 5) props.refocusCell(props.focused_cell + 1); break;
             case "ArrowLeft": if (props.focused_cell > 0) props.refocusCell(props.focused_cell - 1); break;
             default: break;
+
         }
     }
 
     return (
         <Cell>
             {props.focused
-                ? <input className="cell-edit" autoComplete="false" onKeyDown={keydownHandler} ref={InputRef} onChange={props.handler} value={props.word} />
-                : <input className="cell-edit" autoComplete="false" onClick={props.refocusCurrent} onChange={props.handler} value={props.word} />}
+                ? <input className="cell-edit" autoComplete="false" onKeyDown={keydownHandler} ref={InputRef} onChange={(e) => props.onChange(e.target.value)} value={props.word} />
+                : <input className="cell-edit" autoComplete="false" onClick={props.refocusCurrent} onChange={props.onChange} value={props.word} />}
         </Cell>
     )
 }
@@ -49,12 +51,9 @@ export function Row({correctness, disabled, input}) {
 
     const dispatch = useDispatch();
 
-    function changeCell(e) {
-        const val = e.target.value
-
-        dispatch(changeCurrentRowValue(val[val.length - 1])); //
-        if (field.focused_cell < 5 && val) dispatch(refocusCell(field.focused_cell + 1));
-        if (field.focused_cell === 4) dispatch(refocusCell(field.focused_cell)); //todo: fix
+    function changeCell(value) {
+        dispatch(changeCurrentRowValue(value[value.length - 1])); //
+        if (field.focused_cell < 4 && value) dispatch(refocusCell(field.focused_cell + 1));
 
         if (app.sound) PlaySound(); // todo: выпилить
     }
@@ -90,7 +89,7 @@ export function Row({correctness, disabled, input}) {
                                  focused_cell={field.focused_cell}
                                  refocusCurrent={() => dispatch(refocusCell(cell_idx))}
                                  refocusCell={(val) => dispatch(refocusCell(val))}
-                                 handler={changeCell}
+                                 onChange={changeCell}
                                  focused={cell_idx === field.focused_cell}
                                  word={field.row_values[cell_idx] || ""}   />
             })}
