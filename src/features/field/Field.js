@@ -24,6 +24,7 @@ export default function Field() {
 
     function keyDownHandler(e) {
         if (e.key === 'Enter') return processInput();
+        if (e.key === 'Escape') dispatch(showWindow({open: false}));
     }
 
     function processInput() {
