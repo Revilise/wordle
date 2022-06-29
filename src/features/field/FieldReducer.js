@@ -30,6 +30,7 @@ const field = createSlice({
             }
         },
         refocusCell(state, action) {
+            console.log(state.focused_cell, action.payload)
             state.focused_cell = action.payload;
         },
         refocusRow(state, action) {

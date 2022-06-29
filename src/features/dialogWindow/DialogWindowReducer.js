@@ -16,7 +16,7 @@ const dialogWindow = createSlice({
             state.open = open;
             state.title = title || "default";
             state.content = content || "default";
-            state.type = type || "тext"
+            state.type = type || "text"
         }
     }
 })

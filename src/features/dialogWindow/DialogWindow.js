@@ -7,7 +7,7 @@ import closeDark from '../../assets/icons/close-dark.svg';
 import './DialogWindow.css';
 import {useDispatch, useSelector} from "react-redux";
 import {showWindow} from "./DialogWindowReducer";
-import {Popup, PopupFactory, SettingsPopup, TextPopup} from "../../factory/PopupFactory/PopupFactory";
+import {PopupFactory, SettingsPopup, TextPopup} from "../../factory/PopupFactory/PopupFactory";
 import {changeDifficulty, changeTheme, toggleSound} from "../../AppReducer";
 
 const Close = styled.div`
@@ -27,7 +27,7 @@ export default function DialogWindow() {
     const content = PopupFactory.createElem(window.type);
 
     if (TextPopup.prototype.isPrototypeOf(content)) {
-        content.setText(window.content);
+        content.setProps({content: window.content});
     }
     else if (SettingsPopup.prototype.isPrototypeOf(content)) {
         content.setProps({

@@ -1,11 +1,11 @@
 import ControlButtons from "../../../../features/controllButtons/ControlButtons";
 import WordleProcessor from "../../../../wordleProcessor/WordleProcessor";
-import './EndBox.css';
+import './End.css';
 
 const defeat =  "defeat-component";
 const win = "win-component";
 
-function EndBox({state, winInfo}) {
+function End({state, winInfo}) {
     function copy(string) {
         navigator.clipboard.writeText(`WORDLE WIN\n${string[0]}x${string[1]}`).then(r => alert("result copied"));
     }
@@ -27,7 +27,7 @@ function EndBox({state, winInfo}) {
     )
 }
 
-EndBox.Defeat = () => <EndBox state={defeat} />;
-EndBox.Win = (winInfo) => <EndBox state={win} winInfo ={winInfo} />;
+End.Defeat = () => <End state={defeat} />;
+End.Win = (winInfo) => <End state={win} winInfo ={winInfo} />;
 
-export default EndBox;
+export default End;

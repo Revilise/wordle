@@ -1,7 +1,7 @@
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import React from 'react';
 
-import EndBox from "../../factory/PopupFactory/contentBoxes/End/EndBox";
+import End from "../../factory/PopupFactory/contentBoxes/End/End";
 import {Row} from "./row/Row";
 import './Field.css'
 import {useDispatch, useSelector} from "react-redux";
@@ -59,7 +59,6 @@ export default function Field() {
                 dispatch(showWindow({
                     open: true,
                     title: "win :)",
-                    // content: () => End.Win([field.try_number + 1, app.difficulty]),
                     type: "win"
                 }))
             }

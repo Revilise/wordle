@@ -1,6 +1,6 @@
 import Rules from "./contentBoxes/Rules/Rules";
 import Settings from "./contentBoxes/Settings/Settings";
-import EndBox from "./contentBoxes/End/EndBox";
+import End from "./contentBoxes/End/End";
 
 export class PopupFactory {
     static createElem(type) {
@@ -23,17 +23,13 @@ export class PopupFactory {
 
 export class Popup {
     component;
-    props;
+    props = {};
     content;
     get() {
-        console.log(this.component)
         return this.component(this.props);
     }
     setProps(props) {
         this.props = {...props};
-    }
-    setText(text) {
-        this.content = text;
     }
 }
 
@@ -41,8 +37,8 @@ export class TextPopup extends Popup {
     constructor() {
         super();
         this.content = "";
-        this.component = ({children}) => (
-            <p>{children}</p>
+        this.component = (props) => (
+            <p>{props.content || "default"}</p>
         )
     }
 }
@@ -64,13 +60,13 @@ export class SettingsPopup extends Popup {
 export class WinPopup extends Popup {
     constructor() {
         super();
-        this.component = EndBox.Win;
+        this.component = End.Win;
     }
 }
 
 export class DefeatPopup extends Popup {
     constructor() {
         super();
-        this.component = EndBox.Defeat;
+        this.component = End.Defeat;
     }
 }
