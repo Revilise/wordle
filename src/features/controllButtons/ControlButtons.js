@@ -1,5 +1,5 @@
 import React from 'react';
-import './ControlButtons.css'
+
 import WordleProcessor from '../../wordleProcessor/WordleProcessor'
 
 import Button from "./Button/Button";

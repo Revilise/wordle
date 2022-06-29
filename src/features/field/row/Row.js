@@ -22,7 +22,7 @@ function CellEdit(props) {
         switch (e.key) {
             case "Backspace":
                 props.onChange("");
-                if (props.focused_cell > 0 && props.word) {
+                if (props.focused_cell > 0) {
                     props.refocusCell(props.focused_cell - 1);
                 }
                 break;
