@@ -1,4 +1,4 @@
-import ControlButtons from "../../../../features/controllButtons/ControlButtons";
+import ControlButtons, {Restart} from "../../../../features/controllButtons/ControlButtons";
 import WordleProcessor from "../../../../wordleProcessor/WordleProcessor";
 import './End.css';
 
@@ -22,7 +22,7 @@ function End({state, winInfo}) {
                     </div>
                 </>
             }
-            { ControlButtons.Restart ? <ControlButtons.Restart /> : <></> }
+            <Restart />
         </div>
     )
 }

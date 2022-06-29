@@ -50,7 +50,7 @@ export default function Field() {
                 dispatch(showWindow({
                     open: true,
                     title: "defeat :(",
-                    type: "end"
+                    type: "defeat"
                 }))
             }
 
