@@ -2,7 +2,6 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     theme: "light",
-    sound: false,
     difficulty: 5
 }
 
@@ -12,9 +11,6 @@ const app = createSlice({
     reducers: {
         changeTheme(state, action) {
             state.theme = action.payload
-        },
-        toggleSound(state) {
-            state.sound = !state.sound
         },
         changeDifficulty(state, action) {
             state.difficulty = action.payload;

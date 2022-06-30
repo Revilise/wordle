@@ -1,7 +1,6 @@
 import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 import React from 'react';
 
-import End from "../../factory/PopupFactory/contentBoxes/End/End";
 import {Row} from "./row/Row";
 import './Field.css'
 import {useDispatch, useSelector} from "react-redux";

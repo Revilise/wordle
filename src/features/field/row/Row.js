@@ -1,5 +1,4 @@
 import React from 'react'
-import {PlaySound} from "../../../app/audioControl";
 import {useDispatch, useSelector} from "react-redux";
 import {changeCurrentRowValue, refocusCell} from "../FieldReducer";
 
@@ -54,8 +53,6 @@ export function Row({correctness, disabled, input}) {
     function changeCell(value) {
         dispatch(changeCurrentRowValue(value[value.length - 1])); //
         if (field.focused_cell < 4 && value) dispatch(refocusCell(field.focused_cell + 1));
-
-        if (app.sound) PlaySound(); // todo: выпилить
     }
 
     function recolor(letter) {
