@@ -18,5 +18,5 @@ const app = createSlice({
     }
 })
 
-export const { changeTheme, toggleSound, changeDifficulty } = app.actions;
+export const { changeTheme, changeDifficulty } = app.actions;
 export default app.reducer;

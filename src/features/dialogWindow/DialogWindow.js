@@ -8,7 +8,7 @@ import './DialogWindow.css';
 import {useDispatch, useSelector} from "react-redux";
 import {showWindow} from "./DialogWindowReducer";
 import {PopupFactory, SettingsPopup, TextPopup} from "../../factory/PopupFactory/PopupFactory";
-import {changeDifficulty, changeTheme, toggleSound} from "../../AppReducer";
+import {changeDifficulty, changeTheme} from "../../AppReducer";
 
 const Close = styled.div`
   width: 100%;
@@ -33,7 +33,6 @@ export default function DialogWindow() {
         content.setProps({
             app: { theme, difficulty, sound },
             changeDifficulty: (value) => dispatch(changeDifficulty(value)),
-            toggleSound: () => dispatch(toggleSound()),
             changeTheme: (value) => dispatch(changeTheme(value))
         })
     }
