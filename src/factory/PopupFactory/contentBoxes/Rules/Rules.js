@@ -1,5 +1,5 @@
 import './Rules.css'
-import {Cell, Container} from "../../../../features/field/row/Row";
+import Cell from "../../../../features/field/Cell/Cell";
 
 export default function Rules() {
     return (
@@ -11,35 +11,35 @@ export default function Rules() {
             </p>
 
             <div className="rules-box_example">
-                <Container>
+                <Cell.Container>
                     { "SMILE".split('').map((letter, idx) => (
                         <Cell key={idx} recolorClass={letter === "S" ? "item-cell__all-matched" : "item-cell__no-match"}>
                             {letter}
                         </Cell>
                     ))}
-                </Container>
+                </Cell.Container>
                 <p>letter S is on right position in secret word.</p>
             </div>
 
             <div className="rules-box_example">
-                <Container>
+                <Cell.Container>
                     { "ENJOY".split('').map((letter, idx) => (
                         <Cell key={idx} recolorClass={letter === "J" ? "item-cell__exists" : "item-cell__no-match"}>
                             {letter}
                         </Cell>
                     ))}
-                </Container>
+                </Cell.Container>
                 <p>Letter J is exists in secret word, but position is wrong.</p>
             </div>
 
             <div className="rules-box_example">
-                <Container>
+                <Cell.Container>
                     { "HAPPY".split('').map((letter, idx) => (
                         <Cell key={idx} recolorClass="item-cell__no-match">
                             {letter}
                         </Cell>
                     ))}
-                </Container>
+                </Cell.Container>
                 <p>Gray cells display that such letters don't exist in secret word.</p>
             </div>
         </div>

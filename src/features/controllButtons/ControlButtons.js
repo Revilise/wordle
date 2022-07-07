@@ -1,43 +1,40 @@
 import React from 'react';
-
+import {useDispatch, useSelector} from "react-redux";
 import WordleProcessor from '../../wordleProcessor/WordleProcessor'
 
 import Button from "./Button/Button";
-import {useDispatch, useSelector} from "react-redux";
-import {showWindow} from "../dialogWindow/DialogWindowReducer";
-import {resetReducer} from "../field/FieldReducer";
-import {resetKeyState} from "../keyboard/KeyboardReducer";
+import {resetGame} from "../Game/GameReducer";
+import {closePopup, showPopup} from "../Popup/PopupReducer";
 
 let restartGame;
 let showSettings;
 let showRules;
 
 function ControlButtonsAPI() {
-    const theme = useSelector(state => state.app.theme);
+    const theme = useSelector(state => state.game.theme);
     const dispatch = useDispatch();
 
     restartGame = () => {
-        dispatch(showWindow({open: false}));
-        dispatch(resetReducer());
-        dispatch(resetKeyState());
+        dispatch(resetGame());
+        dispatch(closePopup());
         WordleProcessor.GenerateRandomWord();
     }
     showRules = () => {
         dispatch(
-            showWindow({open: true, title: "Game rules", type: "rules"})
+            showPopup({open: true, title: "Game rules", type: "rules"})
         );
     }
     showSettings = () => {
         dispatch(
-            showWindow({open: true, title: "Settings", type: "settings"})
+            showPopup({open: true, title: "Settings", type: "settings"})
         );
     }
     function ControlButtons() {
         return (
             <div className={`control-container ${theme}-theme`}>
-                <Settings/>
-                <Restart/>
                 <Rules/>
+                <Restart/>
+                <Settings/>
             </div>
         )
     }

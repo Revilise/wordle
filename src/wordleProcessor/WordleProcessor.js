@@ -18,7 +18,7 @@ function WordleProcessor() {
 
     }
     const CheckCorrectness = (word) => {
-        if (word) {
+         if (word) {
             const word_chars = word.split('');
             const secretWord_chars = this.secret_word.split('');
 
@@ -31,7 +31,7 @@ function WordleProcessor() {
                 return result;
             })
         }
-        return [];
+        return {};
     }
     const CheckWordExistence = (word) => {
         return vocab.includes(word);

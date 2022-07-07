@@ -1,0 +1,57 @@
+.cell {
+    text-transform: uppercase;
+    font-size: 24px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    outline: none;
+}
+.cell-edit {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 4px;
+    outline: none;
+}
+
+/*light theme*/
+.light-theme .cell-edit {
+    border: 2px solid var(--light-theme-cell-border);
+}
+.light-theme .cell, .light-theme .cell-edit {
+    background: var(--light-theme-default-cell);
+    color: var(--light-theme-text-color);
+}
+.light-theme .cell.item-cell__all-matched {
+    background: var(--light-theme-green-key);
+}
+.light-theme .cell.item-cell__exists {
+    background: var(--light-theme-yellow-key);
+}
+.light-theme .cell.item-cell__no-match {
+    background: var(--light-theme-gray-key);
+}
+
+/*dark theme*/
+.dark-theme .cell, .dark-theme .cell-edit {
+    background: var(--dark-theme-key-default-background);
+    color: var(--dark-theme-text-color);
+}
+.dark-theme .cell-edit {
+    border: 2px solid var(--dark-theme-cell-border);
+}
+
+.dark-theme .cell.item-cell__all-matched {
+    background: var(--dark-theme-green-key);
+}
+.dark-theme .cell.item-cell__exists {
+    background: var(--dark-theme-yellow-key);
+}
+.dark-theme .cell.item-cell__no-match {
+    background: var(--dark-theme-gray-key);
+}

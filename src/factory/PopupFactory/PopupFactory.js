@@ -1,6 +1,6 @@
 import Rules from "./contentBoxes/Rules/Rules";
 import Settings from "./contentBoxes/Settings/Settings";
-import End from "./contentBoxes/End/End";
+import {EndWin, EndDefeat} from "./contentBoxes/End/End";
 
 export class PopupFactory {
     static createElem(type) {
@@ -60,13 +60,13 @@ export class SettingsPopup extends Popup {
 export class WinPopup extends Popup {
     constructor() {
         super();
-        this.component = End.Win;
+        this.component = EndWin;
     }
 }
 
 export class DefeatPopup extends Popup {
     constructor() {
         super();
-        this.component = End.Defeat;
+        this.component = EndDefeat;
     }
 }

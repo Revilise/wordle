@@ -1,14 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit";
 
-import FieldReducer from "../features/field/FieldReducer";
-import AppReducer from "../AppReducer";
-import dialogWindowReducer from "../features/dialogWindow/DialogWindowReducer";
-import keyboardReducer from "../features/keyboard/KeyboardReducer"
+import GameReducer from "../features/Game/GameReducer";
+import PopupReducer from "../features/Popup/PopupReducer";
 
 const store = configureStore({reducer: {
-    field: FieldReducer,
-    app: AppReducer,
-    window: dialogWindowReducer,
-    keyboard: keyboardReducer
+    game: GameReducer,
+    popup: PopupReducer,
   }})
 export default store;
