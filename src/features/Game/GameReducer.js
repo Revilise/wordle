@@ -4,7 +4,7 @@ import WordleProcessor from "../../wordleProcessor/WordleProcessor";
 const initialState = {
     width: 5,
     difficulty: 5,
-    theme: "light",
+    theme: "theme__light",
     rows: [],
     match: {
         full: [], // {letter, col}
@@ -69,6 +69,9 @@ const Game = createSlice({
         changeInput(state, action) {
             state.input[state.cell] = action.payload;
         },
+        changeDifficulty(state, action) {
+            state.difficulty = action.payload;
+        },
         changeTheme(state, action) {
             state.theme = action.payload;
         },
@@ -87,6 +90,6 @@ const Game = createSlice({
     }
 })
 
-export const { SaveCurrentRow, changeTheme, resetGame, changeInput, refocusCell } = Game.actions;
+export const { SaveCurrentRow, changeTheme, resetGame, changeInput, refocusCell, changeDifficulty } = Game.actions;
 
 export default Game.reducer;

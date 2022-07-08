@@ -65,12 +65,12 @@ export default function FieldContainer() {
 
             switch (true) {
                 case full.some(checkIsExists):
-                    return "item-cell__all-matched";
+                    return "cell__all_matched";
                 case exists.some(checkIsExists):
-                    return "item-cell__exists";
+                    return "cell__exists";
                 case none.some(checkIsExists):
-                    return "item-cell__no-match";
-                default: return "item-cell";
+                    return "cell__no_match";
+                default: throw new Error("alias letter was unexpected:" + letter);
             }
         }
     }

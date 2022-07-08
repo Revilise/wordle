@@ -27,14 +27,14 @@
     justify-content: center;
 }
 /* light-theme */
-.light-theme .toggle-difficulty_btn {
+.theme__light .toggle-difficulty_btn {
     background: var(--light-theme-btn-background);
     color: var(--light-theme-text-color);
 }
 .dark-theme .toggle-difficulty_btn:hover {
     background: var(--light-theme-btn-background-hovered);
 }
-.light-theme .toggle-difficulty_label {
+.theme__light .toggle-difficulty_label {
     background: var(--light-theme-slide-background);
 }
 /* dark-theme */

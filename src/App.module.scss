@@ -1,0 +1,70 @@
+//$white: #FFFFFF;
+//$black: #000000;
+//$dark: #414141;
+//
+//$gray-100: #F6F6F6;
+//$gray-200: #F0F0F0;
+//$gray-300: #EAEAEA;
+//$gray-400: #DEDEDE;
+//$gray-500: #D0D0D0;
+//$gray-600: #9E9E9E;
+//
+//$blue-100: #244270;
+//$blue-200: #223E68;
+//$blue-300: #1D3559;
+//$blue-400: #172A46;
+//$blue-500: #0A192F;
+//
+//$green: #6DD864;
+//$yellow: #DDC918;
+
+
+:root {
+    /** light theme */
+    --lt-primary-background: #FFFFFF;
+    --lt-logo: #000000;
+    --lt-btn-primary: #F0F0F0;
+    --lt-btn-secondary: #DEDEDE;
+    --lt-btn-font: #000000;
+    --lt-cell: #F6F6F6;
+    --lt-cell-border: #EAEAEA;
+    --lt-cell-font: #414141;
+    --lt-main-font: #414141;
+
+    /** dark theme */
+    --dt-primary-background: #0A192F;
+    --dt-logo: #FFFFFF;
+    --dt-btn-primary: #1D3559;
+    --dt-btn-secondary: #223E68;
+    --dt-btn-font: #FFFFFF;
+    --dt-cell: #172A46;
+    --dt-cell-border: #223E68;
+    --dt-cell-font: #F6F6F6;
+    --dt-main-font: #F6F6F6;
+
+    --popup-under: rgba(0,0,0, 0.5);
+    --cell__all_matched: #6DD864;
+    --cell__exists: #DDC918;
+    --cell__no_match: #9E9E9E;
+}
+
+@font-face {
+    src: url(fonts/Gilroy/Gilroy-Bold.ttf);
+    font-family: Gilroy-Bold;
+}
+@font-face {
+    src: url(fonts/Gilroy/Gilroy-Medium.ttf);
+    font-family: Gilroy-Medium;
+}
+@font-face {
+    src: url(fonts/Inter/Inter-Bold.ttf);
+    font-family: Inter-Bold;
+}
+@font-face {
+    src: url(fonts/Inter/Inter-Medium.ttf);
+    font-family: Inter-Medium;
+}
+@font-face {
+    src: url(fonts/Inter/Inter-Regular.ttf);
+    font-family: Inter-Regular;
+}

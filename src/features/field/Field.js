@@ -4,7 +4,7 @@ import React from "react";
 export default function Field({game, rows, processInput, keyDownHandler, recolor}) {
     return (
         <>
-            <div className={`rows-container ${game.theme}-theme`} onKeyDown={keyDownHandler}>
+            <div className="rows-container" onKeyDown={keyDownHandler}>
                 {rows.split('').map((row, idx) => (
                     <Row key={idx}
                          recolor={recolor}

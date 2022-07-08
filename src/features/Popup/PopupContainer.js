@@ -3,7 +3,7 @@ import React from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {PopupFactory, SettingsPopup, TextPopup, WinPopup} from "../../factory/PopupFactory/PopupFactory";
 import {Popup} from "./Popup";
-import {changeTheme} from "../Game/GameReducer";
+import {changeDifficulty, changeTheme} from "../Game/GameReducer";
 import {closePopup} from "./PopupReducer";
 
 export default function PopupContainer() {
@@ -29,7 +29,7 @@ export default function PopupContainer() {
         else if (SettingsPopup.prototype.isPrototypeOf(content)) {
             content.setProps({
                 app: { theme, difficulty },
-                // changeDifficulty: (value) => dispatch(changeDifficulty(value)),
+                changeDifficulty: (value) => dispatch(changeDifficulty(value)),
                 changeTheme: (value) => dispatch(changeTheme(value))
             })
         }

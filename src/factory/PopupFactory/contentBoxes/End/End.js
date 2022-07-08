@@ -1,12 +1,13 @@
-import {Restart} from "../../../../features/controllButtons/ControlButtons";
 import WordleProcessor from "../../../../wordleProcessor/WordleProcessor";
+import RestartButton from "../../../../features/RestartButton/RestartButton";
+import Button from "../../../../features/Button/Button";
 import './End.css';
 
 export function EndDefeat() {
     return (
         <div className="end-box">
             <p>secret word is <b>{WordleProcessor.getSecret()}</b></p>
-            <Restart />
+            <RestartButton />
         </div>
     )
 }
@@ -18,10 +19,8 @@ export function EndWin ({winInfo}) {
     return (
         <div className="end-box">
             <p>let's try again!</p>
-            <div className="control-btn">
-                <button onClick={copy}>copy result</button>
-            </div>
-            <Restart />
+            <Button handler={copy}>copy result</Button>
+            <RestartButton />
         </div>
     )
 }

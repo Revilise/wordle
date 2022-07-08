@@ -1,15 +1,15 @@
 import React from "react";
 import {useEffect, useRef} from "react";
 
-import './Cell.css'
+import classes from './Cell.module.scss';
 
 function Cell({recolorClass, children}) {
-    return <div className={`cell ${recolorClass || ""}`}>{children}</div>
+    return <div className={`${classes.cell} ${classes[recolorClass]}`}>{children}</div>
 }
 
 function CellContainer({children}) {
     return (
-        <div className="field">
+        <div className={classes.field}>
             {children}
         </div>
     )
@@ -33,13 +33,15 @@ function CellEdit(props) {
     }
 
     function onKeyPress(e) {
-        props.changeCell(e.key)
+        if (e.key >= 'a' && e.key <= 'z') {
+            props.changeCell(e.key)
+        }
     }
     return (
         <Cell>
             {props.focused
                 ? <input
-                    className="cell-edit"
+                    className={classes.cell_edit}
                     autoComplete="false"
                     onKeyPress={onKeyPress}
                     onKeyDown={keydownHandler}
@@ -49,7 +51,7 @@ function CellEdit(props) {
                     value={props.input}
                 />
                 : <input
-                    className="cell-edit"
+                    className={classes.cell_edit}
                     autoComplete="false"
                     maxLength={1}
                     onClick={() => props.refocusCell(props.idx)}

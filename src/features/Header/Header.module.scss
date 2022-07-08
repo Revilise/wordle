@@ -1,0 +1,29 @@
+@mixin logo-theme($theme) {
+    font-family: Gilroy-Bold;
+    color: var(--+$theme+-logo);
+}
+@mixin center-align {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header {
+    @include center-align;
+    justify-content: space-between;
+    & > .header_btns {
+        @include center-align;
+    }
+    & > .header_btns > div {
+        margin-left: 24px;
+    }
+}
+[class*="theme__light"] {
+    & .header_logo {
+        @include logo-theme(lt)
+    }
+}
+[class*="theme__dark"] {
+    & .header_logo {
+        @include logo-theme(dt)
+    }
+}

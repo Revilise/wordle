@@ -1,0 +1,22 @@
+@mixin game-theme($theme) {
+  background: var(--+$theme+-primary-background);
+  color: var(--+$theme+-main-font);
+}
+
+.game {
+  transition: .4s;
+  padding-top: 16px;
+  height: 100vh;
+  &.theme__light {
+    @include game-theme(lt)
+  }
+  &.theme__dark {
+    @include game-theme(dt)
+  }
+  & > .game_container {
+    width: 948px;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+

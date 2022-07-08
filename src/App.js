@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './App.css';
+import './App.module.scss';
 import Game from "./features/Game/Game";
 
 export default function App() {
