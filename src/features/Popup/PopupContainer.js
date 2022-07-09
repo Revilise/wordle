@@ -9,8 +9,8 @@ import {closePopup} from "./PopupReducer";
 export default function PopupContainer() {
     const { theme, difficulty } = useSelector(state => state.game);
     const try_ = useSelector(state => state.game.try);
-    const dispatch = useDispatch();
     const popup = useSelector(state => state.popup);
+    const dispatch = useDispatch();
 
     if (!popup.open) {
         return <></>

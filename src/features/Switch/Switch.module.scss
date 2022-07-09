@@ -1,7 +1,13 @@
 @mixin switch-theme($theme) {
-  background: var(--+$theme+-switch);
+  background: var(--+$theme+-switch-disable);
+  .active {
+    background: var(--+$theme+-switch-active);
+  }
   & .switch_slider {
-    background: var(--+$theme+-switch-slider);
+    background: var(--+$theme+-switch-slider-disable);
+  }
+  & .switch_checkbox:checked + .switch_slider {
+    background: var(--+$theme+-switch-slider-active);
   }
 }
 [class*="theme__light"] .switch {

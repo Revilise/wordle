@@ -30,8 +30,10 @@
     --lt-cell-border: #EAEAEA;
     --lt-cell-font: #414141;
     --lt-main-font: #414141;
-    --lt-switch: #000000;
-    --lt-switch-slider: #FFFFFF;
+    --lt-switch-active: #F0F0F0;
+    --lt-switch-disable: #414141;
+    --lt-switch-slider-active: #D0D0D0;
+    --lt-switch-slider-disable: #FFFFFF;
 
     /** dark theme */
     --dt-primary-background: #0A192F;
@@ -43,8 +45,10 @@
     --dt-cell-border: #223E68;
     --dt-cell-font: #F6F6F6;
     --dt-main-font: #F6F6F6;
-    --dt-switch: #FFFFFF;
-    --dt-switch-slider: #DEDEDE;
+    --dt-switch-active: #DCDCDC;
+    --dt-switch-disable: #FFFFFF;
+    --dt-switch-slider-active: #DCDCDC;
+    --dt-switch-slider-disable: #FFFFFF;
 
     --popup-under: rgba(0,0,0, 0.5);
     --cell__all_matched: #6DD864;

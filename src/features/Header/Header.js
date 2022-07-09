@@ -31,7 +31,7 @@ export default function Header() {
         <header className={classes.header}>
             <h1 className={classes.header_logo}>WORDLE</h1>
             <div className={classes.header_btns}>
-                <Switch checked={theme === "theme__light"} handler={toggleTheme} />
+                <Switch checked={theme === "theme__dark"} handler={toggleTheme} />
                 <Button handler={showRules}>
                     <img src={theme === "theme__light" ? lightRules : darkRules}  alt="show rules"/>
                 </Button>
