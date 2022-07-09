@@ -13,7 +13,7 @@
   &.theme__dark {
     @include game-theme(dt)
   }
-  & > .game_container {
+  > .game_container {
     width: 948px;
     text-align: center;
     margin: 0 auto;

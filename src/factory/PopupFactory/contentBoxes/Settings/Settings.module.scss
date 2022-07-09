@@ -1,0 +1,25 @@
+.settings {
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 24px;
+    .item {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 2fr 1fr;
+        gap: 24px;
+        .label {
+            text-align: left;
+            font-size: 18px;
+            .span {
+                font-size: 13px;
+                font-family: Inter-Medium;
+                display: block;
+            }
+        }
+        .tool {
+            width: 100%;
+            text-align: right;
+            text-align: -webkit-right;
+        }
+    }
+}

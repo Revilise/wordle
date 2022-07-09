@@ -1,19 +1,19 @@
 @mixin cells-theme($theme) {
     background: var(--+$theme+-cell);
     color: var(--+$theme+-cell-font);
-    & .cell_edit {
+    .cell_edit {
         background: var(--+$theme+-cell);
         border: var(--+$theme+-cell-border) 3px solid;
     }
 }
 
 [class*="theme__light"] {
-    & .cell {
+    .cell {
         @include cells-theme(lt);
     }
 }
 [class*="theme__dark"] {
-    & .cell {
+    .cell {
         @include cells-theme(dt);
     }
 }
@@ -28,7 +28,7 @@
     grid-column-gap: 10px;
     padding: 5px;
     margin: auto;
-    & .cell {
+    .cell {
         text-transform: uppercase;
         font-size: 24px;
         height: 50px;
@@ -42,7 +42,7 @@
         &.cell__all_matched { @include cell-match-recolor(all_matched); }
         &.cell__exists { @include cell-match-recolor(exists); }
         &.cell__no_match { @include cell-match-recolor(no_match); }
-        & .cell_edit {
+        .cell_edit {
             width: 100%;
             height: 100%;
             text-align: center;

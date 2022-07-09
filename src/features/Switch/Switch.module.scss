@@ -3,10 +3,10 @@
   .active {
     background: var(--+$theme+-switch-active);
   }
-  & .switch_slider {
+  .switch_slider {
     background: var(--+$theme+-switch-slider-disable);
   }
-  & .switch_checkbox:checked + .switch_slider {
+  .switch_checkbox:checked + .switch_slider {
     background: var(--+$theme+-switch-slider-active);
   }
 }
@@ -25,7 +25,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  & .switch_checkbox {
+  .switch_checkbox {
     opacity: 0;
     height: 0;
     width: 0;
@@ -33,7 +33,7 @@
       transform: translateX(25px);
     }
   }
-  & .switch_slider {
+  .switch_slider {
     content: "";
     transition: .2s;
     left: 4px;
