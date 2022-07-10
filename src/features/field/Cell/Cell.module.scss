@@ -4,6 +4,7 @@
     .cell_edit {
         background: var(--+$theme+-cell);
         border: var(--+$theme+-cell-border) 3px solid;
+        color: var(--+$theme+-cell-font);
     }
 }
 

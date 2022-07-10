@@ -22,10 +22,10 @@ export default function FieldContainer() {
                 }
             )
             if (flag) {
-                dispatch(showPopup({title: "win", type: "win"}))
+                dispatch(showPopup({title: "Win", type: "win"}))
             }
             else if (!flag && game.try >= game.difficulty) {
-                dispatch(showPopup({title: "defeat", type: "defeat"}))
+                dispatch(showPopup({title: "Defeat", type: "defeat"}))
             }
         }
 
