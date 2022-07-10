@@ -33,6 +33,7 @@
         margin: 62px auto;
         border-radius: 24px;
         padding: 24px;
+        box-sizing: content-box;
         transition: background-color, height .4s;
         .popup_close {
             position: absolute;

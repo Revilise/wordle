@@ -3,6 +3,10 @@
   color: var(--+$theme+-main-font);
 }
 
+.game_container {
+  display: grid;
+  gap: 112px;
+}
 .game {
   transition: .4s;
   padding-top: 16px;

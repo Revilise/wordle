@@ -1,0 +1,18 @@
+@mixin spacing {
+    text-align: left;
+    display: grid;
+    gap: 12px;
+}
+.rules {
+    @include spacing;
+    .text {
+        font-family: Inter-Regular;
+        font-size: 14px;
+        line-height: 1.5em;
+        width: 100%;
+        text-align: left;
+    }
+    .example {
+        @include spacing;
+    }
+}

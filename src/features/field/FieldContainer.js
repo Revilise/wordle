@@ -3,12 +3,11 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {showPopup} from "../Popup/PopupReducer";
 import {changeInput, refocusCell, SaveCurrentRow} from "../Game/GameReducer";
-import './Field.css'
+import './Field.module.scss'
 import Field from "./Field";
 import Keyboard from "../keyboard/KeyboardContainer";
 
 export default function FieldContainer() {
-
     const game = useSelector(state => state.game);
     const dispatch = useDispatch();
 
