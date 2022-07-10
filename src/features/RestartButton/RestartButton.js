@@ -9,7 +9,7 @@ export default function RestartButton() {
 
     const restartGame = () => {
         dispatch(resetGame());
-        dispatch(closePopup());
+        dispatch(closePopup())
         WordleProcessor.GenerateRandomWord();
     }
     return (

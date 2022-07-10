@@ -38,6 +38,8 @@
     --lt-num-btn-secondary: #D0D0D0;
     --lt-field: #F6F6F6;
     --lt-field-font: #414141;
+    --lt-key-primary: #F6F6F6;
+    --lt-key-secondary: #DEDEDE;
 
     /** dark theme */
     --dt-primary-background: #0A192F;
@@ -55,13 +57,22 @@
     --dt-switch-slider-disable: #FFFFFF;
     --dt-num-btn-primary: #1D3559;
     --dt-num-btn-secondary: #244270;
-    --dt-field: #F6F6F6;
-    --dt-field-font: #414141;
+    --dt-field: #172A46;
+    --dt-field-font: #FFFFFF;
+    --dt-key-primary: #1D3559;
+    --dt-key-secondary: #223E68;
 
     --popup-under: rgba(0,0,0, 0.5);
     --cell__all_matched: #6DD864;
     --cell__exists: #DDC918;
     --cell__no_match: #9E9E9E;
+
+    --key__green-primary: #6DD864;
+    --key__green-secondary: #9CFC94;
+    --key__yellow-primary: #DDC918;
+    --key__yellow-secondary: #FFEA30;
+    --key__gray-primary: #9E9E9E;
+    --key__gray-secondary: #E8E8E8;
 }
 
 @font-face {

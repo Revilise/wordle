@@ -1,7 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 
-import FieldContainer from "../field/FieldContainer";
-import Keyboard from "../keyboard/KeyboardContainer";
+import Field from "../field/FieldContainer";
 import {closePopup} from "../Popup/PopupReducer";
 import Popup from "../Popup/PopupContainer";
 
@@ -22,8 +21,7 @@ export default function Game() {
             <div className={classes.game_container}>
                 <Popup />
                 <Header />
-                <FieldContainer />
-                <Keyboard />
+                <Field />
             </div>
         </div>
     )

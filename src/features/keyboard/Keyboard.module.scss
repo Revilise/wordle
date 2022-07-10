@@ -1,0 +1,64 @@
+.keyboard {
+  display: grid;
+  gap: 12px;
+  position: absolute;
+  bottom: 64px;
+  width: 948px;
+  .row {
+    display: flex;
+    position: relative;
+    align-content: center;
+    justify-content: center;
+    width: 748px;
+    margin: 0 auto;
+    .key {
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      justify-content: center;
+      min-width: 64px;
+      max-width: 64px;
+      min-height: 42px;
+      margin: 0 6px;
+      cursor: pointer;
+    }
+    > *:not(.key) {
+      width: 100%;
+      &:nth-child(1) {
+        margin-right: 6px;
+      }
+      &:nth-last-child(1) {
+        margin-left: 6px;
+      }
+    }
+  }
+}
+@mixin key-recolor($color, $theme) {
+  @if $color != default {
+    background: var(--key__+$color+-primary);
+    &:hover {
+      background: var(--key__$color+-secondary);
+    }
+  }
+  @else {
+    background: var(--+$theme+-key-primary);
+    &:hover {
+      background: var(--+$theme+-key-secondary);
+    }
+  }
+}
+
+@mixin keyboard-theme($theme) {
+  .keyboard_key__green { @include key-recolor(green, $theme) }
+  .keyboard_key__yellow { @include key-recolor(yellow, $theme) }
+  .keyboard_key__gray { @include key-recolor(gray, $theme) }
+  .keyboard_key__default { @include key-recolor(default, $theme)}
+}
+
+[class*="theme__light"] .keyboard {
+  @include keyboard-theme(lt)
+}
+[class*="theme__dark"] .keyboard {
+  @include keyboard-theme(dt)
+}
+

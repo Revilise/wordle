@@ -5,8 +5,8 @@ import Keyboard from './Keyboard'
 import "./Keyboard.css"
 import {changeInput, refocusCell} from "../Game/GameReducer";
 
-export default function KeyboardContainer() {
-    const {cell, match, vocab} = useSelector(state => state.game)
+export default function KeyboardContainer({keyDownHandler}) {
+    const {cell, match, vocab, theme} = useSelector(state => state.game)
     const dispatch = useDispatch();
 
     function getKeyState(key) {
@@ -18,7 +18,7 @@ export default function KeyboardContainer() {
             case match.none.includes(key):
                 return "keyboard_key__gray";
             default:
-                return "keyboard_key__white"
+                return "keyboard_key__default"
         }
     }
 
@@ -29,6 +29,6 @@ export default function KeyboardContainer() {
         e.stopPropagation();
     }
 
-    return <Keyboard keys={vocab} getKeyState={(v) => getKeyState(v)} KeyClickHandler={KeyClickHandler} />
+    return <Keyboard keyDownHandler={keyDownHandler} theme={theme} keys={vocab} getKeyState={(v) => getKeyState(v)} KeyClickHandler={KeyClickHandler} />
 }
 

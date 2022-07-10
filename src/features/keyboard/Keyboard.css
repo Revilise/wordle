@@ -19,30 +19,3 @@
     height: 50px;
     text-align: center;
 }
-.keyboard > .keyboard_key__green {
-    background: var(--light-theme-green-key);
-}
-.keyboard > .keyboard_key__green:hover {
-    background: var(--light-theme-green-key__hovered);
-}
-
-.keyboard > .keyboard_key__yellow {
-    background: var(--light-theme-yellow-key);
-}
-.keyboard > .keyboard_key__yellow:hover {
-    background: var(--light-theme-yellow-key__hovered);
-}
-
-.keyboard > .keyboard_key__gray {
-    background: var(--light-theme-gray-key);
-}
-.keyboard > .keyboard_key__gray:hover {
-    background: var(--light-theme-gray-key__hovered);
-}
-
-.keyboard > .keyboard_key__white {
-    background: var(--light-theme-white-key);
-}
-.keyboard > .keyboard_key__white:hover {
-    background: var(--light-theme-white-key__hovered);
-}

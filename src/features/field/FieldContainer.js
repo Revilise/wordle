@@ -5,6 +5,7 @@ import {showPopup} from "../Popup/PopupReducer";
 import {changeInput, refocusCell, SaveCurrentRow} from "../Game/GameReducer";
 import './Field.css'
 import Field from "./Field";
+import Keyboard from "../keyboard/KeyboardContainer";
 
 export default function FieldContainer() {
 
@@ -30,16 +31,16 @@ export default function FieldContainer() {
 
     }, [game.try])
 
-    function keyDownHandler(e) {
+    const keyDownHandler = (e) => {
         if (e.key === 'Enter') return processInput();
         if (e.key === 'Backspace' && game.cell > 0) {
             dispatch(changeInput(""));
             dispatch(refocusCell(game.cell - 1));
-            e.preventDefault();
+            if (e.preventDefault) e.preventDefault();
         }
     }
 
-    function processInput() {
+    const processInput = () => {
         if (game.input.length > 0) {
             const value = game.input.join('').trim().toLowerCase();
             const isWordExists = WordleProcessor.CheckWordExistence(value);
@@ -76,5 +77,10 @@ export default function FieldContainer() {
     }
 
     const rows = " ".repeat(game.difficulty);
-    return <Field recolor={recolor} rows={rows} game={game} keyDownHandler={keyDownHandler} processInput={processInput} />
+    return (
+        <>
+            <Field recolor={recolor} rows={rows} game={game} keyDownHandler={keyDownHandler} processInput={processInput} />
+            <Keyboard keyDownHandler={keyDownHandler} />
+        </>
+    )
 }

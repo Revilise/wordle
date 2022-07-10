@@ -1,22 +1,17 @@
 import {Row} from "./Row/Row";
 import React from "react";
 
-export default function Field({game, rows, processInput, keyDownHandler, recolor}) {
+export default function Field({game, rows, keyDownHandler, recolor}) {
     return (
-        <>
-            <div className="rows-container" onKeyDown={keyDownHandler}>
-                {rows.split('').map((row, idx) => (
-                    <Row key={idx}
-                         recolor={recolor}
-                         disabled={game.try !== idx}
-                         row={idx}
-                    />
-                ))
-                }
-            </div>
-            <div className={`control-btn`}>
-                <button className="enter_btn" onClick={processInput}>enter</button>
-            </div>
-        </>
+        <div className="rows-container" onKeyDown={keyDownHandler}>
+            {rows.split('').map((row, idx) => (
+                <Row key={idx}
+                     recolor={recolor}
+                     disabled={game.try !== idx}
+                     row={idx}
+                />
+            ))
+            }
+        </div>
     )
 }
