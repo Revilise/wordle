@@ -2,7 +2,6 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import Keyboard from './Keyboard'
-import "./Keyboard.css"
 import {changeInput, refocusCell} from "../Game/GameReducer";
 
 export default function KeyboardContainer({keyDownHandler}) {
@@ -10,12 +9,14 @@ export default function KeyboardContainer({keyDownHandler}) {
     const dispatch = useDispatch();
 
     function getKeyState(key) {
+        const checkIsExists = (obj) => obj.letter === key;
+
         switch(true) {
-            case match.full.includes(key):
+            case match.full.some(checkIsExists):
                 return "keyboard_key__green";
-            case match.exists.includes(key):
+            case match.exists.some(checkIsExists):
                 return "keyboard_key__yellow";
-            case match.none.includes(key):
+            case match.none.some(checkIsExists):
                 return "keyboard_key__gray";
             default:
                 return "keyboard_key__default"
