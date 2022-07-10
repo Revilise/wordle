@@ -39,6 +39,7 @@ export default function Settings(props) {
                     </NumericUpDown>
                 </Item.Tool>
             </Item>
+            <span className={classes.footer}>Developed by @Revilise</span>
         </div>
     )
 }
