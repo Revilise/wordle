@@ -26,7 +26,7 @@ export default function Settings(props) {
                     How many tries do you need to guess the secret word.
                 </Item.Description>
                 <Item.Tool>
-                    <Difficulty theme={theme} handler={changeDifficulty} difficulty={difficulty}/>
+                    <Difficulty handler={changeDifficulty} difficulty={difficulty}/>
                 </Item.Tool>
             </Item>
         </div>

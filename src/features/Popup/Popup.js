@@ -14,6 +14,7 @@ export function Popup({theme, onClick, content, title}) {
             back.current.style.opacity = 1;
             popup.current.style.height = popup.current.scrollHeight + "px"
         }, 0)
+        //eslint-disable-next-line
     },[])
 
     function ClosePopup() {

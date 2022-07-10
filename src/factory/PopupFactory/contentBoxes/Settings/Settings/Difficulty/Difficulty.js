@@ -1,6 +1,6 @@
 import './Difficulty.css'
 
-export function Difficulty({theme, difficulty, handler}) {
+export function Difficulty({difficulty, handler}) {
 
     const Increment = () => {
         if (difficulty < 7) handler(difficulty + 1);
