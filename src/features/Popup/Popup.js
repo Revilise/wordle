@@ -10,9 +10,7 @@ export function Popup({theme, onClick, content, title}) {
     const wrapContent = createRef();
 
     useEffect(() => {
-        // for (let k in wrapContent.current) {
-        //     console.log(k, wrapContent.current[k])
-        // }
+
         // даю время стилям загрузиться.
         setTimeout(() => {
             back.current.style.opacity = 1;

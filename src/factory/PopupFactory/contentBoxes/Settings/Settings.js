@@ -2,7 +2,7 @@ import classes from './Settings.module.scss';
 
 import Switch from "../../../../features/Switch/Switch";
 import Item from "./SettingsItem";
-import NumericUpDown from "../../../../NumericUpDown/NumericUpDown";
+import NumericUpDown from "../../../../features/NumericUpDown/NumericUpDown";
 
 export default function Settings(props) {
     const {theme, difficulty, minDifficulty, maxDifficulty} = props.app;
