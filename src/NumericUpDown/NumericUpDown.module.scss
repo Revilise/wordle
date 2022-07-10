@@ -1,0 +1,45 @@
+@mixin numUpDown-theme($theme) {
+  .button {
+    background: var(--+$theme+-btn-primary);
+    color: var(--+$theme+-btn-font);
+    &:hover {
+      background: var(--+$theme+-btn-secondary);
+    }
+  }
+  .field {
+    background: var(--+$theme+-field);
+    color: var(--+$theme+-field-font);
+  }
+}
+
+[class*="theme__light"] {
+  .numUpDown {
+    @include numUpDown-theme(lt)
+  }
+}
+[class*="theme__dark"] {
+  .numUpDown {
+    @include numUpDown-theme(dt)
+  }
+}
+
+.numUpDown {
+  display: flex;
+  > *:nth-child(1) {
+    border-radius: 8px 0 0 8px;
+  }
+  > *:nth-last-child(1) {
+    border-radius: 0 8px 8px 0
+  }
+  .button {
+    border: none;
+    cursor: pointer;
+    padding: 0 16px;
+    font-size: 20px;
+  }
+  .field {
+    text-align: center;
+    padding: 6.5px;
+    width: 100%;
+  }
+}

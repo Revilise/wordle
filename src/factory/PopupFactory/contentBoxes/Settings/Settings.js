@@ -1,15 +1,21 @@
 import classes from './Settings.module.scss';
 
-import {Difficulty} from "./Settings/Difficulty/Difficulty";
 import Switch from "../../../../features/Switch/Switch";
 import Item from "./SettingsItem";
+import NumericUpDown from "../../../../NumericUpDown/NumericUpDown";
 
 export default function Settings(props) {
-    const {theme, difficulty} = props.app;
+    const {theme, difficulty, minDifficulty, maxDifficulty} = props.app;
     const {changeTheme, changeDifficulty} = props;
 
     const toggleTheme = () => {
         changeTheme(theme === "theme__light" ? "theme__dark" : "theme__light")
+    }
+    const IncrementDifficulty = () => {
+        if (difficulty < maxDifficulty) changeDifficulty(difficulty + 1);
+    }
+    const DecrementDifficulty = () => {
+        if (difficulty > minDifficulty) changeDifficulty(difficulty - 1);
     }
     return (
         <div className={classes.settings}>
@@ -26,7 +32,11 @@ export default function Settings(props) {
                     How many tries do you need to guess the secret word.
                 </Item.Description>
                 <Item.Tool>
-                    <Difficulty handler={changeDifficulty} difficulty={difficulty}/>
+                    <NumericUpDown>
+                        <NumericUpDown.Button handler={DecrementDifficulty} children={"-"} />
+                        <NumericUpDown.Field children={difficulty}/>
+                        <NumericUpDown.Button handler={IncrementDifficulty} children={"+"} />
+                    </NumericUpDown>
                 </Item.Tool>
             </Item>
         </div>

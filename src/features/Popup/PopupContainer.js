@@ -7,7 +7,7 @@ import {changeDifficulty, changeTheme} from "../Game/GameReducer";
 import {closePopup} from "./PopupReducer";
 
 export default function PopupContainer() {
-    const { theme, difficulty } = useSelector(state => state.game);
+    const { theme, difficulty, maxDifficulty, minDifficulty } = useSelector(state => state.game);
     const try_ = useSelector(state => state.game.try);
     const popup = useSelector(state => state.popup);
     const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function PopupContainer() {
         }
         else if (SettingsPopup.prototype.isPrototypeOf(content)) {
             content.setProps({
-                app: { theme, difficulty },
+                app: { theme, difficulty, minDifficulty, maxDifficulty },
                 changeDifficulty: (value) => dispatch(changeDifficulty(value)),
                 changeTheme: (value) => dispatch(changeTheme(value))
             })

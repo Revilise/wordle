@@ -15,6 +15,8 @@ const initialState = {
     cell: 0,
     try: 0, // Row also
 
+    maxDifficulty: 7,
+    minDifficulty: 2,
     vocab: "qwertyuiopasdfghjklzxcvbnm".split('')
 }
 
