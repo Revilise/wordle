@@ -63,14 +63,13 @@ export default function FieldContainer() {
         if (letter) {
             const {full, exists, none} = game.match;
             const checkIsExists = (obj) => obj.letter === letter && obj.col === col;
-
             switch (true) {
                 case full.some(checkIsExists):
-                    return "cell__all_matched";
+                    return "all-match";
                 case exists.some(checkIsExists):
-                    return "cell__exists";
+                    return "exists";
                 case none.some(checkIsExists):
-                    return "cell__no_match";
+                    return "no-match";
                 default: throw new Error("alias letter was unexpected:" + letter);
             }
         }

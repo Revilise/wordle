@@ -5,7 +5,6 @@ import {changeInput, refocusCell} from "../../Game/GameReducer";
 import Cell from "../Cell/Cell";
 
 export function Row({disabled, recolor, row}) {
-
     const dispatch = useDispatch();
     const {cell, input, rows} = useSelector(state => state.game);
     const symbols_template = ",".repeat(4).split(',');

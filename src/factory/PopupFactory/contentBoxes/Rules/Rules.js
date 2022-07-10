@@ -13,7 +13,7 @@ export default function Rules() {
             <div className="rules-box_example">
                 <Cell.Container>
                     { "SMILE".split('').map((letter, idx) => (
-                        <Cell key={idx} recolorClass={letter === "S" ? "item-cell__all-matched" : "item-cell__no-match"}>
+                        <Cell key={idx} recolorClass={letter === "S" ? "all-match" : "no-match"}>
                             {letter}
                         </Cell>
                     ))}
@@ -24,7 +24,7 @@ export default function Rules() {
             <div className="rules-box_example">
                 <Cell.Container>
                     { "ENJOY".split('').map((letter, idx) => (
-                        <Cell key={idx} recolorClass={letter === "J" ? "item-cell__exists" : "item-cell__no-match"}>
+                        <Cell key={idx} recolorClass={letter === "J" ? "exists" : "no-match"}>
                             {letter}
                         </Cell>
                     ))}
@@ -35,7 +35,7 @@ export default function Rules() {
             <div className="rules-box_example">
                 <Cell.Container>
                     { "HAPPY".split('').map((letter, idx) => (
-                        <Cell key={idx} recolorClass="item-cell__no-match">
+                        <Cell key={idx} recolorClass="no-match">
                             {letter}
                         </Cell>
                     ))}

@@ -4,7 +4,18 @@ import {useEffect, useRef} from "react";
 import classes from './Cell.module.scss';
 
 function Cell({recolorClass, children}) {
-    return <div className={`${classes.cell} ${classes[recolorClass]}`}>{children}</div>
+    const getRecolor = () => {
+        switch(recolorClass) {
+            case "all-match":
+                return classes.cell__all_matched;
+            case "exists":
+                return classes.cell__exists;
+            case "no-match":
+                return classes.cell__no_match;
+            default: return "";
+        }
+    }
+    return <div className={`${classes.cell} ${getRecolor()}`}>{children}</div>
 }
 
 function CellContainer({children}) {
