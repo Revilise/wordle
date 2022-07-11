@@ -3,65 +3,11 @@
   padding: 0;
 }
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto', Inter-Regular, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #e1e0dd;
   width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-:root {
-  /* light-theme */
-  --light-theme-green-key: #6ABE4DFF;
-  --light-theme-gray-key: #5D768CFF;
-  --light-theme-yellow-key: #E1BD2CFF;
-  --light-theme-white-key: #efeeec;
-
-  --light-theme-green-key__hovered: #56a13c;
-  --light-theme-gray-key__hovered: #4d6075;
-  --light-theme-yellow-key__hovered: #bb9912;
-  --light-theme-white-key__hovered: #dedbd7;
-
-  --light-theme-enter-btn: #97d78b;
-  --light-theme-text-color: #1f1e1e;
-
-  --light-theme-slide-background: #e1dede;
-  --light-theme-switch-background: #fff;
-
-  --light-theme-background: #ffffff;
-  --light-theme-pre-background: rgba(52, 52, 52, 0.19);
-
-  --light-theme-cell-border: #eae8e8;
-  --light-theme-default-cell: #f3f3f3;
-
-  --light-theme-btn-background: #f3f3f3;
-  --light-theme-btn-background-hovered: #dadada;
-
-  /* night-theme */
-  --dark-theme-gray-key: #b0b0b0;
-  --dark-theme-yellow-key: #ffc755;
-  --dark-theme-green-key: #68d554;
-
-  --dark-theme-background: rgb(14, 14, 38);
-  --dark-theme-pre-background: rgba(0, 0, 0, 0.4);
-
-  --dark-theme-slide-background: #131f34;
-
-  --dark-theme-text-color: #ffffff;
-  --dark-theme-btn-background: #1b2c49;
-  --dark-theme-btn-background-hovered: #1e3457;
-
-  --dark-theme-key-default-background: #1b2c49;
-
-  --dark-theme-cell-border: #525f77;
 }

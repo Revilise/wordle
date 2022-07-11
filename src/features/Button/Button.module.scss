@@ -1,0 +1,31 @@
+@mixin button-theme($theme) {
+    background: var(--+$theme+-btn-primary);
+    color: var(--+$theme+-btn-font);
+    &:hover {
+        background: var(--+$theme+-btn-secondary);
+    }
+}
+[class*="theme__light"] {
+    & .button_container > .button {
+        @include button-theme(lt)
+    }
+}
+[class*="theme__dark"] {
+    & .button_container > .button {
+        @include button-theme(dt)
+    }
+}
+.button_container > .button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: .2s;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 22px;
+    font-family: Gilroy-Medium;
+    display: flex;
+    align-items: center;
+}

@@ -12,10 +12,13 @@ function WordleProcessor() {
     const GenerateRandomWord = () => {
         const random_idx = Math.floor(Math.random() * vocab.length);
         this.secret_word = vocab[random_idx];
-        console.log(this.secret_word); // <-- debug
+        if (window.location.href === "http://localhost:3000/") { // dev host
+            console.log(this.secret_word); // <-- debug
+        }
+
     }
     const CheckCorrectness = (word) => {
-        if (word) {
+         if (word) {
             const word_chars = word.split('');
             const secretWord_chars = this.secret_word.split('');
 
@@ -28,7 +31,7 @@ function WordleProcessor() {
                 return result;
             })
         }
-        return [];
+        return {};
     }
     const CheckWordExistence = (word) => {
         return vocab.includes(word);

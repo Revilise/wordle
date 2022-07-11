@@ -1,0 +1,47 @@
+@mixin switch-theme($theme) {
+  background: var(--+$theme+-switch-disable);
+  .active {
+    background: var(--+$theme+-switch-active);
+  }
+  .switch_slider {
+    background: var(--+$theme+-switch-slider-disable);
+  }
+  .switch_checkbox:checked + .switch_slider {
+    background: var(--+$theme+-switch-slider-active);
+  }
+}
+[class*="theme__light"] .switch {
+  @include switch-theme(lt)
+}
+[class*="theme__dark"] .switch {
+  @include switch-theme(dt)
+}
+.switch {
+  position: relative;
+  width: 54px;
+  height: 29px;
+  transition: .2s;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .switch_checkbox {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    &:checked + .switch_slider {
+      transform: translateX(25px);
+    }
+  }
+  .switch_slider {
+    content: "";
+    transition: .2s;
+    left: 4px;
+    height: 21px;
+    width: 21px;
+    position: absolute;
+    border-radius: 100%;
+  }
+}
+
+

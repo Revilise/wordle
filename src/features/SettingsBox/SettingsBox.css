@@ -1,6 +1,0 @@
-.settings-box {
-    text-align: left;
-}
-.settings-box > div:not(:nth-last-child(1)) {
-    margin-bottom: 16px;
-}

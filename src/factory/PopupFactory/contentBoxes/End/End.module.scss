@@ -1,0 +1,15 @@
+.container {
+    display: grid;
+    gap: 24px;
+    .text {
+        font-family: Inter-Regular;
+        font-size: 18px;
+    }
+    .btn_container {
+        display: flex;
+        justify-content: center;
+        > * {
+            margin: 6px;
+        }
+    }
+}

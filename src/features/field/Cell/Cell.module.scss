@@ -1,0 +1,54 @@
+@mixin cells-theme($theme) {
+    background: var(--+$theme+-cell);
+    color: var(--+$theme+-cell-font);
+    .cell_edit {
+        background: var(--+$theme+-cell);
+        border: var(--+$theme+-cell-border) 3px solid;
+        color: var(--+$theme+-cell-font);
+    }
+}
+
+[class*="theme__light"] {
+    .cell {
+        @include cells-theme(lt);
+    }
+}
+[class*="theme__dark"] {
+    .cell {
+        @include cells-theme(dt);
+    }
+}
+
+@mixin cell-match-recolor($match) {
+    background: var(--cell__+$match);
+}
+
+.field {
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px 50px;
+    gap: 10px;
+    margin: 0 auto;
+    .cell {
+        text-transform: uppercase;
+        font-size: 24px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        outline: none;
+        &.cell__all_matched { @include cell-match-recolor(all_matched); }
+        &.cell__exists { @include cell-match-recolor(exists); }
+        &.cell__no_match { @include cell-match-recolor(no_match); }
+        .cell_edit {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            border-radius: 4px;
+            outline: none;
+        }
+    }
+}
