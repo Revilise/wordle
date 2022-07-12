@@ -4,7 +4,6 @@
     gap: 24px;
     .item {
         display: grid;
-        width: 100%;
         grid-template-columns: 2fr 1fr;
         gap: 24px;
         .label {
@@ -17,7 +16,6 @@
             }
         }
         .tool {
-            width: 100%;
             text-align: right;
             text-align: -webkit-right;
         }

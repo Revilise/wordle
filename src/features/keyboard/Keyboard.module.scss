@@ -1,15 +1,14 @@
 .keyboard {
   display: grid;
   gap: 12px;
-  position: absolute;
-  bottom: 64px;
-  width: 948px;
+  position: relative;
   .row {
     display: flex;
     position: relative;
     align-content: center;
     justify-content: center;
-    width: 748px;
+    max-width: 748px;
+    gap: 12px;
     margin: 0 auto;
     .key {
       display: flex;
@@ -17,19 +16,12 @@
       border-radius: 8px;
       justify-content: center;
       min-width: 64px;
-      max-width: 64px;
       min-height: 42px;
-      margin: 0 6px;
+      width: 100%;
       cursor: pointer;
     }
     > *:not(.key) {
       width: 100%;
-      &:nth-child(1) {
-        margin-right: 6px;
-      }
-      &:nth-last-child(1) {
-        margin-left: 6px;
-      }
     }
   }
 }
@@ -62,3 +54,14 @@
   @include keyboard-theme(dt)
 }
 
+@media (max-width: 1080px) {
+  .keyboard,  {
+    .row {
+      width: 100%;
+      gap: 4px;
+      .key {
+        min-width: 0;
+      }
+    }
+  }
+}
