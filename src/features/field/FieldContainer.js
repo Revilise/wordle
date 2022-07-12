@@ -28,6 +28,7 @@ export default function FieldContainer() {
             }
         }
 
+        // eslint-disable-next-line
     }, [game.try])
 
     const keyDownHandler = (e) => {

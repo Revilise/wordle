@@ -2,12 +2,38 @@
   margin: 0;
   padding: 0;
 }
+
 body {
-  font-family: 'Roboto', Inter-Regular, sans-serif;
+  font-family: sans-serif, 'Roboto', Inter-Regular;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #e1e0dd;
-  width: 100vw;
-  overflow-x: hidden;
-  overflow-y: hidden;
+}
+
+@font-face {
+  src: url(fonts/Gilroy/Gilroy-Bold.ttf) format('truetype'),
+       url(fonts/Gilroy/Gilroy-Bold.woff) format('woff');
+  font-family: Gilroy-Bold;
+}
+@font-face {
+  src: url(fonts/Gilroy/Gilroy-Medium.ttf) format('truetype'),
+       url(fonts/Gilroy/Gilroy-Medium.woff) format('woff');
+  font-family: Gilroy-Medium;
+}
+@font-face {
+  src: url(fonts/Gilroy/Gilroy-Regular.ttf),
+       url(fonts/Gilroy/Gilroy-Regular.woff);
+  font-family: Gilroy-Regular;
+}
+@font-face {
+  src: url(fonts/Inter/Inter-Bold.ttf);
+  font-family: Inter-Bold;
+}
+@font-face {
+  src: url(fonts/Inter/Inter-Medium.ttf);
+  font-family: Inter-Medium;
+}
+@font-face {
+  src: url(fonts/Inter/Inter-Regular.ttf);
+  font-family: Inter-Regular;
 }

@@ -28,11 +28,11 @@ export default function Header() {
             <h1 className={classes.header_logo}>WORDLE</h1>
             <div className={classes.header_btns}>
                 <Button handler={showRules}>
-                    <img src={theme === "theme__light" ? lightRules : darkRules}  alt="show rules"/>
+                    <img src={theme === "theme__light" ? lightRules : darkRules} alt="show rules"/>
                 </Button>
-                <RestartButton />
+                <RestartButton/>
                 <Button handler={showSettings}>
-                    <img src={theme === "theme__light" ? lightSettings: darkSettings} alt="show settings" />
+                    <img src={theme === "theme__light" ? lightSettings : darkSettings} alt="show settings"/>
                 </Button>
             </div>
         </header>

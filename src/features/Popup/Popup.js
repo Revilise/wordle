@@ -10,13 +10,10 @@ export function Popup({theme, onClick, content, title}) {
     const wrapContent = createRef();
 
     useEffect(() => {
-
-        // даю время стилям загрузиться.
+        back.current.style.opacity = 1;
         setTimeout(() => {
-            back.current.style.opacity = 1;
-            popup.current.style.height = wrapContent.current.clientHeight + "px"
-        }, 0)
-        //eslint-disable-next-line
+            popup.current.style.height = wrapContent.current.scrollHeight + "px"
+        }, 20)
     },[])
 
     function ClosePopup() {
