@@ -44,7 +44,8 @@ function CellEdit(props) {
     }
 
     function onKeyPress(e) {
-        if (e.key >= 'a' && e.key <= 'z') {
+        const key = e.key.toLowerCase();
+        if (key >= 'a' && key <= 'z' && key !== 'enter') {
             props.changeCell(e.key)
         }
     }
@@ -52,7 +53,7 @@ function CellEdit(props) {
         <Cell>
             {props.focused
                 ? <input
-                    className={classes.cell_edit}
+                    className={`${classes.cell_edit} ${classes.focused}`}
                     autoComplete="false"
                     onKeyPress={onKeyPress}
                     onKeyDown={keydownHandler}

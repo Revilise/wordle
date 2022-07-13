@@ -9,7 +9,9 @@ export default function Settings(props) {
     const {changeTheme, changeDifficulty} = props;
 
     const toggleTheme = () => {
-        changeTheme(theme === "theme__light" ? "theme__dark" : "theme__light")
+        const savedTheme = theme === "theme__light" ? "theme__dark" : "theme__light"
+        document.cookie = `theme=${savedTheme}`;
+        changeTheme(savedTheme);
     }
     const IncrementDifficulty = () => {
         if (difficulty < maxDifficulty) changeDifficulty(difficulty + 1);

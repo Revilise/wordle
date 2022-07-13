@@ -7,7 +7,6 @@
   }
 }
 .preloader {
-  animation: preloader-appear 2s ease-in-out;
   width: 100%;
   min-height: 100vh;
   color: var(--preload-title);
@@ -17,5 +16,16 @@
   justify-content: center;
   .title {
     font-size: 96px;
+    animation: preloader-appear 2s ease-in-out;
   }
+}
+
+@mixin preloader-theme($theme) {
+  background: var(--+$theme+-primary-background);
+}
+.preloader.theme__light {
+  @include preloader-theme(lt);
+}
+.preloader.theme__dark {
+  @include preloader-theme(dt);
 }

@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import './App.module.scss';
-// import Game from "./features/Game/Game";
 import Preloader from "./features/Preloader/Preloader";
-const Game = React.lazy(() => import ('./features/Game/Game.js'));
+import {useDispatch} from "react-redux";
+import {changeTheme} from "./features/Game/GameReducer";
+const Game = React.lazy(() => import('./features/Game/Game.js'));
 
 export default function App() {
-    // return <Game />;
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const cookie = document.cookie;
+        const theme = cookie.substring(cookie.indexOf('=')+1);
+        dispatch(changeTheme(theme));
+    }, [])
     return (
         <React.Suspense fallback={<Preloader />}>
             <Game />
