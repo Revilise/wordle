@@ -1,0 +1,21 @@
+@keyframes preloader-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.preloader {
+  animation: preloader-appear 2s ease-in-out;
+  width: 100%;
+  min-height: 100vh;
+  color: var(--preload-title);
+  font-family: Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .title {
+    font-size: 96px;
+  }
+}
