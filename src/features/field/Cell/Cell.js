@@ -60,6 +60,7 @@ function CellEdit(props) {
                     ref={InputRef}
                     onChange={(e) => props.changeCell(e.target.value)}
                     value={props.input}
+                    readOnly={true}
                 />
                 : <input
                     className={classes.cell_edit}
@@ -68,6 +69,7 @@ function CellEdit(props) {
                     onClick={() => props.refocusCell(props.idx)}
                     onChange={(e) => props.changeCell(e.target.value)}
                     value={props.input}
+                    readOnly={true}
                 />}
         </Cell>
     )
