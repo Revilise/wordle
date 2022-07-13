@@ -1,5 +1,5 @@
 @mixin logo-theme($theme) {
-    font-family: Gilroy-Bold;
+    font-family: 'Gilroy', 'Roboto', sans-serif;
     color: var(--+$theme+-logo);
 }
 @mixin center-align {
@@ -34,5 +34,11 @@
         .header_btns > div {
             margin-left: 8px;
         }
+    }
+}
+@media (max-width: 375px) {
+    .header {
+        flex-direction: column;
+        gap: 16px;
     }
 }
