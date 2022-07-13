@@ -32,3 +32,11 @@
     padding: 16px;
   }
 }
+
+@media (max-width: 375px) {
+  .game {
+    .game_container {
+      gap: 5%;
+    }
+  }
+}

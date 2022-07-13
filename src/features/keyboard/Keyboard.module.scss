@@ -24,6 +24,14 @@
       width: 100%;
     }
   }
+  .rowForAdaptive {
+    display: none;
+    flex-direction: row;
+    gap: 16px;
+    > * {
+      width: 100%;
+    }
+  }
 }
 @mixin key-recolor($color, $theme) {
   @if $color != default {
@@ -62,6 +70,17 @@
       .key {
         min-width: 0;
       }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .keyboard {
+    .row .btn{
+        display: none;
+    }
+    .rowForAdaptive {
+      display: flex;
     }
   }
 }
