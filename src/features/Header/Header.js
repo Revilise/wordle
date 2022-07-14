@@ -4,8 +4,8 @@ import Button from "../Button/Button"
 import {showPopup} from "../Popup/PopupReducer";
 import RestartButton from "../RestartButton/RestartButton";
 import classes from './Header.module.scss'
-import Rules from "./Icons/Rules";
-import Settings from "./Icons/Settings";
+import Rules from "../Icons/Rules";
+import Settings from "../Icons/Settings";
 
 export default function Header() {
     const theme = useSelector(state => state.game.theme)

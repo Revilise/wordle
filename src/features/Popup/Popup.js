@@ -1,7 +1,7 @@
 import classes from './Popup.module.scss'
 
 import {createRef, useEffect} from "react";
-import Close from "./Icons/Close";
+import Close from "../Icons/Close";
 
 export function Popup({theme, onClick, content, title}) {
     const popup = createRef()
