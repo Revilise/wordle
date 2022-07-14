@@ -3,12 +3,10 @@ import React from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {PopupFactory, SettingsPopup, TextPopup, WinPopup} from "../../factory/PopupFactory/PopupFactory";
 import {Popup} from "./Popup";
-import {changeDifficulty, changeTheme} from "../Game/GameReducer";
 import {closePopup} from "./PopupReducer";
 
 export default function PopupContainer() {
-    const { theme, difficulty, maxDifficulty, minDifficulty } = useSelector(state => state.game);
-    const try_ = useSelector(state => state.game.try);
+    const game = useSelector(state => state.game);
     const popup = useSelector(state => state.popup);
     const dispatch = useDispatch();
 
@@ -27,17 +25,13 @@ export default function PopupContainer() {
             content.setProps({content: popup.content});
         }
         else if (SettingsPopup.prototype.isPrototypeOf(content)) {
-            content.setProps({
-                app: { theme, difficulty, minDifficulty, maxDifficulty },
-                changeDifficulty: (value) => dispatch(changeDifficulty(value)),
-                changeTheme: (value) => dispatch(changeTheme(value))
-            })
+            content.setProps({game})
         }
         else if (WinPopup.prototype.isPrototypeOf(content)) {
-            content.setProps({winInfo: [try_, difficulty]})
+            content.setProps({winInfo: [game.try, game.difficulty]})
         }
         return content.get();
     }
 
-    return <Popup title={popup.title} theme={theme} content={getContent()} onClick={onClick}/>
+    return <Popup title={popup.title} theme={game.theme} content={getContent()} onClick={onClick}/>
 }

@@ -1,0 +1,31 @@
+@keyframes preloader-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.preloader {
+  width: 100%;
+  min-height: 100vh;
+  color: var(--preload-title);
+  font-family: Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .title {
+    font-size: 96px;
+    animation: preloader-appear 2s ease-in-out;
+  }
+}
+
+@mixin preloader-theme($theme) {
+  background: var(--+$theme+-primary-background);
+}
+.preloader.theme__light {
+  @include preloader-theme(lt);
+}
+.preloader.theme__dark {
+  @include preloader-theme(dt);
+}

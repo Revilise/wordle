@@ -6,6 +6,9 @@
         border: var(--+$theme+-cell-border) 3px solid;
         color: var(--+$theme+-cell-font);
     }
+    .focused {
+        border: 3px solid var(--+$theme+-focused-cell-border);
+    }
 }
 
 [class*="theme__light"] {
@@ -51,7 +54,6 @@
         }
     }
 }
-
 @media (max-width: 350px) {
     .field {
         grid-template-columns: repeat(5, 40px);

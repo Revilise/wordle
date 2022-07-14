@@ -1,8 +1,7 @@
 import {Key} from "./key/Key";
 import classes from "./Keyboard.module.scss";
 import Button from "../Button/Button";
-import backspaceLight from '../../assets/light-theme/backspace-light.svg';
-import backspaceDark from '../../assets/dark-theme/backspace-dark.svg';
+import Backspace from "../Icons/Backspace";
 
 export default function Keyboard({getKeyState, KeyClickHandler, keys, theme, keyDownHandler}) {
     const row1 = keys.filter((el, idx) => idx < 9);
@@ -23,19 +22,19 @@ export default function Keyboard({getKeyState, KeyClickHandler, keys, theme, key
             </div>
             <div className={classes.row}>
                 <div className={classes.btn}>
-                    <Button handler={(e) => keyDownHandler({key: 'Enter'})}>ENTER</Button>
+                    <Button handler={() => keyDownHandler({key: 'Enter'})}>ENTER</Button>
                 </div>
                 {row3.map((key, idx) => <KeyWrap key={idx} idx={idx} children={key}/>)}
                 <div className={classes.btn}>
-                    <Button handler={(e) => keyDownHandler({key: 'Backspace'})}>
-                        <img width={34.11} height={22} src={theme === "theme__light" ? backspaceLight : backspaceDark} alt="backspace"/>
+                    <Button handler={() => keyDownHandler({key: 'Backspace'})}>
+                        <Backspace theme={theme} />
                     </Button>
                 </div>
             </div>
             <div className={classes.rowForAdaptive}>
-                <Button handler={(e) => keyDownHandler({key: 'Enter'})}>ENTER</Button>
-                <Button handler={(e) => keyDownHandler({key: 'Backspace'})}>
-                    <img width={34.11} height={22} src={theme === "theme__light" ? backspaceLight : backspaceDark} alt="backspace"/>
+                <Button handler={() => keyDownHandler({key: 'Enter'})}>ENTER</Button>
+                <Button handler={() => keyDownHandler({key: 'Backspace'})}>
+                    <Backspace theme={theme} />
                 </Button>
             </div>
         </div>

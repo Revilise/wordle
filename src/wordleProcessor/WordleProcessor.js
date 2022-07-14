@@ -13,9 +13,9 @@ function WordleProcessor() {
         const random_idx = Math.floor(Math.random() * vocab.length);
         this.secret_word = vocab[random_idx];
         if (window.location.href === "http://localhost:3000/") { // dev host
-            console.log(this.secret_word); // <-- debug
+            console.clear();
+            console.log(`secret word: ${this.secret_word}`); // <-- debug
         }
-
     }
     const CheckCorrectness = (word) => {
          if (word) {

@@ -32,10 +32,14 @@ export default function FieldContainer() {
     }, [game.try])
 
     const keyDownHandler = (e) => {
-        if (e.key === 'Enter') return processInput();
-        if (e.key === 'Backspace' && game.cell > 0) {
+        if (e.key === 'Enter') {
+            processInput();
+            return;
+        }
+
+        if (e.key === 'Backspace') {
             dispatch(changeInput(""));
-            dispatch(refocusCell(game.cell - 1));
+            if (game.cell > 0) dispatch(refocusCell(game.cell - 1));
             if (e.preventDefault) e.preventDefault();
         }
     }
@@ -79,7 +83,7 @@ export default function FieldContainer() {
     return (
         <>
             <Field recolor={recolor} rows={rows} game={game} keyDownHandler={keyDownHandler} processInput={processInput} />
-            <Keyboard keyDownHandler={keyDownHandler} />
+            {game.isKeyboardVisible ? <Keyboard keyDownHandler={keyDownHandler} /> : <></>}
         </>
     )
 }

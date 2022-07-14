@@ -3,9 +3,9 @@
   color: var(--+$theme+-main-font);
 }
 .game {
-  transition: .4s;
+  transition: background .4s;
   padding-top: 16px;
-  height: 100vh;
+  min-height: 100vh;
   box-sizing: border-box;
   &.theme__light {
     @include game-theme(lt)

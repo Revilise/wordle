@@ -7,11 +7,12 @@
     --lt-btn-font: #000000;
     --lt-cell: #F6F6F6;
     --lt-cell-border: #EAEAEA;
+    --lt-focused-cell-border: #D0D0D0;
     --lt-cell-font: #414141;
     --lt-main-font: #414141;
     --lt-switch-active: #F0F0F0;
     --lt-switch-disable: #414141;
-    --lt-switch-slider-active: #D0D0D0;
+    --lt-switch-slider-active: #FFFFFF;
     --lt-switch-slider-disable: #FFFFFF;
     --lt-num-btn-primary: #DEDEDE;
     --lt-num-btn-secondary: #D0D0D0;
@@ -28,12 +29,13 @@
     --dt-btn-font: #FFFFFF;
     --dt-cell: #172A46;
     --dt-cell-border: #223E68;
+    --dt-focused-cell-border: #325C9A;
     --dt-cell-font: #F6F6F6;
     --dt-main-font: #F6F6F6;
     --dt-switch-active: #DCDCDC;
     --dt-switch-disable: #FFFFFF;
     --dt-switch-slider-active: #DCDCDC;
-    --dt-switch-slider-disable: #FFFFFF;
+    --dt-switch-slider-disable: #DCDCDC;
     --dt-num-btn-primary: #1D3559;
     --dt-num-btn-secondary: #244270;
     --dt-field: #172A46;
@@ -52,4 +54,6 @@
     --key__yellow-secondary: #FFEA30;
     --key__gray-primary: #9E9E9E;
     --key__gray-secondary: #E8E8E8;
+
+    --preload-title: #6DD864;
 }
