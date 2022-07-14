@@ -7,7 +7,6 @@ import {useDispatch} from "react-redux";
 import {changeDifficulty, changeTheme, toggleKeyboardVisibility} from "../../../../features/Game/GameReducer";
 
 export default function Settings(props) {
-
     const game = props.game;
     const {theme, difficulty, minDifficulty, maxDifficulty, isKeyboardVisible} = game;
     const dispatch = useDispatch();
@@ -36,6 +35,7 @@ export default function Settings(props) {
                     <Switch checked={theme === "theme__dark"} handler={toggleTheme}/>
                 </Item.Tool>
             </Item>
+
             <Item>
                 <Item.Description label="Difficulty">
                     How many tries do you need to guess the secret word.
@@ -48,6 +48,7 @@ export default function Settings(props) {
                     </NumericUpDown>
                 </Item.Tool>
             </Item>
+
             <Item>
                 <Item.Description label="keyboard visibility">
                     Hide/show visibility of virtual keyboard.
@@ -56,6 +57,7 @@ export default function Settings(props) {
                     <Switch checked={isKeyboardVisible} handler={changeKeyboardVisibility}/>
                 </Item.Tool>
             </Item>
+
             <span className={classes.footer}>Developed by @Revilise</span>
         </div>
     )
