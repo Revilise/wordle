@@ -79,7 +79,7 @@ export default function FieldContainer() {
     return (
         <>
             <Field recolor={recolor} rows={rows} game={game} keyDownHandler={keyDownHandler} processInput={processInput} />
-            <Keyboard keyDownHandler={keyDownHandler} />
+            {game.isKeyboardVisible ? <Keyboard keyDownHandler={keyDownHandler} /> : <></>}
         </>
     )
 }

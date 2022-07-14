@@ -14,6 +14,7 @@ const initialState = {
     input: [],
     cell: 0,
     try: 0, // Row also
+    isKeyboardVisible: true,
 
     maxDifficulty: 7,
     minDifficulty: 2,
@@ -77,6 +78,9 @@ const Game = createSlice({
         changeTheme(state, action) {
             state.theme = action.payload;
         },
+        toggleKeyboardVisibility(state) {
+            state.isKeyboardVisible = !state.isKeyboardVisible;
+        },
         resetGame(state) {
             const theme = state.theme;
             const difficulty = state.difficulty;
@@ -92,6 +96,6 @@ const Game = createSlice({
     }
 })
 
-export const { SaveCurrentRow, changeTheme, resetGame, changeInput, refocusCell, changeDifficulty } = Game.actions;
+export const { SaveCurrentRow, changeTheme, resetGame, changeInput, refocusCell, changeDifficulty, toggleKeyboardVisibility } = Game.actions;
 
 export default Game.reducer;
