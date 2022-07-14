@@ -32,7 +32,11 @@ export default function FieldContainer() {
     }, [game.try])
 
     const keyDownHandler = (e) => {
-        if (e.key === 'Enter') return processInput();
+        if (e.key === 'Enter') {
+            processInput();
+            return;
+        }
+
         if (e.key === 'Backspace') {
             dispatch(changeInput(""));
             if (game.cell > 0) dispatch(refocusCell(game.cell - 1));

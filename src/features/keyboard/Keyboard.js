@@ -22,18 +22,18 @@ export default function Keyboard({getKeyState, KeyClickHandler, keys, theme, key
             </div>
             <div className={classes.row}>
                 <div className={classes.btn}>
-                    <Button handler={(e) => keyDownHandler({key: 'Enter'})}>ENTER</Button>
+                    <Button handler={() => keyDownHandler({key: 'Enter'})}>ENTER</Button>
                 </div>
                 {row3.map((key, idx) => <KeyWrap key={idx} idx={idx} children={key}/>)}
                 <div className={classes.btn}>
-                    <Button handler={(e) => keyDownHandler({key: 'Backspace'})}>
+                    <Button handler={() => keyDownHandler({key: 'Backspace'})}>
                         <Backspace theme={theme} />
                     </Button>
                 </div>
             </div>
             <div className={classes.rowForAdaptive}>
-                <Button handler={(e) => keyDownHandler({key: 'Enter'})}>ENTER</Button>
-                <Button handler={(e) => keyDownHandler({key: 'Backspace'})}>
+                <Button handler={() => keyDownHandler({key: 'Enter'})}>ENTER</Button>
+                <Button handler={() => keyDownHandler({key: 'Backspace'})}>
                     <Backspace theme={theme} />
                 </Button>
             </div>
