@@ -49,6 +49,7 @@ function CellEdit(props) {
             props.changeCell(e.key)
         }
     }
+
     return (
         <Cell>
             {props.focused

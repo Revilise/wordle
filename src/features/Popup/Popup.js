@@ -21,6 +21,7 @@ export function Popup({theme, onClick, content, title}) {
         popup.current.style.height = "0";
         setTimeout(onClick, 200)
     }
+
     return (
         <div ref={back} className={classes.popup_back}>
             <div ref={popup} className={classes.popup}>

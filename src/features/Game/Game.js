@@ -7,6 +7,7 @@ import Popup from "../Popup/PopupContainer";
 import './Game.module.scss'
 import Header from "../Header/Header";
 import classes from './Game.module.scss';
+import {refocusCell} from "./GameReducer";
 
 export default function Game() {
 

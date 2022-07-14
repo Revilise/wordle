@@ -10,8 +10,10 @@ export default function App() {
     const dispatch = useDispatch();
     useEffect(() => {
         const cookie = document.cookie;
-        const theme = cookie.substring(cookie.indexOf('=')+1);
-        dispatch(changeTheme(theme));
+        const theme = cookie.substring(cookie.indexOf('=')+1).trim();
+        if (theme.length > 0) {
+            dispatch(changeTheme(theme));
+        }
     }, [])
     return (
         <React.Suspense fallback={<Preloader />}>

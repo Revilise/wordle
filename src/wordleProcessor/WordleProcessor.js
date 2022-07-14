@@ -16,7 +16,6 @@ function WordleProcessor() {
             console.clear();
             console.log(`secret word: ${this.secret_word}`); // <-- debug
         }
-
     }
     const CheckCorrectness = (word) => {
          if (word) {
